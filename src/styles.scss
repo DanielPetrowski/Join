@@ -1,4 +1,6 @@
 @use './styles/color' as *;
+@use './styles/variables' as *;
+@use './styles/global-styles' as *;
 
 
 // GET FONT "Inter" ...
@@ -49,43 +51,3 @@ h2 {
     background-color: $white;
 }
 
-h3 {
-    /* Figma: "subtitle" */
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-style: bold;
-    font-size: 27px;
-    line-height: 1.2;
-    color: $black;
-    background-color: $white;
-}
-
-h4 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-style: bold;
-    font-size: 20px;
-    line-height: 1.2;
-    color: $black;
-    background-color: $white;
-}
-
-h5 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-style: regular;
-    font-size: 27px;
-    line-height: 1.2;
-    color: $black;
-    background-color: $white;
-}
-
-h6 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-style: regular;
-    font-size: 20px;
-    line-height: 1.2;
-    color: $black;
-    background-color: $white;
-}
