@@ -1,0 +1,11 @@
+@if (isOpen) {
+  <div class="backdrop">
+    <div class="dialog" [style.width]="width">
+      <ng-content></ng-content>
+
+      <button type="button" (click)="close()">
+        Schließen
+      </button>
+    </div>
+  </div>
+}
