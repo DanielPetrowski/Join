@@ -12,8 +12,8 @@ import { Contact } from '../interfaces/contact.interface';
   providedIn: 'root',
 })
 export class FirebaseServices {
-
   contactsList: Contact[] = [];
+
   unsubList;
 
   firestore = inject(Firestore);
@@ -22,7 +22,7 @@ export class FirebaseServices {
     this.unsubList = this.subContactsList();
   }
 
-  ngonDestroy() {
+  ngOnDestroy() {
     this.unsubList();
   }
 
@@ -32,6 +32,12 @@ export class FirebaseServices {
       list.forEach((element) => {
         this.contactsList.push(this.setContactObject(element.data(), element.id));
       });
+    });
+  }
+
+  subSingleContact(docID: string) {
+    return onSnapshot(this.getSingleContact(docID), (contact) => {
+      contact.data();
     });
   }
 

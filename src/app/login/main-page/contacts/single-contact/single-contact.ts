@@ -10,4 +10,6 @@ import { FirebaseServices } from '../../../../firebase-services/firebase-service
 })
 export class SingleContact {
 
+  constructor(private contactService: FirebaseServices) {}
+
 }
