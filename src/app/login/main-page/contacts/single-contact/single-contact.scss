@@ -12,6 +12,22 @@
     font-size: 27px;
   }
 }
+.seperator{
+height: 59px;
+border: 3px solid #29ABE2;
+border-radius: 3px;
+}
+
+.sc_information--active {
+  opacity: 1;
+  transform: translateX(0);
+  animation: sc-slide-in 280ms ease forwards;
+}
+
+@keyframes sc-slide-in {
+  from { opacity: 0; transform: translateX(1200px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
 
 .sc_top {
   display: flex;
