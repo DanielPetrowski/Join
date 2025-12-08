@@ -1,1 +1,62 @@
 @import './../../../styles.scss';
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 232px;
+    background-color: $navBgNotActiveGrey ;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    >div img {
+        width: 100px;
+        height: 120px;
+        margin-bottom: 60%;
+    }
+
+    >div nav {
+        display: flex;
+        flex-direction: column;
+     
+
+
+
+
+        >a {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            margin-top: 20%;
+
+            &:hover {
+                text-decoration: underline;
+                background-color: darkblue;
+            }
+
+            >img {
+                width: 30px;
+                margin-right: 20%;
+                height: auto;
+                margin: 0 10px;
+            }
+
+            ;
+        }
+    }
+
+    .Legal {
+        display: flex;
+        flex-direction: column;
+
+        >a {
+            color: #A8A8A8;
+            text-decoration: none;
+            margin-bottom: 25px;
+
+        }
+    }
+}
