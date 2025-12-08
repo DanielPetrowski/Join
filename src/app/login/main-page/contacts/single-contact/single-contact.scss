@@ -1,11 +1,7 @@
 @import './../../../../../styles.scss';
 @import './../../../../styles/colors.scss';
 
-.single_contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 21px;
-}
+
 
 .sc_header {
   display: flex;
@@ -50,11 +46,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-       img {
+      &:hover {
+        color: lightblue;
+        cursor: pointer;
+        filter: drop-shadow(0 0 4px lightblue);
+      }
+      img {
         height: 24px;
         width: 24px;
       }
-       span {
+      span {
         font-size: 16px;
         font-weight: 400;
       }
