@@ -1,13 +1,34 @@
-<section>
-  <h1>Contact</h1>
+<div class="contacts-wrapper">
 
-  <article>
-    <!-- Contact-List -->
-    <!-- HIER komplett erstellen -->
-  </article>
+    <!-- Add contact button -->
+    <button class="add-contact-btn" (click)="onAddContact()">
+        Add new contact
+        <span class="add-contact-icon">👤+</span>
+    </button>
 
-  <article class="single-contact">
-    <!-- SingleContact -->
-    <app-single-contact></app-single-contact>
-  </article>
-</section>
+    <div class="contacts-scroll-area">
+
+        <div *ngFor="let group of groupedContacts" class="contacts-group">
+
+            <div class="group-letter">{{ group.letter }}</div>
+
+            <div *ngFor="let c of group.contacts" class="contact-box">
+
+                <div class="contact-avatar" [style.backgroundColor]="c.color">
+                    {{ getInitials(c.name) }}
+                </div>
+
+                <div class="contact-info">
+                    <div class="contact-name text_3">{{ c.name }}</div>
+                    <div class="contact-email">{{ c.email }}</div>
+                </div>
+
+            </div>
+
+            <img class="contact-divider" src="/IMG/Frame-120.svg" alt="divider">
+
+        </div>
+
+    </div>
+
+</div>
