@@ -46,48 +46,35 @@
     gap: 8px;
     > div {
       display: flex;
-      gap: 8px;
-      > button:nth-of-type(1) {
-        width: 62px;
-        height: 24px;
-        border: none;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-image: url('./../../../../../../public/IMG/edit-black.svg');
-        &:hover {
-          background-image: url('./../../../../../../public/IMG/edit-blue.svg');
-        }
+      gap: 16px;
+
+    }
+
+    button {
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      gap: 4px;
+
+      &:hover {
+        color: lightblue;
+        cursor: pointer;
       }
-      > button:nth-of-type(2) {
-        width: 81px;
+      svg {
         height: 24px;
-        border: none;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-image: url('./../../../../../../public/IMG/delete-black.svg');
-        &:hover {
-          background-image: url('./../../../../../../public/IMG/delete-blue.svg');
-        }
+        width: 24px;
+        display: flex;
+        align-self: self-end;
+        
+      }
+      span {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 120%;
       }
     }
-    // button {
-    //   border: none;
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    //   &:hover {
-    //     color: lightblue;
-    //     cursor: pointer;
-    //   }
-    //   img {
-    //     height: 24px;
-    //     width: 24px;
-    //   }
-    //   span {
-    //     font-size: 16px;
-    //     font-weight: 400;
-    //   }
-    // }
   }
 }
 .sc_logo {
@@ -243,3 +230,6 @@
     }
   }
 }
+
+
+
