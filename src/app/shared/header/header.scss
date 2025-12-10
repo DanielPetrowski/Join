@@ -29,6 +29,7 @@ main {
 
         svg rect {
             &:hover {
+                
                 cursor: pointer;
                 fill: #d7d3d3;
             }
@@ -91,17 +92,20 @@ main {
         }
 
         >.user{
+            display: flex;
+    width: 92%;
             
             >.help-icon{
                 display: none;
             }
         }
-        .mobil{
+        
+    }
+    .mobil{
                     display: flex;
         justify-content: space-between;
         width: 100vw;
         padding: 3vw;
         
         }
-    }
 }
