@@ -1,15 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener,OnInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive ],
   templateUrl: './header.html',
   styleUrls: ['./header.scss']
 })
-export class Header {
+export class Header implements OnInit {
   menuOpen = false;
 
   toggleMenu() {
@@ -33,5 +33,20 @@ export class Header {
         this.menuOpen = false;
       }
     }
+  }
+
+   isMobile: boolean = false;
+
+     ngOnInit() {
+    this.checkScreenWidth();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenWidth();
+  }
+
+  checkScreenWidth() {
+    this.isMobile = window.innerWidth <= 900;
   }
 }

@@ -2,6 +2,12 @@
 <span class="text_6">Kanban Project Management Tool</span>
 <div class="user">
     <img class="help-icon" src="IMG/help-icon.png" alt="">
+
+    <div class="mobil"*ngIf="isMobile">
+
+        <img src="IMG/Capa 3.png" alt="">
+   
+    
     
 <svg (click)="toggleMenu()" 
     class="menu-icon"  width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,6 +16,7 @@
 <path d="M26.9559 21.0703H30.5679L34.3829 30.3776H34.5452L38.3601 21.0703H41.9721V34.9231H39.1312V25.9066H39.0162L35.4313 34.8554H33.4968L29.9118 25.8727H29.7968V34.9231H26.9559V21.0703Z" fill="#29ABE2"/>
 <circle cx="28" cy="28" r="26.5" stroke="#2A3647" stroke-width="3"/>
 </svg>
+</div>
 
  <nav class="menu" *ngIf="menuOpen">
     
