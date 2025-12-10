@@ -11,7 +11,9 @@ export const routes: Routes = [
     {path:"contacs",component:Contacts},
     {path:"board",component:Board},
     {path:"add-task",component:AddTask},
-    {path:"summary",component:Summary}
+    {path:"summary",component:Summary},
+    {path:"Privacy Policy",component:Summary},
+    {path:"Legal notice",component:Summary}
 
     
 ];
