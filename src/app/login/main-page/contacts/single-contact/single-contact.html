@@ -97,32 +97,51 @@
       <div class="right_side">
         <button class="close" type="button" (click)="editDialog.close()">X</button>
 
+        <!-- ----------------------------- InputFields ----------------------------- -->
         <article>
           <form class="contact_form">
             <label class="field">
-              <input type="text" placeholder="Jane Doe" [(ngModel)]="editModel.name" name="name" />
+              <input
+                #nameField="ngModel"
+                [(ngModel)]="editModel.name"
+                name="name"
+                type="text"
+                placeholder="Jane Doe"
+                required
+                pattern="^[A-Za-zÄÖÜäöüß\-]{3,}\s[A-Za-zÄÖÜäöüß\-]{3,}$"
+              />
               <img src="IMG/person.svg" alt="" />
             </label>
+            <p class="error-msg" *ngIf="nameField.invalid">Mindestens drei Buchstaben</p>
 
             <label class="field">
               <input
-                type="email"
-                placeholder="example@provider.com"
+                #emailField="ngModel"
                 [(ngModel)]="editModel.email"
                 name="email"
+                type="email"
+                required
+                pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"
+                placeholder="example@provider.com"
               />
+
               <img src="IMG/mail.svg" alt="" />
             </label>
+            <p class="error-msg" *ngIf="emailField.invalid">E-mail valiedierung stimmt nicht.</p>
 
             <label class="field">
               <input
+                #phoneField="ngModel"
+                [(ngModel)]="editModel.phone"
+                name="tel"
                 type="tel"
                 placeholder="+0 0000 000 00 0"
-                [(ngModel)]="editModel.phone"
-                name="phone"
+                required
+                minlength="7"
               />
               <img src="IMG/call.svg" alt="" />
             </label>
+            <p class="error-msg" *ngIf="phoneField.invalid">Gib eine gültige Nummer ein.</p>
           </form>
         </article>
 

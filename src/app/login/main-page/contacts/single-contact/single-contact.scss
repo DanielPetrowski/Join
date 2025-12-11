@@ -1,6 +1,5 @@
 @import './../../../../../styles.scss';
 
-
 :host {
   background-color: #1678da;
 }
@@ -16,6 +15,7 @@
     font-size: 27px;
   }
 }
+
 .seperator {
   height: 59px;
   border: 3px solid #29abe2;
@@ -47,7 +47,6 @@
     > div {
       display: flex;
       gap: 16px;
-
     }
 
     button {
@@ -67,7 +66,6 @@
         width: 24px;
         display: flex;
         align-self: self-end;
-        
       }
       span {
         font-size: 16px;
@@ -178,40 +176,54 @@
       }
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      label {
-        border: 1px solid rgba(209, 209, 209, 1);
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        border-radius: 10px;
-        padding: 13px 21px;
-        width: 420px;
-        &:hover {
-          border: 1px solid rgba(41, 171, 226, 1);
-        }
-        &:has(input:invalid) {
-          border-color: red;
-        }
-        input {
-          border: none;
-          font-size: 20px;
-          font-weight: 400;
-          align-self: self-start;
-          &:focus {
-            border: none;
-            outline: none;
-          }
-        }
-        img {
-          height: 24px;
-          width: 24px;
-        }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  label {
+    border: 1px solid rgba(209, 209, 209, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 13px 21px;
+    width: 420px;
+    transition: border-color 150ms ease;
+
+    &:hover {
+      border-color: rgba(41, 171, 226, 1);
+    }
+
+    &:has(input.ng-invalid) {
+      border-color: red;
+    }
+
+    input {
+      border: none;
+      font-size: 20px;
+      font-weight: 400;
+      flex: 1;
+
+      &:focus {
+        outline: none;
       }
     }
+
+    img {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .error-msg {
+    color: red;
+    font-size: 14px;
+    margin-top: -20px;  
+    margin-left: 4px;
+  }
+}
+
 
     .dialog_buttons {
       display: flex;
@@ -222,7 +234,7 @@
         justify-content: center;
         padding: 16px;
         gap: 4px;
-        img{
+        img {
           height: 24px;
           width: 24px;
         }
@@ -230,6 +242,3 @@
     }
   }
 }
-
-
-
