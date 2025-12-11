@@ -121,15 +121,13 @@
 /* -------------------------- Media for max 1050px -------------------------- */
 .circle_menu {
   display: none;
-  background-image: url('/IMG/Menu-Contact-options.svg');
-  background-position: center;
-  background-size: cover;
+background-image: url("/IMG/Menu-Contact-options.svg");
   @media (max-width: 1050px) {
-    display: flex;
+    display: grid;
     place-items: center;
-    position: relative;
-    
-    bottom: -400px; // Button runter
+    position: fixed;
+    right: 64px;
+    bottom: -200px; // Button runter
     width: 56px;
     height: 56px;
     border: none;
