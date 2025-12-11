@@ -8,7 +8,7 @@ main {
     position: absolute;
     padding: 0 2em 0 16em;
     align-items: center;
-    box-shadow: 12vw -14px 24px black;
+    box-shadow: 22vw -14px 24px black;
 
     .user {
         a .help-icon {
@@ -75,7 +75,7 @@ main {
     }
 }
 
-/* MOBILE */
+
 @media(max-width: 1050px) {
     main {
         box-shadow: 0vw -14px 24px black;
@@ -147,7 +147,6 @@ main {
     }
 }
 
-/* ULTRA-WIDE */
 @media(min-width:1921px) {
     section {
         position: relative;
