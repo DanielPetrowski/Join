@@ -51,11 +51,15 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+
+  &:hover {
+    background-color: $buttonBlue;
+    transition: background-color 150ms ease-in-out;
+  }
 }
 
 .contacts-scroll-area {
@@ -75,20 +79,25 @@
 }
 
 
-/* ################################# */
-/* SINGLE-CONTACT as Box (344 × 100) */
-/* ################################# */
+/* ############################ */
+/* CONTACT-LIST Box (344 × 100) */
+/* ############################ */
 .contact-box {
   width: 344px;
   height: 100px;
   background-color: $white;
   border-radius: 16px;
   padding: 16px 8px;
-
   display: flex;
   align-items: center;
   gap: 16px;
   box-sizing: border-box;
+  transition: background-color 120ms ease-in-out;
+
+  &:hover {
+    background-color: $bgLightGrey;
+    cursor: pointer;
+  }
 }
 
 /* Avatar */
@@ -331,5 +340,18 @@ form.contact_form {
       width: 24px;
       height: 24px;
     }
+  }
+
+  .button_light:hover {
+    background-color: $buttonBlue;
+    color: $white;
+    border-color: $buttonBlue;
+    transition: background-color 150ms ease-in-out;
+  }
+
+  .button_dark:hover {
+    background-color: $buttonBlue;
+    color: $white;
+    transition: background-color 150ms ease-in-out;
   }
 }
