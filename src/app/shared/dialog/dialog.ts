@@ -27,7 +27,7 @@ export class Dialog {
       this.isOpen = false;
       this.closed.emit();
       this.cdr.markForCheck();
-    }, 200);
+    }, 400);
   }
 
   open(): void {

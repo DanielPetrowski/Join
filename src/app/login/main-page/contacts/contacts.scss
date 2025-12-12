@@ -75,7 +75,7 @@
 
   overflow-y: auto;
   padding-right: 8px;
-  max-height: calc(100vh - 122px);
+  max-height: calc(100vh - 118px);
 
   @media (max-width: 1050px) {
     z-index: auto;
@@ -115,12 +115,11 @@
   display: none;
 }
 
-// .contacts-scroll-area {
-//   overflow-y: auto;
-//   margin-top: 24px;
-//   padding-right: 8px;
-//   max-height: calc(100vh - 194px);
-// }
+.contacts-scroll-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 /* Alphabet-Groups */
 .contacts-group {

@@ -8,35 +8,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   width: none;
+  animation: fadeIn 300ms ease-out;
+
+  &.closing {
+    animation: fadeOut 420ms ease-out;
+  }
 
   // Dialog-Shell
-  > .dialog {
+  .dialog {
     max-height: none;
     height: auto;
     background: #ffffff;
-    border-radius: 12px;
+    border-radius: 40px;
     box-shadow: 0 14px 48px rgba(0, 0, 0, 0.18);
-    transform: translateX(100%);
-    animation-fill-mode: forwards;
-  }
-}
 
-.dialog.opening {
-  animation: dialog-in 240ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    &.opening {
+      animation: dialog-in 400ms ease-in;
 
-  @media (max-width: 1050px) {
-    animation: dialog-inY 240ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-  }
-}
+      @media (max-width: 1050px) {
+        animation: dialog-inY 400ms ease-in;
+      }
+    }
 
-.dialog.closing {
-  animation: dialog-out 240ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    &.closing {
+      animation: dialog-out 500ms ease-out;
 
-  @media (max-width: 1050px) {
-    animation: dialog-outY 240ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      @media (max-width: 1050px) {
+        animation: dialog-outY 500ms ease-out;
+      }
+    }
   }
 }
 
@@ -78,5 +81,25 @@
 
   to {
     transform: translateY(120%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }

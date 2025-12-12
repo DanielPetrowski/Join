@@ -1,5 +1,5 @@
 @if (isOpen){
-<div class="backdrop" (click)="close()">
+<div class="backdrop" [class.closing]="isClosing" (click)="close()">
     <article class="dialog"
              [class.opening]="isOpen && !isClosing"
              [class.closing]="isClosing"
