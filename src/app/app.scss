@@ -24,9 +24,12 @@
   width: 100%;
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1440px) {
   .widescreen {
-    padding-left: calc((100% - 1920px) / 2);
-    padding-right: calc((100% - 1920px) / 2);
+   padding-right: calc((100% - 1440px));
+  //  padding-left: calc((100% - 1920px) / 2);
+  }
+  .right_wrapper{
+    padding-left: 234px;
   }
 }
