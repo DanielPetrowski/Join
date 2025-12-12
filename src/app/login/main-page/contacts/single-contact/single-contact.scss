@@ -2,19 +2,26 @@
 
 .sc_information--active {
   opacity: 1;
-  transform: translateX(0);
   animation: sc-slide-in 280ms ease forwards;
+
+
   @keyframes sc-slide-in {
-    from {
-      opacity: 0;
-      transform: translateX(1200px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(1200px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
 }
+
+@media (max-width: 1050px) {
+  .sc_information--active {
+    animation: sc-slide-in-mobile 280ms ease forwards;
+  }
+
+  @keyframes sc-slide-in-mobile {
+    from { opacity: 0; transform: translateY(1200px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
 
 .sc_top {
   display: flex;
@@ -23,6 +30,9 @@
 
   .sc_menu {
     gap: 8px;
+    h2 {
+      background: transparent;
+    }
     > div {
       display: flex;
       gap: 16px;
@@ -40,17 +50,20 @@
         color: lightblue;
         cursor: pointer;
       }
+
       svg {
         height: 24px;
         width: 24px;
         display: flex;
         align-self: self-end;
       }
+
       span {
         font-size: 16px;
         font-weight: 400;
         line-height: 120%;
       }
+
       @media (max-width: 1050px) {
         display: none;
       }
@@ -59,11 +72,13 @@
 
   @media (max-width: 1050px) {
     gap: 20px;
+
     h2 {
       font-size: 36px;
     }
   }
 }
+
 .sc_logo {
   display: flex;
   justify-content: center;
@@ -100,39 +115,75 @@
     flex-direction: column;
     gap: 15px;
 
-    > strong {
+    >strong {
       font-size: 16px;
       font-weight: 700px;
     }
-    > a {
+
+    >a {
       color: #007cee;
       font-size: 16px;
       font-weight: 400;
     }
   }
+
   @media (max-width: 1050px) {
     gap: 21px;
   }
 }
 
-.menu_circle {
+/* -------------------------- Media for max 1050px -------------------------- */
+.circle_menu {
+  display: none;
+background-image: url("/IMG/Menu-Contact-options.svg");
+  @media (max-width: 1050px) {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    right: 64px;
+    bottom: -200px; // Button runter
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    cursor: pointer;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.circle_menu+div {
   display: none;
 
   @media (max-width: 1050px) {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 8px;
     padding: 10px;
-    width: 116px;
+    width: 140px;
 
     position: fixed;
     right: 24px;
-    bottom: -110px;
-
+    bottom: -200px; // Panel gleich weit unten
     background: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px 20px 0 20px;
+    box-shadow: -6px 8px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 16px 0 0 16px;
+
+    transform: translateX(140%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 220ms ease, opacity 220ms ease;
+
+    &.is-open {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
 
     button {
       display: flex;
@@ -145,141 +196,20 @@
       background: transparent;
       color: #2a3647;
       font: 400 16px/1.2 'Inter', sans-serif;
-    }
+      cursor: pointer;
 
-    button svg {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }
 
-
-
 /* ------------------------------- Dialog:Edit ------------------------------ */
 
-:host ::ng-deep app-dialog {
-  .dialog {
-    background: transparent;
-    border-radius: 30px;
-    overflow: hidden; // clippt die Rundung
-  }
-
-  .sc_dialog {
-    max-width: 1212px;
-    display: flex;
-    flex-direction: row;
-    padding: 0px;
-    margin: 0px;
-    gap: 20px;
-
-    .left_side {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background-color: #2a3647;
-      padding: 60px 40px 60px 40px;
-
-      > .seperator {
-        height: 0px;
-        width: 90px;
-        margin-top: 20px;
-      }
-
-      img {
-        height: 64px;
-        width: 52px;
-      }
-      span {
-        font-size: 60px;
-        color: rgb(255, 255, 255);
-      }
-    }
-
-    .mid_side {
-      display: flex;
-      align-items: center;
-      margin: 0 40px;
-    }
-
-    .right_side {
-      background: #fff;
-      padding: 60px 60px 50px;
-      padding-left: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-
-      > button {
-        align-self: self-end;
-        border: none;
-        cursor: pointer;
-      }
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-
-      label {
-        border: 1px solid rgba(209, 209, 209, 1);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 10px;
-        padding: 13px 21px;
-        width: 420px;
-        transition: border-color 150ms ease;
-
-        &:hover {
-          border-color: rgba(41, 171, 226, 1);
-        }
-
-        &:has(input.ng-invalid) {
-          border-color: red;
-        }
-
-        input {
-          border: none;
-          font-size: 20px;
-          font-weight: 400;
-          flex: 1;
-
-          &:focus {
-            outline: none;
-          }
-        }
-
-        img {
-          height: 24px;
-          width: 24px;
-        }
-      }
-
-      .error-msg {
-        color: red;
-        font-size: 14px;
-        margin-top: -20px;
-        margin-left: 4px;
-      }
-    }
-
-    .dialog_buttons {
-      display: flex;
-      gap: 20px;
-      > .button_dark {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        gap: 4px;
-        img {
-          height: 24px;
-          width: 24px;
-        }
-      }
-    }
-  }
+.mid_side {
+  display: flex;
+  align-items: center;
+  margin: 0 40px;
 }
