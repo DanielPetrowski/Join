@@ -137,6 +137,10 @@
   <!-- ----------------------------- Dialog:Edit ----------------------------- -->
   <app-dialog #editDialog>
     <article class="sc_dialog">
+
+      <button class="close" type="button" (click)="editDialog.close()">
+        <img src="/IMG/close.svg" alt="close dialog" />
+      </button>
       <!-- ------------------------- Dialog:Linke Seite -------------------------- -->
       <div class="left_side">
         <img src="IMG/Capa 1.png" alt="" />
@@ -152,7 +156,6 @@
       </div>
       <!-- ------------------------- Dialog:Rechte Seite ------------------------- -->
       <div class="right_side">
-        <button class="close" type="button" (click)="editDialog.close()">X</button>
 
         <!-- ----------------------------- InputFields ----------------------------- -->
         <article>

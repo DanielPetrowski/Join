@@ -1,15 +1,9 @@
 <section class="main-area">
   <article class="contacts-wrapper">
-
     <!-- Add contact button -->
     <button class="add-contact-btn text_4" (click)="onAddContact()" aria-label="Add a Contact">
       Add new contact
       <img class="add-contact-icon" src="/IMG/person_add.svg" alt="Add person icon" />
-    </button>
-
-    <!-- Add contact Floating-Button (Mobile only) -->
-    <button class="add-contact-fab" (click)="onAddContact()" aria-label="Add a Contact (mobile)">
-      <img src="/IMG/person_add.svg" alt="Add person icon" />
     </button>
 
     <!-- Contacts-SROLL-AREA -->
@@ -24,7 +18,7 @@
           </div>
 
           <div class="contact-info">
-            <div class="text_6">{{ c.name }}</div>
+            <div class="contact-name text_3">{{ c.name }}</div>
             <div class="contact-email">{{ c.email }}</div>
           </div>
         </div>
@@ -38,7 +32,7 @@
   <!-- SINGLE-Contact -->
   <article class="single-contact">
     <header class="sc_header">
-      <h1>Contacts</h1>
+      <h2>Contacts</h2>
       <div class="seperator"></div>
       <p>Better with a team</p>
     </header>
@@ -85,23 +79,50 @@
       <div class="right_side">
 
 
-
         <article>
           <form class="contact_form">
             <label class="field">
-              <input type="text" placeholder="Name" name="name" [(ngModel)]="formModel().name" />
+              <input
+                #nameField="ngModel"
+                [(ngModel)]="formModel().name"
+                name="name"
+                type="text"
+                placeholder="Jane Doe"
+                required
+                pattern="^[A-Za-zÄÖÜäöüß\-]{3,}\s[A-Za-zÄÖÜäöüß\-]{3,}$"
+              />
               <img src="IMG/person.svg" alt="" />
             </label>
+            <p class="error-msg" *ngIf="nameField.invalid">Mindestens drei Buchstaben</p>
 
             <label class="field">
-              <input type="email" placeholder="Email" name="email" [(ngModel)]="formModel().email" />
+              <input
+                #emailField="ngModel"
+                [(ngModel)]="formModel().email"
+                name="email"
+                type="email"
+                required
+                pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"
+                placeholder="example@provider.com"
+              />
+
               <img src="IMG/mail.svg" alt="" />
             </label>
+            <p class="error-msg" *ngIf="emailField.invalid">E-mail valiedierung stimmt nicht.</p>
 
             <label class="field">
-              <input type="tel" placeholder="Phone" name="phone" [(ngModel)]="formModel().phone" />
+              <input
+                #phoneField="ngModel"
+                [(ngModel)]="formModel().phone"
+                name="tel"
+                type="tel"
+                placeholder="+0 0000 000 00 0"
+                required
+                minlength="7"
+              />
               <img src="IMG/call.svg" alt="" />
             </label>
+            <p class="error-msg" *ngIf="phoneField.invalid">Gib eine gültige Nummer ein.</p>
           </form>
         </article>
 

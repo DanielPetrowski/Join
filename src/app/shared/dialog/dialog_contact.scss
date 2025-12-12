@@ -1,0 +1,185 @@
+:host ::ng-deep app-dialog {
+    .dialog {
+        background: $white;
+        border-radius: 30px;
+        overflow: hidden; // clippt die Rundung
+    }
+
+    .sc_dialog {
+        max-width: 1212px;
+        height: 590px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+        gap: 20px;
+
+        .close {
+            top: 48px;
+            right: 48px;
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            position: absolute;
+            border: none;
+            cursor: pointer;
+
+            img {
+                width: 14px;
+                height: 14px;
+                top: 9px;
+                left: 9px;
+                pointer-events: none;
+            }
+        }
+    }
+
+    .left_side {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 480px;
+        background-color: $bgGrey;
+        padding: 60px 40px 60px 40px;
+
+        .seperator {
+            height: 0px;
+            width: 90px;
+            border-bottom: 3px solid $buttonBlue;
+            margin-top: 20px;
+        }
+
+        img {
+            height: 64px;
+            width: 52px;
+        }
+
+        span {
+            font-size: 60px;
+            font-weight: 700;
+            color: $white;
+            margin-top: 32px;
+        }
+
+        p {
+            font-size: 27px;
+            font-weight: 700;
+            color: $white;
+            margin-top: 32px;
+        }
+
+    }
+
+    .mid_side {
+        display: flex;
+        align-items: center;
+        margin: 0 40px;
+    }
+
+    .right_side {
+        background: $white;
+        padding: 60px 60px 50px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        label {
+            border: 1px solid $bgMiddleGrey;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+            padding: 13px 21px;
+            width: 420px;
+            transition: border-color 150ms ease;
+
+            &:hover {
+                border-color: $buttonBlue;
+            }
+
+            &:has(input.ng-invalid) {
+                border-color: $errorRed;
+            }
+
+            input {
+                border: none;
+                font-size: 20px;
+                font-weight: 400;
+                flex: 1;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            img {
+                height: 24px;
+                width: 24px;
+            }
+        }
+
+        .error-msg {
+            color: $errorRed;
+            font-size: 14px;
+            margin-top: -20px;
+            margin-left: 4px;
+        }
+    }
+
+    .dialog_buttons {
+        display: flex;
+        gap: 24px;
+        white-space: nowrap;
+
+        .button_light {
+            font-size: 20px;
+            font-weight: 400;
+            width: 126px;
+            padding: 16px 8px;
+            border-radius: 16px;
+            background-color: $white;
+            border: 1px solid $bgGrey;
+        }
+
+        .button_dark {
+            font-size: 21px;
+            font-weight: 700;
+            width: auto;
+            padding: 16px 24px;
+            border-radius: 16px;
+            background-color: $bgGrey;
+            color: $white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .button_light:hover {
+            color: $buttonBlue;
+            border-color: $buttonBlue;
+            transition: background-color 150ms ease-in-out;
+            cursor: pointer;
+        }
+
+        .button_dark:hover {
+            background-color: $buttonBlue;
+            color: $white;
+            transition: background-color 150ms ease-in-out;
+            cursor: pointer;
+        }
+    }
+}
