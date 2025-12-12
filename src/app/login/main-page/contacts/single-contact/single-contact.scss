@@ -25,8 +25,10 @@
 
   .sc_menu {
     gap: 8px;
-
-    >div {
+    h2 {
+      background: transparent;
+    }
+    > div {
       display: flex;
       gap: 16px;
     }
@@ -125,20 +127,20 @@
   }
 }
 
+/* -------------------------- Media for max 1050px -------------------------- */
 .circle_menu {
   display: none;
-
+background-image: url("/IMG/Menu-Contact-options.svg");
   @media (max-width: 1050px) {
     display: grid;
     place-items: center;
     position: fixed;
-    right: 24px;
+    right: 64px;
     bottom: -200px; // Button runter
     width: 56px;
     height: 56px;
     border: none;
     border-radius: 50%;
-    background: #2a3647;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     padding: 0;
     cursor: pointer;
@@ -198,7 +200,6 @@
     }
   }
 }
-
 
 /* ------------------------------- Dialog:Edit ------------------------------ */
 
