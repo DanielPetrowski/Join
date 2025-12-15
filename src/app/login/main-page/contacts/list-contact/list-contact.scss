@@ -1,8 +1,8 @@
 @import './../../../../../styles.scss';
 
-.confirmation_container{
+.confirmation_container {
   position: fixed;
-  bottom : 20px;
+  bottom: 20px;
   left: 50%;
   background-color: $buttonGrey;
   color: $white;
@@ -29,14 +29,22 @@
   animation: cc-fade-in-out 3500ms ease forwards;
 
   @keyframes cc-fade-in-out {
-    0% {      opacity: 0;
-              transform: translateX(2400);    }
-    25% {      opacity: 1;
-              transform: translateX(0);    }
-    75% {      opacity: 1;
-              transform: translateX(0);   }
-    100% {      opacity: 0;
-              transform: translateX(2400);    }
+    0% {
+      opacity: 0;
+      transform: translateX(2400);
+    }
+    25% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    75% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(2400);
+    }
   }
 }
 
@@ -58,6 +66,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   overflow-y: auto;
   padding-right: 8px;
   max-height: calc(100vh - 100px);
@@ -194,6 +203,8 @@
       div {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+
         gap: 5px;
 
         span {
