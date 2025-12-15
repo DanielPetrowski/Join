@@ -16,9 +16,11 @@
 .content {
   display: flex;
   width: 100%;
+  background-color: $bgLightGrey;
+  height: 100vh;
 }
 
-.right_wrapper{
+.right_wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -26,7 +28,7 @@
 
 @media (min-width: 1440px) {
   .widescreen {
-   padding-right: calc((100% - 1440px));
-  //  padding-left: calc((100% - 1920px) / 2);
+    padding-right: calc((100% - 1440px));
+    //  padding-left: calc((100% - 1920px) / 2);
   }
 }
