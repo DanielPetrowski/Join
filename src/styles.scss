@@ -2,6 +2,12 @@
 @import './app/styles/global-styles.scss';
 @import './app/shared/dialog/dialog.scss';
 
+/* --------------------------------- Styling -------------------------------- */
+
+.content{
+    background-color: $bgLightGrey;
+}
+
 // GET FONT "Inter" ...
 @font-face {
     font-family: 'Inter';
