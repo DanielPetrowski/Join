@@ -115,6 +115,23 @@
       font-size: 20px;
       margin: -60px 0px 0px 0px;
     }
+
+    .sc_logo, img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid $white;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+      background-color: $bgGrey;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 47px;
+      font-weight: 500;
+      color: $white;
+    }
   }
 
   .right_side {

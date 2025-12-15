@@ -78,6 +78,8 @@
     padding-left: 0;
     padding-right: 0;
     box-shadow: inset 0px 2px 4px -2px $bgMiddleGrey;
+    height: calc(100vh - 80px);
+    max-height: none;
   }
 
   .button_container {
