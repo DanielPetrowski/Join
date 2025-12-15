@@ -1,12 +1,11 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
   standalone: true,
   imports: [],
   templateUrl: './dialog.html',
-  styleUrl: './dialog.scss',
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './dialog.scss'
 })
 export class Dialog {
   @Input() width = '480px';
