@@ -101,20 +101,20 @@ export class ListContact {
 
   }
 
-  // async saveNewContact(form: NgForm): Promise<void> {
-  //   if (!form.valid) return;
-  //   const data = this.formModel();
-  //   await this.firebase.setLastUserColor(this.lastUserColor);
+  async saveNewContact(form: NgForm): Promise<void> {
+    if (!form.valid) return;
+    const data = this.formModel();
+    await this.firebase.setLastUserColor(this.lastUserColor);
 
-  //   await this.firebase.addContact({
-  //     name: data.name?.trim() ?? '',
-  //     email: data.email?.trim() ?? '',
-  //     phone: data.phone?.trim() ?? '',
-  //     color: data.color ?? '#000'
-  //   });
-  //   this.DialogAddNewContact.close();
-  //   this.writeConfirmation();
-  // }
+    await this.firebase.addContact({
+      name: data.name?.trim() ?? '',
+      email: data.email?.trim() ?? '',
+      phone: data.phone?.trim() ?? '',
+      color: data.color ?? '#000'
+    });
+    this.DialogAddNewContact.close();
+    this.writeConfirmation();
+  }
 
   private getColor(): string {
     this.lastUserColor = (this.lastUserColor % this.maxColors) + 1;
