@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { TaskPreview } from './task-preview/task-preview';
 import { DialogAddTask } from './dialog-add-task/dialog-add-task';
 
@@ -9,5 +9,9 @@ import { DialogAddTask } from './dialog-add-task/dialog-add-task';
   styleUrl: './board.scss',
 })
 export class Board {
+  @ViewChild(DialogAddTask) dialogAddTask!: DialogAddTask;
 
+  openDialogAddTask() {
+    this.dialogAddTask.open();
+  }
 }

@@ -4,12 +4,13 @@
 
     <div>
       <input type="text" placeholder="Find Task" />
-      <button class="button_dark">
-        <app-dialog-add-task></app-dialog-add-task>
+      <button class="button_dark" (click)="openDialogAddTask()">
         <span>+</span>
       </button>
     </div>
   </article>
+
+  <app-dialog-add-task></app-dialog-add-task>
 
   <article class="area_bottom">
 

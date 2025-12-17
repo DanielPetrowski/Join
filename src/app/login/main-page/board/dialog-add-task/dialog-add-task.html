@@ -1,1 +1,61 @@
-<app-dialog></app-dialog>
+<app-dialog #dialogAddTask>
+  <section class="add_task">
+    <header>
+      <span>Add Task</span>
+      <button>X</button>
+    </header>
+
+    <section class="area_mid">
+      <article class="area_left">
+        <form action="">
+          <div class="area_input">
+            <label for="Titel">Titel</label>
+            <input type="text" placeholder="Enter a title" required />
+          </div>
+
+          <div class="area_input">
+            <label for="Titel">Description</label>
+            <input type="text" placeholder="Enter a Description" required />
+          </div>
+
+          <div class="area_input">
+            <label for="Titel">Due date</label>
+            <input type="date" placeholder="dd/mm/yyyy" required />
+          </div>
+        </form>
+      </article>
+
+      <div class="seperator"></div>
+
+      <article class="area_right">
+        <div class="priority">
+          <button>urgent</button>
+          <button>Medium</button>
+          <button>Low</button>
+        </div>
+        <div class="assigned_to">
+          <button>Select contacts to assign</button>
+        </div>
+
+        <div class="category">
+          <button>Select task ctegory</button>
+        </div>
+
+        <div>
+          <form class="area_input" action="">
+            <label for="Subtasks">Subtasks</label>
+            <input type="text" placeholder="Add new subtask" />
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <span>This fiels is reqiuered</span>
+      <div>
+        <button class="button_light">Cancel</button>
+        <button class="button_dark">Create Task</button>
+    </div>
+    </footer>
+  </section>
+</app-dialog>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild} from '@angular/core';
 import { Dialog } from '../../../../shared/dialog/dialog';
 
 @Component({
@@ -8,5 +8,9 @@ import { Dialog } from '../../../../shared/dialog/dialog';
   styleUrl: './dialog-add-task.scss',
 })
 export class DialogAddTask {
+  @ViewChild(Dialog) dialog!: Dialog;
 
+    open() {
+    this.dialog.open();
+  }
 }
