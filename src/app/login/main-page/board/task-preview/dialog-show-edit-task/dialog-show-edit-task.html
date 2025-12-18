@@ -1,5 +1,5 @@
 <app-dialog>
-  <section class="dialog_showedit">
+  <section class="dialog_show" [class.d_none]="isEditMode">
     <header>
       <span>User Story</span>
       <button>X</button>
@@ -39,7 +39,54 @@
     </div>
     <footer>
       <button>Delete</button>
-      <button>Edit</button>
+      <button (click)="switchPage()">Edit</button>
     </footer>
   </section>
+
+<!-- -------------------------- Section EditTask --------------------------- -->
+    <section class="dialog_edit" [class.d_none]="!isEditMode">
+    <header>
+      <span>Edit Fenster</span>
+      <button>X</button>
+    </header>
+
+    <p class="area_title">
+      <span class="task_title">Du sieht heir was anderes</span>
+      <small class="task_description">lelelelele lelelelelle.</small>
+    </p>
+
+      <p class="task_info">
+        <span>Due date:</span>
+        <span>10/05/2023</span>
+      </p>
+      <p class="task_info">
+        <span>Priority</span>
+        <span>Medium</span>
+      </p>
+    
+    <span class="assigned_title">Assigned To:</span>
+    <div class="area_assigned">
+      <p><span>EM</span><span>Emmanuel Mauert</span></p>
+      <p><span>MB</span><span>Marcel Bauer</span></p>
+      <p><span>M</span><span>Anton Myer</span></p>
+    </div>
+
+    <span class="subtasks_title">Subtasks</span>
+    <div class="subtasks">
+      <p>
+        <span>?</span>
+        <span>implement Recipe Recommendation</span>
+      </p>
+      <p>
+        <span>?</span>
+        <span>Start Page Layout</span>
+      </p>
+    </div>
+    <footer>
+      <button>Delete</button>
+      <button (click)="switchPage()">Safe</button>
+    </footer>
+  </section>
+
+
 </app-dialog>
