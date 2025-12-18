@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -17,11 +18,20 @@ import {
     CdkDropList,
     CdkDropListGroup
   ],
+=======
+import { Component,ViewChild } from '@angular/core';
+import { DialogShowEditTask } from './dialog-show-edit-task/dialog-show-edit-task';
+
+@Component({
+  selector: 'app-task-preview',
+  imports: [DialogShowEditTask],
+>>>>>>> 3c78c269a7a90e1424b83ee0bbbf98cbafebe8bc
   templateUrl: './task-preview.html',
   styleUrl: './task-preview.scss',
 })
 export class TaskPreview {
 
+<<<<<<< HEAD
   todoTasks: string[] = ['Test Task'];
   inProgressTasks: string[] = [];
   awaitFeedbackTasks: string[] = [];
@@ -42,5 +52,11 @@ export class TaskPreview {
         event.currentIndex
       );
     }
+=======
+    @ViewChild(DialogShowEditTask) dialogShowEditTask!: DialogShowEditTask;
+
+  openDialogShowEditTask() {
+    this.dialogShowEditTask.open();
+>>>>>>> 3c78c269a7a90e1424b83ee0bbbf98cbafebe8bc
   }
 }

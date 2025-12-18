@@ -1,0 +1,242 @@
+.dialog_show {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 4px;
+  width: 440px; // evt habt ihr tipps zur breite?
+
+  header {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      display: flex;
+      padding: 4px 24px;
+      gap: 10px;
+
+      color: white;
+      background: #0038ff;
+      border-radius: 8px;
+    }
+  }
+
+  .area_title {
+    display: flex;
+    flex-direction: column;
+    .task_title {
+      font-weight: 700;
+      font-size: 61px;
+    }
+
+    .task_description {
+      font-weight: 400;
+      font-size: 20px;
+    }
+  }
+
+  .task_info {
+    display: flex;
+    justify-content: space-between;
+    span:nth-child(1) {
+      font-weight: 400;
+      font-size: 20px;
+      color: rgba(66, 82, 110, 1);
+    }
+    span:nth-child(2) {
+      font-weight: 400;
+      font-size: 20px;
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+
+  .assigned_title {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2a3647;
+  }
+
+  .area_assigned {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 7px 16px;
+      border-radius: 10px;
+      margin: 0;
+
+      span:nth-child(1) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 400;
+        background-color: green;
+      }
+
+      span:nth-child(2) {
+        font-size: 19px;
+        font-weight: 400;
+        color: #000000;
+      }
+    }
+  }
+
+  .subtasks_title {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2a3647;
+  }
+
+  .subtasks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+
+    p {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
+
+.d_none {
+  display: none !important;
+}
+
+/* ------------------------------- EditBereich ------------------------------ */
+.dialog_edit {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 4px;
+  width: 440px; // evt habt ihr tipps zur breite?
+
+  header {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      display: flex;
+      padding: 4px 24px;
+      gap: 10px;
+
+      color: white;
+      background: #0038ff;
+      border-radius: 8px;
+    }
+  }
+
+  .area_title {
+    display: flex;
+    flex-direction: column;
+    .task_title {
+      font-weight: 700;
+      font-size: 61px;
+    }
+
+    .task_description {
+      font-weight: 400;
+      font-size: 20px;
+    }
+  }
+
+  .task_info {
+    display: flex;
+    justify-content: space-between;
+    span:nth-child(1) {
+      font-weight: 400;
+      font-size: 20px;
+      color: rgba(66, 82, 110, 1);
+    }
+    span:nth-child(2) {
+      font-weight: 400;
+      font-size: 20px;
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+
+  .assigned_title {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2a3647;
+  }
+
+  .area_assigned {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 7px 16px;
+      border-radius: 10px;
+      margin: 0;
+
+      span:nth-child(1) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 400;
+        background-color: green;
+      }
+
+      span:nth-child(2) {
+        font-size: 19px;
+        font-weight: 400;
+        color: #000000;
+      }
+    }
+  }
+
+  .subtasks_title {
+    font-weight: 400;
+    font-size: 20px;
+    color: #2a3647;
+  }
+
+  .subtasks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+
+    p {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
