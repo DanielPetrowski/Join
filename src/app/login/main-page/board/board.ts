@@ -8,6 +8,7 @@ import { DialogAddTask } from './dialog-add-task/dialog-add-task';
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
+
 export class Board {
   @ViewChild(DialogAddTask) dialogAddTask!: DialogAddTask;
 
