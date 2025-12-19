@@ -89,22 +89,44 @@
                 </div>
             </div>
             <div>
-            <p>Assigned to</p>
-            <div class="assigned_to">
-                <span>Select contacts to assign</span>
-            </div>
-            </div>
+                <p>Assigned to</p>
+                <div >
+                    <mat-form-field class="assigned_to">
+                        <mat-label> Select contacts to assign</mat-label>
+                        <mat-select [formControl]="toppings" multiple>
+                            @for (topping of toppingList; track topping) {
+                            <mat-option [value]="topping">{{topping}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
 
-            <div><p>Category <span class="required">*</span></p>
-            <div class="category">
-                <span>Select task category</span>
-            </div>
+                </div>
             </div>
 
             <div>
-                <form class="area_input" action="">
-                    <label for="Subtasks">Subtasks</label>
-                    <input type="text" placeholder="Add new subtask" />
+                <p>Category <span class="required">*</span></p>
+                <div >
+                    <mat-form-field class="category">
+                        <mat-label> Select task category</mat-label>
+                        <mat-select [formControl]="toppings" multiple>
+                            @for (topping of toppingList; track topping) {
+                            <mat-option [value]="topping">{{topping}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <form >
+                    <mat-form-field class="area_input">
+                        <mat-label> Add  new subtask</mat-label>
+                        <mat-select [formControl]="toppings" multiple>
+                            @for (topping of toppingList; track topping) {
+                            <mat-option [value]="topping">{{topping}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
                 </form>
             </div>
         </article>

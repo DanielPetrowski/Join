@@ -45,6 +45,17 @@
     flex-direction: column;
     gap: 24px;
     width: 100%;
+    form{
+      background-color: white;
+      height: 54px;
+      input{
+        height: 54px;
+        border-style: none;
+        select{
+          border-style: none;
+        }
+      }
+    }
   }
 
   .seperator {
@@ -205,7 +216,6 @@
   align-items: center;
   padding: 12px 16px;
   width: 100%;
-  height: 48px;
   background: #ffffff;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -214,6 +224,7 @@
   color: #000000;
   cursor: pointer;
   text-align: left;
+ 
 }
 
   }
@@ -275,4 +286,6 @@ footer {
       cursor: pointer;
     }
   }
+ 
+
 }
