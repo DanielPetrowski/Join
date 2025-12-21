@@ -36,10 +36,20 @@
       right: 48px;
       width: 32px;
       height: 32px;
+      border-radius: 50%;
       background: transparent;
       position: absolute;
       border: none;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      &:hover {
+        background-color: colors.$bgMiddleGrey;
+        transition: background-color 150ms ease-in-out;
+      }
 
       @media (max-width: 1050px) {
         top: 24px;
@@ -148,23 +158,23 @@
       z-index: 10;
     }
 
-    .sc_logo,
-    svg {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid colors.$white;
-      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-      fill: colors.$white;
-      object-fit: cover;
+    .logo_container{
+      width: 120px;
+      height: 120px;
       background-color: colors.$bgMiddleGrey;
-
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 47px;
-      font-weight: 500;
-      color: colors.$white;
+      border-radius: 50%;
+      border: 3px solid colors.$white;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .sc_logo,
+    svg {
+      width: 48px;
+      height: 48px;
+      fill: colors.$white;
 
       @media (max-width: 500px) {
         width: 80px;
@@ -218,10 +228,6 @@
         border-color: colors.$buttonBlue;
       }
 
-      &:has(input.ng-invalid) {
-        border-color: colors.$errorRed;
-      }
-
       input {
         border: none;
         font-size: 20px;
@@ -267,6 +273,9 @@
       border-radius: 16px;
       background-color: colors.$white;
       border: 1px solid colors.$bgGrey;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
 
       @media (max-width: 500px) {
         font-size: 10px;
@@ -286,7 +295,7 @@
       color: colors.$white;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-evenly;
 
       @media (max-width: 500px) {
         font-size: 10px;
@@ -294,7 +303,6 @@
         width: 90px;
         padding: 0px 4px;
         gap: 0;
-        display: flex;
         justify-content: center;
       }
 

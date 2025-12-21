@@ -40,6 +40,15 @@
       position: absolute;
       border: none;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      &:hover {
+        background-color: colors.$bgMiddleGrey;
+        transition: background-color 150ms ease-in-out;
+      }
 
       @media (max-width: 1050px) {
         top: 24px;
@@ -312,6 +321,7 @@
 
     .button_dark:hover {
       background-color: colors.$buttonBlue;
+      border-color: colors.$buttonBlue;
       color: colors.$white;
       transition: background-color 150ms ease-in-out;
       cursor: pointer;

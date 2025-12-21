@@ -463,9 +463,6 @@ y
         border-color: colors.$buttonBlue;
       }
 
-      &:has(input.ng-invalid) {
-        border-color: colors.$errorRed;
-      }
 
       input {
         border: none;
