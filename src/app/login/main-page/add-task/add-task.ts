@@ -19,6 +19,38 @@ import { TaskStatus } from '../../../types/task-status';
 })
 
 export class AddTask {
+
+
+
+  
+
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+  this.menuOpen = false;
+}
+// Prüfen, ob Kontakt ausgewählt ist
+isAssigned(contact: Contact): boolean {
+  return this.assignedTo().some(function(c) { return c.id === contact.id; });
+}
+
+// Kontakt hinzufügen oder entfernen
+toggleContact(contact: Contact, checked: boolean) {
+  const current = this.assignedTo();
+  if (checked) {
+    if (!current.some(function(c) { return c.id === contact.id; })) {
+      this.assignedTo.set([...current, contact]);
+    }
+  } else {
+    this.assignedTo.set(current.filter(function(c) { return c.id !== contact.id; }));
+  }
+}
+
+
   // Signals
   assignedTo = signal<Contact[]>([]);
   selectedTaskType = signal<TaskType | null>(null);
@@ -46,6 +78,10 @@ export class AddTask {
     });
   }
 
+
+
+
+  
   setPriority(p: 'urgent' | 'medium' | 'low') {
     this.priority.set(this.priority() === p ? null : p);
   }

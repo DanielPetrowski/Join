@@ -54,7 +54,7 @@
               </clipPath>
             </defs>
           </svg>
-        </div>
+         </div>
         <div
           class="button_container"
           (click)="setPriority('medium')"
@@ -106,48 +106,65 @@
 
       <div>
         <p>Assigned to</p>
-        <mat-form-field appearance="fill" class="assigned_to">
-          <mat-label>Assign to</mat-label>
-          <mat-select
-            multiple
-            [value]="assignedTo()"
-            (selectionChange)="assignedTo.set($event.value)"
-          >
-            <mat-option *ngFor="let contact of contacts()" [value]="contact">{{
-              contact.name
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+<div class="dropdown">
+  <input type="text" readonly (click)="toggleMenu()" placeholder="Kontakt auswählen">
 
-      <div>
-        <p>Category <span class="required">*</span></p>
-        <mat-form-field appearance="fill" class="category">
-          <mat-label>Task Type <span class="required">*</span></mat-label>
-          <mat-select
-            [value]="selectedTaskType()"
-            (selectionChange)="selectedTaskType.set($event.value)"
-          >
-            <mat-option *ngFor="let type of taskTypes" [value]="type.value">{{
-              type.name
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+  <ul *ngIf="menuOpen" class="menu">
+    <li *ngFor="let contact of contacts()" class="menu-item">
+      <span class="contact-name">{{ contact.name }}</span>
+      <input 
+        type="checkbox"
+        [checked]="isAssigned(contact)"
+        (change)="toggleContact(contact, $event.target.checked)">
+    </li>
+  </ul>
+</div>
 
-      <form class="area_input" action="">
-        <label for="Subtasks">Subtasks</label>
-        <input type="text" placeholder="Add new subtask" />
-      </form>
+      </div>
+<div>
+<p>Category <span class="required">*</span></p>
+
+<label for="taskType"></label>
+<select
+  id="taskType"
+  class="category"
+  [ngModel]="selectedTaskType()"
+  (ngModelChange)="selectedTaskType.set($event)">
+
+  <option [ngValue]="null" disabled selected hidden>Task Type</option>
+
+  <option *ngFor="let type of taskTypes" [ngValue]="type.value">
+    {{ type.name }}
+  </option>
+</select>
+</div>
+
+
+
+
+       <form class="area_input" action="">
+                    <label for="Subtasks">Subtasks</label>
+                    <input type="text" placeholder="Add new subtask" />
+                </form>
     </article>
   </section>
 
   <footer>
-    <span><span class="required">*</span>This field is required</span>
+       <span><span class="required">*</span>This field is required</span>
+   
+
+
 
     <div>
-      <button class="button_light">Cancel</button>
-      <button class="button_dark" (click)="createTask()">Create Task</button>
+      
+      <button class="button_light"><img  src="img/iconoir_cancel.svg" alt=""> Cancel</button>
+      
+      
+      <div class="create_task_button">
+      <button class="button_dark" (click)="createTask()"><img src="img/check.svg" alt="">Create Task</button>
+      </div>
     </div>
   </footer>
+
+  
 </section>

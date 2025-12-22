@@ -111,6 +111,9 @@
       gap: 16px;
       width: 100%;
       max-width: 440px;
+     
+     
+      
       
 
       .button_container{
@@ -165,7 +168,7 @@
             }
             
         }
-      
+     
 
       .buttons {
         display: flex;
@@ -200,6 +203,46 @@
       }
     }
     }
+   
+.dropdown {
+  background-color: white;
+  max-height: 200px;
+  overflow-y: scroll;
+ 
+
+  // Styles für das Dropdown-Input
+  input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    height: 48px;
+    cursor: pointer;
+  }
+
+  // Menü-Liste
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      font-size: 20px;
+
+      // Checkboxen innerhalb der Menu-Items
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: red; // moderne Browser
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
 
  
 
@@ -266,6 +309,7 @@ footer {
       color: #2a3647;
       font-size: 20px;
       font-weight: 400;
+      flex-direction: row-reverse;
       cursor: pointer;
     }
 
@@ -283,6 +327,7 @@ footer {
       color: #ffffff;
       font-size: 21px;
       font-weight: 700;
+      flex-direction: row-reverse;
       cursor: pointer;
     }
   }

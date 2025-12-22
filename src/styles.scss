@@ -92,3 +92,12 @@ h2 {
 div.mat-mdc-select-panel{
     background-color: white !important;
 }
+
+
+.mat-mdc-form-field{
+    width: 100%;
+    background-color: white;
+}
+.no-underline .mdc-line-ripple {
+  display: none !important;
+}
