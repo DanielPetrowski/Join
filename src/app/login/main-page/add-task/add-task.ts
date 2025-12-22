@@ -1,4 +1,4 @@
-import { Component, signal, effect } from '@angular/core';
+import { Component, signal, effect,ViewChildren,QueryList,ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,8 +22,67 @@ import { TaskStatus } from '../../../types/task-status';
 })
 
 export class AddTask {
+  subtaskInput = '';
 
 
+
+  
+  subtasks: string[] = [];
+  showIcons = false;
+
+
+  editIndex: number | null = null;
+  @ViewChildren('editInput') editInputs!: QueryList<ElementRef<HTMLInputElement>>;
+
+  editSubtask(index: number) {
+    this.editIndex = index;
+
+    setTimeout(() => {
+      const elRef = this.editInputs.toArray()[index];
+      if (elRef?.nativeElement) {
+        elRef.nativeElement.focus();
+        elRef.nativeElement.select();
+      }
+    });
+  }
+
+ saveEdit() {
+    this.editIndex = null;
+  }
+
+ deleteSubtask(index: number) {
+    this.subtasks.splice(index, 1);
+  }
+
+  trackByIndex(index: number, item: any) {
+    return index;
+  }
+  
+
+
+
+
+
+
+    
+
+
+  
+
+  addSubtask() {
+    if (this.subtaskInput.trim()) {
+      this.subtasks.push(this.subtaskInput);
+      this.subtaskInput = '';
+    }
+  }
+
+  onBlur() {
+    if (!this.subtaskInput.trim()) {
+      this.showIcons = false;
+    }
+  }
+
+  
 
   
 
