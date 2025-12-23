@@ -31,6 +31,8 @@ export class AddTask {
   editIndex: number | null = null;
   @ViewChildren('editInput') editInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
+  
+
   editSubtask(index: number) {
     this.editIndex = index;
 

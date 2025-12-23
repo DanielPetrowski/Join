@@ -14,14 +14,17 @@
         <label>Description</label>
         <input type="text" [(ngModel)]="description" placeholder="Enter a description" />
       </div>
-<p>dueDate</p>
-<mat-form-field appearance="outline"floatLabel="always">
-  <mat-label></mat-label>
+      <div class="carlenda">
+<p>Due date <span class="required">*</span></p>
+<mat-form-field appearance="outline"floatLabel="auto">
+  
+  
   <input
     matInput
     [matDatepicker]="picker"
     [(ngModel)]="dueDate"
     placeholder="DD/MM/YYYY"
+    [class.has-value]="dueDate"
      (focus)="picker.open()"
   />
  <mat-datepicker-toggle matSuffix [for]="picker">
@@ -38,6 +41,7 @@
   <mat-datepicker #picker></mat-datepicker>
   
 </mat-form-field>
+</div>
 
 
     </article>

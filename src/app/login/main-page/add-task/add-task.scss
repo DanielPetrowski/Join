@@ -47,6 +47,14 @@
     flex-direction: column;
     gap: 24px;
     width: 100%;
+    .carlenda{
+      p{
+        height: 24px;
+      }
+      .required{
+        color: colors.$errorRed;
+      }
+    }
 
     form {
       background-color: white;
