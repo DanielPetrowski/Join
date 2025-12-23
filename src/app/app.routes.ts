@@ -13,7 +13,7 @@ export const routes: Routes = [
     
     {path:"contacs",component:Contacts},
     {path:"board",component:Board},
-    {path:"add-task",component:AddTask},
+    {path: 'add-task',loadComponent: () => import('../app/login/main-page/add-task/add-task').then(c => c.AddTask) },
     {path:"summary",component:Summary},
     {path:"Privacy Policy",component:PrivacyPolicy},
     {path:"Legal notice",component:LegalNotice},

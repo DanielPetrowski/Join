@@ -1,24 +1,22 @@
 import { Component, signal, effect, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { MatSelectModule, } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirebaseServices } from '../../../firebase-services/firebase-services';
 import { Contact } from '../../../interfaces/contact.interface';
 import { Task } from '../../../interfaces/task.interface';
 import { Subtask } from '../../../interfaces/subtask.interface';
-import { TaskAssign } from '../../../interfaces/task-assign.interface';
 import { TaskType } from '../../../types/task-type';
 import { TaskStatus } from '../../../types/task-status';
-import {  MatDatepickerModule, } from '@angular/material/datepicker';
+import { MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule,MatNativeDateModule, MatDatepickerModule,MatInputModule, FormsModule],
+  imports: [CommonModule, MatFormFieldModule, MatNativeDateModule, MatDatepickerModule, MatInputModule, MatSelectModule, ReactiveFormsModule, FormsModule],
   templateUrl: './add-task.html',
   styleUrls: ['./add-task.scss'],
 })
@@ -30,8 +28,6 @@ export class AddTask {
 
   editIndex: number | null = null;
   @ViewChildren('editInput') editInputs!: QueryList<ElementRef<HTMLInputElement>>;
-
-  
 
   editSubtask(index: number) {
     this.editIndex = index;
@@ -51,7 +47,7 @@ export class AddTask {
     this.subtasks.splice(index, 1);
   }
 
-  trackByIndex(index: number, item: any) {
+  trackByIndex(index: number) {
     return index;
   }
 
@@ -79,14 +75,13 @@ export class AddTask {
   closeMenu() {
     this.menuOpen = false;
   }
-  // Prüfen, ob Kontakt ausgewählt ist
+
   isAssigned(contact: Contact): boolean {
     return this.assignedTo().some(function (c) {
       return c.id === contact.id;
     });
   }
 
-  // Kontakt hinzufügen oder entfernen
   toggleContact(contact: Contact, checked: boolean) {
     const current = this.assignedTo();
     if (checked) {
@@ -117,7 +112,7 @@ export class AddTask {
 
   contacts = signal<Contact[]>([]);
   taskTypes = Object.entries(TaskType)
-    .filter(([key, value]) => typeof value === 'number')
+    .filter(([, value]) => typeof value === 'number')
     .map(([key, value]) => ({ name: key, value: value as TaskType }));
 
   constructor(private firebase: FirebaseServices) {
@@ -130,8 +125,33 @@ export class AddTask {
     });
   }
 
+  assignedToText: string = '';
+
+  selectOpened = false;
+
+  updateAssignedToText(opened?: boolean) {
+    if (opened !== undefined) {
+      this.selectOpened = opened;
+    }
+
+    if (this.assignedTo().length > 0) {
+
+      this.assignedToText = this.assignedTo().map(c => c.name).join(', ');
+    } else {
+
+      this.assignedToText = '';
+    }
+  }
+
   setPriority(p: 'urgent' | 'medium' | 'low') {
     this.priority.set(this.priority() === p ? null : p);
+  }
+
+  getInitials(name: string): string {
+    const parts = name.trim().split(' ');
+    const first = parts[0]?.charAt(0).toUpperCase() ?? '';
+    const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
+    return first + last;
   }
 
   async createTask() {

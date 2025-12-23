@@ -17,14 +17,11 @@
       <div class="carlenda">
 <p>Due date <span class="required">*</span></p>
 <mat-form-field appearance="outline"floatLabel="auto">
-  
-  
-  <input
+<input
     matInput
     [matDatepicker]="picker"
     [(ngModel)]="dueDate"
     placeholder="DD/MM/YYYY"
-    [class.has-value]="dueDate"
      (focus)="picker.open()"
   />
  <mat-datepicker-toggle matSuffix [for]="picker">
@@ -42,9 +39,7 @@
   
 </mat-form-field>
 </div>
-
-
-    </article>
+</article>
 
     <div class="seperator"></div>
 
@@ -101,7 +96,43 @@
 
       <div>
         <p>Assigned to</p>
-        <div class="dropdown">
+<mat-form-field appearance="fill" floatLabel="always">
+  <mat-label>
+    {{ (assignedTo().length > 0 || selectOpened) ? 'An:' : 'Select contacts to assign' }}
+  </mat-label>
+
+  <mat-select
+    multiple
+    [value]="assignedTo()"
+    (selectionChange)="assignedTo.set($event.value)"
+  >
+    <!-- Trigger OHNE Initialen -->
+    <mat-select-trigger>
+      {{ assignedToText }}
+    </mat-select-trigger>
+
+    <!-- Liste MIT Initialen -->
+    <mat-option *ngFor="let contact of contacts()" [value]="contact">
+      <span class="sc_logo" [style.background]="contact.color">
+        {{ getInitials(contact.name) }}
+      </span>
+      {{ contact.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- 🔽 Initialen unter dem Inputfeld -->
+<div class="assigned-logos" *ngIf="assignedTo().length > 0">
+  <span
+    class="sc_logo"
+    *ngFor="let contact of assignedTo()"
+    [style.background]="contact.color"
+  >
+    {{ getInitials(contact.name) }}
+  </span>
+</div>
+<!-- <div class="dropdown">
+          
           <input type="text" readonly (click)="toggleMenu()" placeholder="Select contacts to assign">
 
           <ul *ngIf="menuOpen" class="menu">
@@ -111,7 +142,7 @@
                 (change)="toggleContact(contact, $event.target.checked)">
             </li>
           </ul>
-        </div>
+        </div> -->
 
       </div>
       <div>
@@ -128,11 +159,7 @@
           </option>
         </select>
       </div>
-
-
-
-
-      <form class="area_input" (submit)="$event.preventDefault()">
+<form class="area_input" (submit)="$event.preventDefault()">
         <label for="Subtasks">Subtasks
           <div class="inner_subtask">
             <div class="inner_icons">
@@ -151,9 +178,6 @@
           </div>
         </label>
       </form>
-
-
-  
 <div class="subtask_list" *ngIf="subtasks.length > 0">
   <ul>
     <li *ngFor="let subtask of subtasks; let i = index; trackBy: trackByIndex" class="subtask_item">
@@ -177,32 +201,17 @@
     </li>
   </ul>
 </div>
-
-
-
-
-
-
-
-    </article>
+</article>
   </section>
 
   <footer>
     <span><span class="required">*</span>This field is required</span>
-
-
-
-
-    <div>
+<div>
 
       <button class="button_light"> Cancel X</button>
-
-
-      <div class="create_task_button">
+<div class="create_task_button">
         <button class="button_dark" (click)="createTask()"><img src="img/check.svg" alt="">Create Task</button>
       </div>
     </div>
   </footer>
-
-
 </section>
