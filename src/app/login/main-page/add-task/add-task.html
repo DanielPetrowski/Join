@@ -114,7 +114,7 @@
     <!-- Liste MIT Initialen -->
     <mat-option *ngFor="let contact of contacts()" [value]="contact">
       <span class="sc_logo" [style.background]="contact.color">
-        {{ getInitials(contact.name) }}
+        {{ userUi.getInitials(contact.name) }}
       </span>
       {{ contact.name }}
     </mat-option>
@@ -128,7 +128,7 @@
     *ngFor="let contact of assignedTo()"
     [style.background]="contact.color"
   >
-    {{ getInitials(contact.name) }}
+    {{ userUi.getInitials(contact.name) }}
   </span>
 </div>
 <!-- <div class="dropdown">

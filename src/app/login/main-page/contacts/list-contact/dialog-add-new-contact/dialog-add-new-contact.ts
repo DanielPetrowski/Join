@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  ChangeDetectionStrategy,
   inject,
   ViewChild,
   Output,
@@ -12,6 +11,8 @@ import { FirebaseServices } from '../../../../../firebase-services/firebase-serv
 import { Contact } from '../../../../../interfaces/contact.interface';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Dialog } from '../../../../../shared/dialog/dialog';
+import { UserUiService } from '../../../../../services/user-ui.service';
+
 @Component({
   selector: 'app-dialog-add-new-contact',
   imports: [CommonModule, FormsModule, Dialog],
@@ -22,6 +23,7 @@ import { Dialog } from '../../../../../shared/dialog/dialog';
 
 export class DialogAddNewContact {
   private readonly firebase = inject(FirebaseServices);
+  private readonly userUi = inject(UserUiService);
 
   @Output() contactSelected = new EventEmitter<string>();
   @ViewChild('DialogAddNewContact') addDialog!: Dialog;
@@ -31,49 +33,42 @@ export class DialogAddNewContact {
     name: '',
     email: '',
     phone: '',
-    color: this.getColor(),
+    color: '#000',
   });
 
   selectedContactId = signal<string | null>(null);
 
-  private lastUserColor = 7;
-  private maxColors = 15;
-
   getInitials(name: string): string {
-    const parts = name.trim().split(' ');
-    const first = parts[0]?.charAt(0).toUpperCase() ?? '';
-    const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
-    return first + last;
+    return this.userUi.getInitials(name);
   }
 
-  open() {
+  async open(): Promise<void> {
+
+    const colorIndex = await this.userUi.getNextColorIndex();
+    const colorHex = this.userUi.getColorByIndex(colorIndex);
+
+    this.formModel.set({
+      name: '',
+      email: '',
+      phone: '',
+      color: colorHex,
+    });
     this.addDialog.open();
   }
 
   async saveNewContact(form: NgForm): Promise<void> {
     if (!form.valid) return;
     const data = this.formModel();
-    await this.firebase.setLastUserColor(this.lastUserColor);
 
     await this.firebase.addContact({
       name: data.name?.trim() ?? '',
       email: data.email?.trim() ?? '',
       phone: data.phone?.trim() ?? '',
-      color: data.color ?? '#000'
+      color: data.color ?? '#000',
     });
     this.addDialog.close();
     this.writeConfirmation();
-  }
-
-  private getColor(): string {
-    this.lastUserColor = (this.lastUserColor % this.maxColors) + 1;
-
-    const cssVar = `--userColor${this.lastUserColor}`;
-    const style = getComputedStyle(document.documentElement);
-    const color = style.getPropertyValue(cssVar).trim();
-
-    return color;
-  }
+  } 
 
   writeConfirmation(): void {
     const container = document.querySelector('.confirmation_container') as HTMLElement;

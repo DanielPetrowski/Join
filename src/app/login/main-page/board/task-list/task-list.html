@@ -1,184 +1,27 @@
-<!-- ===================================== -->
-<!-- KANBAN – BASIC DRAG & DROP (TEST) -->
-<!-- ===================================== -->
-
 <div class="board_columns" cdkDropListGroup>
-
-    <!-- TO DO -->
+  <ng-container
+    *ngFor="
+      let column of [
+        { title: 'To do', status: 'todo', data: todo$ },
+        { title: 'In progress', status: 'in_progress', data: inProgress$ },
+        { title: 'Await feedback', status: 'await_feedback', data: awaitFeedback$ },
+        { title: 'Done', status: 'done', data: done$ }
+      ]
+    "
+  >
     <div class="board_column">
-        <span class="column_title">To do</span>
+      <span class="column_title">{{ column.title }}</span>
 
-        <div class="column_drop_area" cdkDropList (cdkDropListDropped)="drop($event, 'todo')">
-            <div class="task_card" *ngFor="let task of todoTasks" cdkDrag [cdkDragData]="task">
-
-                <section class="task_preview">
-
-                    <span class="task_tag">
-                        {{ task.type }}
-                    </span>
-
-                    <span class="task_title">
-                        {{ task.title }}
-                    </span>
-
-                    <span class="task_content">
-                        {{ task.description }}
-                    </span>
-
-                    <article class="area_progress">
-
-                        <div class="progress_bar">
-                            <div class="progress_fill" [style.width.%]="getSubtaskProgress(task)">
-                            </div>
-                        </div>
-
-                        <span class="progress_text">
-                            {{ task.subtasksDone }}/{{ task.subtasksTotal }} Subtasks
-                        </span>
-
-                    </article>
-
-
-                    <article class="area_prio">
-                        <div>● ●</div>
-                        <div>{{ task.priority }}</div>
-                    </article>
-
-                </section>
-
-            </div>
+      <div class="column_drop_area" cdkDropList (cdkDropListDropped)="drop($event, TaskStatus.ToDo)">
+        <div
+          class="task_card"
+          *ngFor="let task of column.data | async"
+          cdkDrag
+          [cdkDragData]="task"
+        >
+          <app-task-preview [task]="task" />
         </div>
+      </div>
     </div>
-
-    <!-- IN PROGRESS -->
-    <div class="board_column">
-        <span class="column_title">In progress</span>
-
-        <div class="column_drop_area" cdkDropList (cdkDropListDropped)="drop($event, 'inProgress')">
-            <div class="task_card" *ngFor="let task of inProgressTasks" cdkDrag [cdkDragData]="task">
-
-                <section class="task_preview">
-                    <span class="task_tag">{{ task.type }}</span>
-                    <span class="task_title">{{ task.title }}</span>
-                    <span class="task_content">{{ task.description }}</span>
-
-                    <article class="area_progress">
-
-                        <div class="progress_bar">
-                            <div class="progress_fill" [style.width.%]="getSubtaskProgress(task)">
-                            </div>
-                        </div>
-
-                        <span class="progress_text">
-                            {{ task.subtasksDone }}/{{ task.subtasksTotal }} Subtasks
-                        </span>
-
-                    </article>
-
-
-                    <article class="area_prio">
-                        <div>● ●</div>
-                        <div>{{ task.priority }}</div>
-                    </article>
-                </section>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- AWAIT FEEDBACK -->
-    <div class="board_column">
-        <span class="column_title">Await feedback</span>
-
-        <div class="column_drop_area" cdkDropList (cdkDropListDropped)="drop($event, 'awaitFeedback')">
-            <div class="task_card" *ngFor="let task of awaitFeedbackTasks" cdkDrag [cdkDragData]="task">
-
-                <section class="task_preview">
-                    <span class="task_tag">{{ task.type }}</span>
-                    <span class="task_title">{{ task.title }}</span>
-                    <span class="task_content">{{ task.description }}</span>
-                    <article class="area_progress">
-
-                        <div class="progress_bar">
-                            <div class="progress_fill" [style.width.%]="getSubtaskProgress(task)">
-                            </div>
-                        </div>
-
-                        <span class="progress_text">
-                            {{ task.subtasksDone }}/{{ task.subtasksTotal }} Subtasks
-                        </span>
-
-                    </article>
-
-
-                    <article class="area_prio">
-                        <div>● ●</div>
-                        <div>{{ task.priority }}</div>
-                    </article>
-                </section>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- DONE -->
-    <div class="board_column">
-        <span class="column_title">Done</span>
-
-        <div class="column_drop_area" cdkDropList (cdkDropListDropped)="drop($event, 'done')">
-            <div class="task_card" *ngFor="let task of doneTasks" cdkDrag [cdkDragData]="task">
-
-                <section class="task_preview">
-                    <span class="task_tag">{{ task.type }}</span>
-                    <span class="task_title">{{ task.title }}</span>
-                    <span class="task_content">{{ task.description }}</span>
-
-                    <article class="area_progress">
-
-                        <div class="progress_bar">
-                            <div class="progress_fill" [style.width.%]="getSubtaskProgress(task)">
-                            </div>
-                        </div>
-
-                        <span class="progress_text">
-                            {{ task.subtasksDone }}/{{ task.subtasksTotal }} Subtasks
-                        </span>
-
-                    </article>
-
-
-                    <article class="area_prio">
-                        <div>● ●</div>
-                        <div>{{ task.priority }}</div>
-                    </article>
-                </section>
-
-            </div>
-        </div>
-    </div>
-
+  </ng-container>
 </div>
-
-<!-- ===================================== -->
-<!-- PLATZHALTER – bleibt vorerst bestehen -->
-<!-- ===================================== -->
-
-<br><br><br><br>
-
-<div class="task_card" *ngFor="let task of todoTasks" cdkDrag [cdkDragData]="task">
-    <app-task-preview [task]="task"></app-task-preview>
-</div>
-
-<div class="task_card" *ngFor="let task of inProgressTasks" cdkDrag [cdkDragData]="task">
-    <app-task-preview [task]="task"></app-task-preview>
-</div>
-
-<div class="task_card" *ngFor="let task of awaitFeedbackTasks" cdkDrag [cdkDragData]="task">
-    <app-task-preview [task]="task"></app-task-preview>
-</div>
-
-<div class="task_card" *ngFor="let task of doneTasks" cdkDrag [cdkDragData]="task">
-    <app-task-preview [task]="task"></app-task-preview>
-</div>
-
-<!-- <app-dialog-show-edit-task></app-dialog-show-edit-task> -->

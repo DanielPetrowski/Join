@@ -34,7 +34,7 @@
 
       <article class="contact_group" *ngFor="let c of group.contacts" (click)="onSelectContact(c.id)">
         <div class="contact_single" [class.active]="selectedContactId() === c.id">
-          <span [style.backgroundColor]="c.color">{{ getInitials(c.name) }}</span>
+          <span [style.backgroundColor]="c.color">{{ userUi.getInitials(c.name) }}</span>
           <div>
             <span>{{ c.name }}</span>
             <small>{{ c.email }}</small>

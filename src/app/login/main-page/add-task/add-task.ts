@@ -1,7 +1,7 @@
 import { Component, signal, effect, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule, } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirebaseServices } from '../../../firebase-services/firebase-services';
 import { Contact } from '../../../interfaces/contact.interface';
@@ -9,24 +9,33 @@ import { Task } from '../../../interfaces/task.interface';
 import { Subtask } from '../../../interfaces/subtask.interface';
 import { TaskType } from '../../../types/task-type';
 import { TaskStatus } from '../../../types/task-status';
-import { MatDatepickerModule, } from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { UserUiService } from '../../../services/user-ui.service';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatNativeDateModule, MatDatepickerModule, MatInputModule, MatSelectModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './add-task.html',
   styleUrls: ['./add-task.scss'],
 })
 export class AddTask {
   subtaskInput = '';
-
   subtasks: Subtask[] = [];
   showIcons = false;
-
   editIndex: number | null = null;
+
   @ViewChildren('editInput') editInputs!: QueryList<ElementRef<HTMLInputElement>>;
 
   editSubtask(index: number) {
@@ -66,8 +75,6 @@ export class AddTask {
     }
   }
 
-  menuOpen = false;
-
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
@@ -105,17 +112,20 @@ export class AddTask {
   assignedTo = signal<Contact[]>([]);
   selectedTaskType = signal<TaskType | null>(null);
   priority = signal<'urgent' | 'medium' | 'low' | null>(null);
-
   title = signal('');
   description = signal('');
   dueDate = signal('');
-
   contacts = signal<Contact[]>([]);
+
   taskTypes = Object.entries(TaskType)
     .filter(([, value]) => typeof value === 'number')
     .map(([key, value]) => ({ name: key, value: value as TaskType }));
 
-  constructor(private firebase: FirebaseServices) {
+  assignedToText: string = '';
+  selectOpened = false;
+  menuOpen = false;
+
+  constructor(private firebase: FirebaseServices, public userUi: UserUiService) {
     this.firebase.subContactsList().subscribe((data) => this.contacts.set(data));
 
     effect(() => {
@@ -125,33 +135,22 @@ export class AddTask {
     });
   }
 
-  assignedToText: string = '';
-
-  selectOpened = false;
-
   updateAssignedToText(opened?: boolean) {
     if (opened !== undefined) {
       this.selectOpened = opened;
     }
 
     if (this.assignedTo().length > 0) {
-
-      this.assignedToText = this.assignedTo().map(c => c.name).join(', ');
+      this.assignedToText = this.assignedTo()
+        .map((c) => c.name)
+        .join(', ');
     } else {
-
       this.assignedToText = '';
     }
   }
 
   setPriority(p: 'urgent' | 'medium' | 'low') {
     this.priority.set(this.priority() === p ? null : p);
-  }
-
-  getInitials(name: string): string {
-    const parts = name.trim().split(' ');
-    const first = parts[0]?.charAt(0).toUpperCase() ?? '';
-    const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
-    return first + last;
   }
 
   async createTask() {
@@ -174,15 +173,20 @@ export class AddTask {
       const createdTask = await this.firebase.addTask(newTask);
       const taskId = createdTask.id!;
 
-      await Promise.all(
-        this.assignedTo().map((contact) => this.firebase.addTaskAssign(taskId, contact))
-      );
+      for (const contact of this.assignedTo()) {
+        const colorIndex = await this.userUi.getNextColorIndex();
+        const colorHex = this.userUi.getColorByIndex(colorIndex);
 
-      await Promise.all(
-        this.subtasks.map((subtask) =>
-          this.firebase.addSubtask(taskId, { title: subtask.title, done: false })
-        )
-      );
+        await this.firebase.addTaskAssign(taskId, {
+          contact,
+          initials: this.userUi.getInitials(contact.name),
+          color: colorHex,
+        });
+      }
+
+      for (const subtask of this.subtasks) {
+        await this.firebase.addSubtask(taskId, { title: subtask.title, done: false });
+      }
 
       alert('Task created successfully!');
       this.resetForm();

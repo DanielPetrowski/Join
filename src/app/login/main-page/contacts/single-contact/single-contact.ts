@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogEditContact } from './dialog-edit-contact/dialog-edit-contact';
 import { Contact } from '../../../../interfaces/contact.interface';
 import { FirebaseServices } from '../../../../firebase-services/firebase-services';
+import { UserUiService } from '../../../../services/user-ui.service';
 
 @Component({
   selector: 'app-single-contact',
@@ -23,6 +24,7 @@ import { FirebaseServices } from '../../../../firebase-services/firebase-service
 export class SingleContact {
   contactId = input.required<string>();
   private readonly firebase = inject(FirebaseServices);
+  public readonly userUi = inject(UserUiService);
 
   @ViewChild(DialogEditContact) dialogEditContact!: DialogEditContact;
 
@@ -40,12 +42,12 @@ export class SingleContact {
     this.isMenuOpen = false;
   }
 
-  getInitials(name: string): string {
-    const parts = name.trim().split(' ');
-    const first = parts[0]?.charAt(0).toUpperCase() ?? '';
-    const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
-    return first + last;
-  }
+  // getInitials(name: string): string {
+  //   const parts = name.trim().split(' ');
+  //   const first = parts[0]?.charAt(0).toUpperCase() ?? '';
+  //   const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
+  //   return first + last;
+  // }
 
   async deleteContact(): Promise<void> {
     const id = this.contactId();

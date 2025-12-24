@@ -1,119 +1,87 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-    CdkDrag,
-    CdkDropList,
-    CdkDropListGroup,
-    CdkDragDrop
-} from '@angular/cdk/drag-drop';
-import { TaskPreview } from "../task-preview/task-preview";
+import { CdkDrag, CdkDropList, CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { TaskPreview } from '../task-preview/task-preview';
+import { FirebaseServices } from '../../../../firebase-services/firebase-services';
+import { UserUiService } from '../../../../services/user-ui.service';
+import { Task } from '../../../../interfaces/task.interface';
+import { BoardTask } from '../../../../interfaces/task-board.interface';
+import { TaskAssign } from '../../../../interfaces/task-assign.interface';
+import { TaskStatus } from '../../../../types/task-status';
+import { Observable, combineLatest, switchMap, map } from 'rxjs';
 
 @Component({
-    selector: 'app-task-list',
-    imports: [
-    CommonModule,
-    CdkDrag,
-    CdkDropList,
-    CdkDropListGroup,
-    TaskPreview
-],
-    templateUrl: './task-list.html',
-    styleUrl: './task-list.scss',
+  selector: 'app-task-list',
+  standalone: true,
+  imports: [CommonModule, CdkDrag, CdkDropList, CdkDropListGroup, TaskPreview],
+  templateUrl: './task-list.html',
+  styleUrl: './task-list.scss',
 })
 export class TaskList {
+  TaskStatus = TaskStatus;
+  assigns: TaskAssign[] = [];
 
-    // =========================
-    // TASK MODEL (UI DUMMY)
-    // =========================
+  private readonly firebase = inject(FirebaseServices);
+  private readonly userUi = inject(UserUiService);
 
-    allTasks = [
-        {
-            id: '1',
-            type: 'User Story',
-            title: 'Kochwelt Page & Recipe Recommender',
-            description: 'Build start page with recipe recommendation',
-            subtasksDone: 1,
-            subtasksTotal: 2,
-            priority: 'medium',
-            status: 'todo'
-        },
-        {
-            id: '2',
-            type: 'Technical Task',
-            title: 'Implement Auth Guard',
-            description: 'Protect board route',
-            subtasksDone: 0,
-            subtasksTotal: 1,
-            priority: 'urgent',
-            status: 'inProgress'
-        },
-        {
-            id: '3',
-            type: 'User Story',
-            title: 'Feedback Landing Page',
-            description: 'Waiting for UX feedback',
-            subtasksDone: 0,
-            subtasksTotal: 0,
-            priority: 'low',
-            status: 'awaitFeedback'
-        },
-        {
-            id: '4',
-            type: 'Technical Task',
-            title: 'Setup Project Structure',
-            description: 'Initial Angular project setup',
-            subtasksDone: 3,
-            subtasksTotal: 3,
-            priority: 'low',
-            status: 'done'
-        }
-    ];
+  readonly tasks$: Observable<BoardTask[]> = this.firebase
+    .subTasks()
+    .pipe(switchMap((tasks: Task[]) => combineLatest(tasks.map((task) => this.enrichTask(task)))));
 
-    // =========================
-    // COLUMN FILTERS
-    // =========================
+  readonly todo$ = this.filterByStatus(TaskStatus.ToDo);
+  readonly inProgress$ = this.filterByStatus(TaskStatus.InProgress);
+  readonly awaitFeedback$ = this.filterByStatus(TaskStatus.AwaitFeedback);
+  readonly done$ = this.filterByStatus(TaskStatus.Done);
 
-    get todoTasks() {
-        return this.allTasks.filter(function (task) {
-            return task.status === 'todo';
-        });
-    }
+  async drop(event: CdkDragDrop<BoardTask[]>, status: TaskStatus): Promise<void> {
+    const task = event.item.data;
+    await this.firebase.updateTaskStatus(task.id!, status);
+  }
 
-    get inProgressTasks() {
-        return this.allTasks.filter(function (task) {
-            return task.status === 'inProgress';
-        });
-    }
+  private filterByStatus(status: TaskStatus): Observable<BoardTask[]> {
+    return this.tasks$.pipe(map((tasks) => tasks.filter((task) => task.status === status)));
+  }
 
-    get awaitFeedbackTasks() {
-        return this.allTasks.filter(function (task) {
-            return task.status === 'awaitFeedback';
-        });
-    }
+  private enrichTask(task: Task): Observable<BoardTask> {
+    return combineLatest([
+      this.firebase.subSubtasks(task.id!),
+      this.firebase.subTaskAssigns(task.id!),
+      this.firebase.subContactsList(),
+    ]).pipe(
+      switchMap(async ([subtasks, assigns, contacts]) => {
+        const uiAssigns: TaskAssign[] = [];
 
-    get doneTasks() {
-        return this.allTasks.filter(function (task) {
-            return task.status === 'done';
-        });
-    }
+        for (const assign of assigns) {
+          const contact = contacts.find((c) => c.id === assign.contactId);
+          if (!contact) continue;
 
-    // =========================
-    // DRAG & DROP LOGIC
-    // =========================
+          const colorIndex = await this.userUi.getNextColorIndex();
+          const colorHex = this.userUi.getColorByIndex(colorIndex);
 
-    drop(event: CdkDragDrop<any[]>, newStatus: string) {
-        const movedTask = event.item.data;
-        movedTask.status = newStatus;
-    }
+          const result: TaskAssign = {
+            contact,
+            initials: this.userUi.getInitials(contact.name),
+            color: colorHex,
+          };
 
-    // ==========================
-    // SUBTASK PROGRESS-BAR
-    // ==========================
-    getSubtaskProgress(task: any): number {
-        if (task.subtasksTotal === 0) {
-            return 0;
+          if (assign.id) {
+            result.id = assign.id;
+          }
+
+          uiAssigns.push(result);
         }
 
-        return (task.subtasksDone / task.subtasksTotal) * 100;
-    }
+        const done = subtasks.filter((st) => st.done).length;
+        const total = subtasks.length;
+
+        return {
+          ...task,
+          assigns: uiAssigns,
+          subtasksDone: done,
+          subtasksTotal: total,
+          progress: total === 0 ? 0 : Math.round((done / total) * 100),
+        };
+      })
+    );
+  }
 }

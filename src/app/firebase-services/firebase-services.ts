@@ -17,6 +17,7 @@ import { TaskAssign } from '../interfaces/task-assign.interface';
 import { Subtask } from '../interfaces/subtask.interface';
 import { TaskType } from '../types/task-type';
 import { TaskStatus } from '../types/task-status';
+import { TaskAssignDb } from '../interfaces/task-assign-db.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -118,10 +119,10 @@ export class FirebaseServices {
 
   /* ========================== TASK SUBCOLLECTIONS ========================== */
 
-  subTaskAssigns(taskId: string): Observable<TaskAssign[]> {
-    const ref = collection(this.firestore, `tasks/${taskId}/assigns`);
-    return collectionData(ref, { idField: 'id' }) as Observable<TaskAssign[]>;
-  }
+  subTaskAssigns(taskId: string): Observable<TaskAssignDb[]> {
+  const ref = collection(this.firestore, `tasks/${taskId}/assigns`);
+  return collectionData(ref, { idField: 'id' }) as Observable<TaskAssignDb[]>;
+}
 
   async addTaskAssign(taskId: string, assign: Omit<TaskAssign, 'id'>): Promise<void> {
     const ref = collection(this.firestore, `tasks/${taskId}/assigns`);

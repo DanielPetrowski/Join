@@ -1,24 +1,26 @@
 <section class="task_preview">
-  <span class="task_tag">{{ taskreceived.type }}</span>
-  <span class="task_title">{{ taskreceived.title }}</span>
-  <span class="task_content">{{ taskreceived.description }}</span>
+  <span class="task_tag">{{ task.type }}</span>
+  <span class="task_title">{{ task.title }}</span>
+  <span class="task_content">{{ task.description }}</span>
 
-  <article class="area_progress">
-
+  <article class="area_progress" *ngIf="task.subtasksTotal > 0">
     <div class="progress_bar">
-      <div class="progress_fill" [style.width.%]="getSubtaskProgress(taskreceived)">
-      </div>
+      <div class="progress_fill" [style.width.%]="task.progress"></div>
     </div>
-
-    <span class="progress_text">
-      {{ taskreceived.subtasksDone }}/{{ taskreceived.subtasksTotal }} Subtasks
-    </span>
-
+    <span class="progress_text"> {{ task.subtasksDone }}/{{ task.subtasksTotal }} Subtasks </span>
   </article>
 
+  <article class="area_assigns">
+    <span
+      class="assign_avatar"
+      *ngFor="let assign of task.assigns"
+      [style.backgroundColor]="assign.color"
+    >
+      {{ assign.initials }}
+    </span>
+  </article>
 
   <article class="area_prio">
-    <div>● ●</div>
-    <div>{{ taskreceived.priority }}</div>
+    {{ task.priority }}
   </article>
 </section>

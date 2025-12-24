@@ -1,14 +1,11 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  inject,
-  ViewChild,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, ViewChild } from '@angular/core';
 import { FirebaseServices } from '../../../../../firebase-services/firebase-services';
 import { Contact } from '../../../../../interfaces/contact.interface';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Dialog } from '../../../../../shared/dialog/dialog';
+import { UserUiService } from '../../../../../services/user-ui.service';
+
 @Component({
   selector: 'app-dialog-edit-contact',
   imports: [CommonModule, FormsModule, Dialog],
@@ -18,17 +15,11 @@ import { Dialog } from '../../../../../shared/dialog/dialog';
 })
 export class DialogEditContact {
   private readonly firebase = inject(FirebaseServices);
+  public readonly userUi = inject(UserUiService);
 
   @ViewChild('editDialog') editDialog!: Dialog;
 
   editModel: Partial<Contact> = {};
-
-  getInitials(name: string): string {
-    const parts = name.trim().split(' ');
-    const first = parts[0]?.charAt(0).toUpperCase() ?? '';
-    const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
-    return first + last;
-  }
 
   open() {
     this.editDialog.open();
