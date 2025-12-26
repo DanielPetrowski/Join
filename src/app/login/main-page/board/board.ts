@@ -5,6 +5,7 @@ import { DialogShowEditTask } from './task-preview/dialog-show-edit-task/dialog-
 
 @Component({
   selector: 'app-board',
+  standalone: true,
   imports: [TaskList, DialogAddTask,DialogShowEditTask],
   templateUrl: './board.html',
   styleUrl: './board.scss',
