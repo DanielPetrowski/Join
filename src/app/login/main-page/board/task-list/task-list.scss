@@ -50,9 +50,6 @@
 }
 
 .task_card {
-    padding: 12px;
-    background-color: yellow;
-    border-radius: 12px;
     cursor: grab;
 }
 
@@ -61,71 +58,71 @@
 }
 
 
-.task_preview {
-    display: flex;
-    flex-direction: column;
-    max-width: 260px;
-    padding: 12px;
-    gap: 8px;
-    background-color: white;
-    border-radius: 24px;
+// .task_preview {
+//     display: flex;
+//     flex-direction: column;
+//     max-width: 260px;
+//     padding: 12px;
+//     gap: 8px;
+//     background-color: white;
+//     border-radius: 24px;
 
-    .task_tag {
-        background-color: blue;
-        color: white;
-        justify-content: center;
-        align-items: center;
-        padding: 4px 8px;
-        width: fit-content;
-        border-radius: 8px;
-    }
+//     .task_tag {
+//         background-color: blue;
+//         color: white;
+//         justify-content: center;
+//         align-items: center;
+//         padding: 4px 8px;
+//         width: fit-content;
+//         border-radius: 8px;
+//     }
 
-    .task_title {
-        font-weight: 700;
-        font-size: 16px;
+//     .task_title {
+//         font-weight: 700;
+//         font-size: 16px;
 
-        color: #2a3647;
-    }
+//         color: #2a3647;
+//     }
 
-    .task_content {
-        font-weight: 400;
-        font-size: 16px;
-        color: #a8a8a8;
-    }
-}
+//     .task_content {
+//         font-weight: 400;
+//         font-size: 16px;
+//         color: #a8a8a8;
+//     }
+// }
 
-.area_prio {
-    display: flex;
-    justify-content: space-between;
-}
+// .area_prio {
+//     display: flex;
+//     justify-content: space-between;
+// }
 
 // ###################
 // Progress-Bar Styles
 // ###################
 
-.area_progress {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+// .area_progress {
+//     display: flex;
+//     align-items: center;
+//     gap: 8px;
+// }
 
-.progress_bar {
-    flex: 1;
-    height: 8px;
-    background-color: #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
-}
+// .progress_bar {
+//     flex: 1;
+//     height: 8px;
+//     background-color: #e0e0e0;
+//     border-radius: 4px;
+//     overflow: hidden;
+// }
 
-.progress_fill {
-    height: 100%;
-    background-color: #4589ff;
-    border-radius: 4px;
-    transition: width 200ms ease-in-out;
-}
+// .progress_fill {
+//     height: 100%;
+//     background-color: #4589ff;
+//     border-radius: 4px;
+//     transition: width 200ms ease-in-out;
+// }
 
-.progress_text {
-    font-size: 12px;
-    color: #2a3647;
-    white-space: nowrap;
-}
+// .progress_text {
+//     font-size: 12px;
+//     color: #2a3647;
+//     white-space: nowrap;
+// }

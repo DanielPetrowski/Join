@@ -1,46 +1,164 @@
+// .task_preview {
+//   display: flex;
+//   flex-direction: column;
+//   max-width: 260px;
+//   padding: 12px;
+//   gap: 8px;
+//   background-color: white;
+//   border-radius: 24px;
+
+//   .task_tag {
+//     background-color: blue;
+//     color: white;
+//     justify-content: center;
+//     align-items: center;
+//     padding: 4px 8px;
+//     width: fit-content;
+//     border-radius: 8px;
+//   }
+
+//   .task_title {
+//     font-weight: 700;
+//     font-size: 16px;
+
+//     color: #2a3647;
+//   }
+
+//   .task_content {
+//     font-weight: 400;
+//     font-size: 16px;
+//     color: #a8a8a8;
+//   }
+// }
+
+// .area_progress {
+//   display: flex;
+//   justify-content: space-between;
+
+//   div {
+//     color: blue;
+//   }
+// }
+
+// .area_prio {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+:host {
+  display: block;
+  width: 100%;
+}
+
 .task_preview {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  max-width: 260px;
-  padding: 12px;
-  gap: 8px;
-  background-color: white;
-  border-radius: 24px;
+  gap: 12px;
+  cursor: grab;
+}
 
-  .task_tag {
-    background-color: blue;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 8px;
-    width: fit-content;
-    border-radius: 8px;
+.task_type_badge {
+  width: fit-content;
+  margin-bottom: 4px;
+
+  img {
+    height: 24px; // 👈 Badge-Höhe
+    display: block;
   }
+}
 
-  .task_title {
-    font-weight: 700;
-    font-size: 16px;
+.task_title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
 
-    color: #2a3647;
-  }
-
-  .task_content {
-    font-weight: 400;
-    font-size: 16px;
-    color: #a8a8a8;
-  }
+.task_content {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
 }
 
 .area_progress {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
 
-  div {
-    color: blue;
-  }
+.progress_bar {
+  flex: 1;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress_fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.progress_text {
+  font-size: 12px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.task_footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.area_assigns {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+}
+
+.assign_avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  margin-left: -8px;
+}
+
+.assign_avatar:first-child {
+  margin-left: 0;
 }
 
 .area_prio {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.prio_icon {
+  width: 20px;
+  height: auto;
+}
+
+.prio_icon.urgent {
+  color: #ff3d00;
+}
+
+.prio_icon.medium {
+  color: #ffa800;
+}
+
+.prio_icon.low {
+  color: #7ae229;
 }
