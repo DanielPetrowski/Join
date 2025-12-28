@@ -42,13 +42,6 @@ export class SingleContact {
     this.isMenuOpen = false;
   }
 
-  // getInitials(name: string): string {
-  //   const parts = name.trim().split(' ');
-  //   const first = parts[0]?.charAt(0).toUpperCase() ?? '';
-  //   const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
-  //   return first + last;
-  // }
-
   async deleteContact(): Promise<void> {
     const id = this.contactId();
     this.closeMenu();
