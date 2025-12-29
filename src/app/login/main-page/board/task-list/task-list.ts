@@ -7,8 +7,10 @@ import { UserUiService } from '../../../../services/user-ui.service';
 import { Task } from '../../../../interfaces/task.interface';
 import { BoardTask } from '../../../../interfaces/task-board.interface';
 import { TaskAssign } from '../../../../interfaces/task-assign.interface';
+import { TaskAssignDb } from '../../../../interfaces/task-assign-db.interface';
 import { TaskStatus } from '../../../../types/task-status';
 import { Observable, combineLatest, map, switchMap, from } from 'rxjs';
+import { Contacts } from '../../contacts/contacts';
 
 @Component({
   selector: 'app-task-list',
@@ -43,102 +45,31 @@ export class TaskList {
     return this.tasks$.pipe(map((tasks) => tasks.filter((task) => task.status === status)));
   }
 
-  private enrichTask(task: Task): Observable<BoardTask> {
-    return combineLatest([
-      this.firebase.subSubtasks(task.id!),
-      this.firebase.subTaskAssigns(task.id!),
-      this.firebase.subContactsList(),
-    ]).pipe(
-      switchMap(([subtasks, assigns, contacts]) =>
-        from(this.mapAssigns(subtasks, assigns, contacts, task))
-      )
-    );
-  }
+private enrichTask(task: Task): Observable<BoardTask> {
+  return combineLatest([
+    this.firebase.subSubtasks(task.id!),
+    this.firebase.subTaskAssigns(task.id!),
+  ]).pipe(
+    map(([subtasks, assigns]) => {
+      const done = subtasks.filter(st => st.done).length;
+      const total = subtasks.length;
 
-//   private async mapAssigns(
-//     subtasks: any[],
-//     assigns: any[],
-//     contacts: any[],
-//     task: Task
-//   ): Promise<BoardTask> {
-//     const uiAssigns: TaskAssign[] = [];
+      const mappedAssigns: TaskAssign[] = assigns.map((a: TaskAssignDb) => ({
+        ...a,
+        name: (a as any).name ?? '',
+        initials: (a as any).initials ?? '',
+        color: (a as any).color ?? '',
+      }));
 
-//     for (const assign of assigns) {
-//       console.log('ASSIGN:', assign);
-//       console.log('ASSIGN.contactId:', assign.contactId);
-//       console.log('CONTACTS:', contacts);
-
-//       const contact = contacts.find((c) => String(c.id) === String(assign.contactId));
-
-//       console.log('MATCHED CONTACT:', contact);
-
-//       if (!contact) {
-//         console.warn('❌ No contact found for assign', assign);
-//         continue;
-//       }
-
-//       const colorIndex = await this.userUi.getNextColorIndex();
-//       const colorHex = this.userUi.getColorByIndex(colorIndex);
-
-//       uiAssigns.push({
-//         contact,
-//         initials: this.userUi.getInitials(contact.name),
-//         color: colorHex,
-//         id: assign.id,
-//       });
-//     }
-
-//     const done = subtasks.filter((st) => st.done).length;
-//     const total = subtasks.length;
-
-//     return {
-//       ...task,
-//       assigns: uiAssigns,
-//       subtasks,
-//       subtasksDone: done,
-//       subtasksTotal: total,
-//       progress: total === 0 ? 0 : Math.round((done / total) * 100),
-//     };
-//   }
-// }
-
-private async mapAssigns(
-  subtasks: any[],
-  assigns: any[],
-  contacts: any[],
-  task: Task
-): Promise<BoardTask> {
-
-  const uiAssigns: TaskAssign[] = [];
-
-  for (const assign of assigns) {
-
-    const contact = assign;
-
-    const colorHex = contact.color
-      ? contact.color
-      : this.userUi.getColorByIndex(
-          await this.userUi.getNextColorIndex()
-        );
-
-    uiAssigns.push({
-      id: contact.id,
-      contact,
-      initials: this.userUi.getInitials(contact.name),
-      color: colorHex,
-    });
-  }
-
-  const done = subtasks.filter((st) => st.done).length;
-  const total = subtasks.length;
-
-  return {
-    ...task,
-    assigns: uiAssigns,
-    subtasks,
-    subtasksDone: done,
-    subtasksTotal: total,
-    progress: total === 0 ? 0 : Math.round((done / total) * 100),
-  };
+      return {
+        ...task,
+        assigns: mappedAssigns,
+        subtasks,
+        subtasksDone: done,
+        subtasksTotal: total,
+        progress: total === 0 ? 0 : Math.round((done / total) * 100),
+      };
+    })
+  );
 }
 }

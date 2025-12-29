@@ -178,7 +178,8 @@ export class AddTask {
         const colorHex = this.userUi.getColorByIndex(colorIndex);
 
         await this.firebase.addTaskAssign(taskId, {
-          contact,
+          contactId: contact.id,
+          name:contact.name,
           initials: this.userUi.getInitials(contact.name),
           color: colorHex,
         });

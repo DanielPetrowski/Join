@@ -1,8 +1,6 @@
-import { Contact } from './contact.interface';
-
 export interface TaskAssign {
-  id?: string;
-  contact: Contact;
+  contactId: string;
+  name: string;
   initials: string;
   color: string;
 }
