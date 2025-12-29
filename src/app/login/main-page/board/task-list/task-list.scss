@@ -16,11 +16,6 @@
     }
 }
 
-
-/* ======================================= */
-/* KANBAN – BASIC STRUCTURE (STEP 2A) */
-/* ======================================= */
-
 .board_columns {
     display: flex;
     gap: 16px;
@@ -40,11 +35,48 @@
     font-size: 16px;
 }
 
+.column_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.add_task_btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover svg rect {
+        stroke: #4589ff;
+    }
+}
+
+
 .column_drop_area {
     min-height: 120px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.no_tasks_box {
+    width: 100%;
+    height: 48px;
+    background-color: #E7E7E7; 
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #A8A8A8; 
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .task_card {
@@ -54,73 +86,3 @@
 .task_card:active {
     cursor: grabbing;
 }
-
-
-// .task_preview {
-//     display: flex;
-//     flex-direction: column;
-//     max-width: 260px;
-//     padding: 12px;
-//     gap: 8px;
-//     background-color: white;
-//     border-radius: 24px;
-
-//     .task_tag {
-//         background-color: blue;
-//         color: white;
-//         justify-content: center;
-//         align-items: center;
-//         padding: 4px 8px;
-//         width: fit-content;
-//         border-radius: 8px;
-//     }
-
-//     .task_title {
-//         font-weight: 700;
-//         font-size: 16px;
-
-//         color: #2a3647;
-//     }
-
-//     .task_content {
-//         font-weight: 400;
-//         font-size: 16px;
-//         color: #a8a8a8;
-//     }
-// }
-
-// .area_prio {
-//     display: flex;
-//     justify-content: space-between;
-// }
-
-// ###################
-// Progress-Bar Styles
-// ###################
-
-// .area_progress {
-//     display: flex;
-//     align-items: center;
-//     gap: 8px;
-// }
-
-// .progress_bar {
-//     flex: 1;
-//     height: 8px;
-//     background-color: #e0e0e0;
-//     border-radius: 4px;
-//     overflow: hidden;
-// }
-
-// .progress_fill {
-//     height: 100%;
-//     background-color: #4589ff;
-//     border-radius: 4px;
-//     transition: width 200ms ease-in-out;
-// }
-
-// .progress_text {
-//     font-size: 12px;
-//     color: #2a3647;
-//     white-space: nowrap;
-// }
