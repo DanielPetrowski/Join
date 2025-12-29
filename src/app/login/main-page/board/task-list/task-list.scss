@@ -35,6 +35,28 @@
     font-size: 16px;
 }
 
+.column_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.add_task_btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover svg rect {
+        stroke: #4589ff;
+    }
+}
+
+
 .column_drop_area {
     min-height: 120px;
     display: flex;
