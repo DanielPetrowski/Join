@@ -48,8 +48,16 @@
 
   .task_info {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     padding-top: 20px;
+
+    .task_info_space_1 {
+      margin-left: 20px;
+    }
+
+    .task_info_space_2 {
+      margin-left: 38px;
+    }
 
     span:nth-child(1) {
       font-weight: 400;
