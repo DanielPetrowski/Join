@@ -131,10 +131,40 @@
 
     p {
       display: flex;
+      align-items: center; 
       padding-top: 16px;
       gap: 8px;
+
+      .checkbox_icon {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: colors.$bgGrey;
+
+        .box,
+        .check {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .check {
+          opacity: 0; 
+          transition: opacity 150ms ease-in-out;
+        }
+
+        &.done {
+          .check {
+            opacity: 1; 
+          }
+        }
+      }
     }
   }
+
 
   footer {
     display: flex;
