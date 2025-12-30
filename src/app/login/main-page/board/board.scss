@@ -4,7 +4,6 @@
   flex-direction: column;
   height: 100vh;
   overflow-y: auto;
-  align-items: center;
 }
 
 .board {
@@ -16,7 +15,7 @@
 .area_top {
   display: flex;
   justify-content: space-between;
-  max-width: 1390px;
+  max-width: 1200px;
 
   > span {
     font-weight: 700;
