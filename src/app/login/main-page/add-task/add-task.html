@@ -124,13 +124,13 @@
   <p>Assigned to</p>
   <mat-form-field appearance="fill" floatLabel="always">
     <mat-label>
-      {{ (currentAssignedSelection.length > 0 || selectOpened) ? 'An:' : 'Select contacts to assign' }}
+      {{ (assignedTo().length > 0 || selectOpened) ? 'An:' : 'Select contacts to assign' }}
     </mat-label>
 
     <mat-select
       multiple
-      [value]="currentAssignedSelection"
-      (selectionChange)="currentAssignedSelection = $event.value; updateAssignedToText()"
+      [value]="assignedTo()"
+      (selectionChange)="assignedTo.set($event.value); updateAssignedToText()"
     >
       <mat-select-trigger>
         {{ assignedToText }}
@@ -145,15 +145,16 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="assigned-logos" *ngIf="currentAssignedSelection.length > 0">
-    <span
-      class="sc_logo"
-      *ngFor="let contact of currentAssignedSelection"
-      [style.background]="contact.color"
-    >
-      {{ userUi.getInitials(contact.name) }}
-    </span>
-  </div>
+  <div class="assigned-logos" *ngIf="assignedTo().length > 0">
+  <span
+    class="sc_logo"
+    *ngFor="let contact of assignedTo()"
+    [style.background]="contact.color"
+  >
+    {{ userUi.getInitials(contact.name) }}
+  </span>
+</div>
+
 
 
 <!-- <div class="dropdown">
