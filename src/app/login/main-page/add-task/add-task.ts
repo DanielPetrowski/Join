@@ -202,7 +202,7 @@ export class AddTask {
     const prio = this.priority();
     if (!this.title() || !this.selectedTaskType() || !prio || !this.dueDate()) {
       this.taskErrorMessage.set('Please fill all required fields!');
-      setTimeout(() => this.taskErrorMessage.set(''), 2000);
+      setTimeout(() => this.taskErrorMessage.set(''), 1000);
       return;
     }
 
