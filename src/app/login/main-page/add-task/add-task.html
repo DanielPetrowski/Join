@@ -133,7 +133,7 @@
       (selectionChange)="assignedTo.set($event.value); updateAssignedToText()"
     >
       <mat-select-trigger>
-        {{ assignedToText }}
+        
       </mat-select-trigger>
 
       <mat-option *ngFor="let contact of contacts()" [value]="contact">
