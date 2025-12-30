@@ -1,4 +1,4 @@
-import { Component, inject,ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDrag, CdkDropList, CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskPreview } from '../task-preview/task-preview';
@@ -8,29 +8,37 @@ import { BoardTask } from '../../../../interfaces/task-board.interface';
 import { TaskAssign } from '../../../../interfaces/task-assign.interface';
 import { TaskAssignDb } from '../../../../interfaces/task-assign-db.interface';
 import { TaskStatus } from '../../../../types/task-status';
-import { Observable, combineLatest, map, switchMap, from, of } from 'rxjs';
+import { Observable, combineLatest, map, switchMap, of } from 'rxjs';
 import { UserUiService } from '../../../../services/user-ui.service';
 import { DialogAddTask } from '../dialog-add-task/dialog-add-task';
-
+import { Board } from '../board';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, CdkDrag, CdkDropList, CdkDropListGroup, TaskPreview,DialogAddTask],
+  imports: [CommonModule, CdkDrag, CdkDropList, CdkDropListGroup, TaskPreview, DialogAddTask],
   templateUrl: './task-list.html',
   styleUrls: ['./task-list.scss'],
 })
 export class TaskList {
   TaskStatus = TaskStatus;
 
- @ViewChild('addTaskDialog') addTaskDialog!: DialogAddTask;
-
-openAddTaskDialog() {
-  this.addTaskDialog.open();
-}
+  @ViewChild('addTaskDialog') addTaskDialog!: DialogAddTask;
 
   private readonly firebase = inject(FirebaseServices);
   private readonly userUi = inject(UserUiService);
+
+  // WICHTIG: Board injizieren, damit wir den Preview-Dialog öffnen können
+  private readonly board = inject(Board);
+
+  openAddTaskDialog() {
+    this.addTaskDialog.open();
+  }
+
+  // Task per Klick anzeigen
+  onTaskClick(task: BoardTask) {
+    this.board.openDialogEditTask();
+  }
 
   readonly tasks$: Observable<BoardTask[]> = this.firebase
     .subTasks()
@@ -52,16 +60,16 @@ openAddTaskDialog() {
     return this.tasks$.pipe(map((tasks) => tasks.filter((task) => task.status === status)));
   }
 
-private enrichTask(task: Task): Observable<BoardTask> {
-  return combineLatest([
-    this.firebase.subSubtasks(task.id!),
-    this.firebase.subTaskAssigns(task.id!),
-  ]).pipe(
-    switchMap(([subtasks, assigns]) => {
-      const done = subtasks.filter(st => st.done).length;
-      const total = subtasks.length;
+  private enrichTask(task: Task): Observable<BoardTask> {
+    return combineLatest([
+      this.firebase.subSubtasks(task.id!),
+      this.firebase.subTaskAssigns(task.id!),
+    ]).pipe(
+      switchMap(([subtasks, assigns]) => {
+        const done = subtasks.filter(st => st.done).length;
+        const total = subtasks.length;
 
-      if (!assigns || assigns.length === 0) {
+        if (!assigns || assigns.length === 0) {
           return of({
             ...task,
             assigns: [] as TaskAssign[],
@@ -72,7 +80,7 @@ private enrichTask(task: Task): Observable<BoardTask> {
           } as BoardTask);
         }
 
-      const assignObservables = assigns.map((a: TaskAssignDb) =>
+        const assignObservables = assigns.map((a: TaskAssignDb) =>
           this.firebase.subSingleContact(a.contactId).pipe(
             map((contact) => {
               const c = contact ? this.firebase.toContact(contact) : { id: a.contactId, name: '', email: '', phone: '', color: '' };
@@ -87,7 +95,7 @@ private enrichTask(task: Task): Observable<BoardTask> {
           )
         );
 
-      return combineLatest(assignObservables).pipe(
+        return combineLatest(assignObservables).pipe(
           map((mappedAssigns: TaskAssign[]) => ({
             ...task,
             assigns: mappedAssigns,
