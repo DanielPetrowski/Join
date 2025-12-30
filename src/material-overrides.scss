@@ -143,8 +143,31 @@ body .mat-mdc-form-field.invalid .mdc-text-field:hover,
 body .mat-mdc-form-field.invalid .mdc-text-field.mdc-text-field--focused {
   border-color: colors.$errorRed !important;
 }
+body .mat-mdc-option.mdc-list-item{
+  &:hover{
+    background-color: colors.$bgLightGrey;
+  }
+}
+body .mat-mdc-option.mdc-list-item.mdc-list-item--selected {
+  background-color: colors.$bgGrey;
+  color: colors.$white;
+}
 
+body .mat-mdc-checkbox .mdc-checkbox__checkmark {
+  display: none;
+}
 
+.mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-full.mat-pseudo-checkbox-indeterminate  {
+  background-image: url("../public/img/checkbox_checked.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+ ;
+  
+  &::after{
+    display: none;
+  }
+}
 
 
 
