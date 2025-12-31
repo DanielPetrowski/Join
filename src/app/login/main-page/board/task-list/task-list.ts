@@ -35,7 +35,7 @@ export class TaskList {
     this.addTaskDialog.open();
   }
 
-  // Task per Klick anzeigen
+
   onTaskClick(task: BoardTask): void {
     if (!task.id) return;
     this.board.openDialogEditTask(task);
