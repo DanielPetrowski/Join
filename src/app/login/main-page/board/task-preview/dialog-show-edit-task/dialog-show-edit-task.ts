@@ -1,8 +1,9 @@
-import { Component,ViewChild, signal } from '@angular/core';
+import { Component, ViewChild, signal, inject } from '@angular/core';
 import { Dialog } from '../../../../../shared/dialog/dialog';
 import { BoardTask } from '../../../../../interfaces/task-board.interface';
 import { TaskType } from '../../../../../types/task-type';
 import { CommonModule } from '@angular/common';
+import { FirebaseServices } from '../../../../../firebase-services/firebase-services';
 
 @Component({
   selector: 'app-dialog-show-edit-task',
@@ -11,9 +12,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dialog-show-edit-task.html',
   styleUrl: './dialog-show-edit-task.scss',
 })
-
 export class DialogShowEditTask {
   @ViewChild('DialogShowEditTask') dialog!: Dialog;
+
+  private readonly firebase = inject(FirebaseServices);
 
   readonly task = signal<BoardTask | null>(null);
   readonly TaskType = TaskType;
@@ -29,7 +31,7 @@ export class DialogShowEditTask {
     this.dialog.close();
   }
 
-   get taskTypeSvg(): string {
+  get taskTypeSvg(): string {
     if (!this.task()) return '';
     switch (this.task()!.type) {
       case TaskType.UserStory:
@@ -41,11 +43,17 @@ export class DialogShowEditTask {
     }
   }
 
-
   /* ----------------------------- SwitschFunktion für seitenwechsel---------------------------- */
 
+  switchPage(): void {
+    this.isEditMode = !this.isEditMode;
+  }
 
-switchPage(): void {
-  this.isEditMode = !this.isEditMode;
-}
+  async deleteTask(): Promise<void> {
+    const taskId = this.task()?.id;
+    if (!taskId) return;
+
+    await this.firebase.deleteTaskWithChildren(taskId);
+    this.close();
+  }
 }

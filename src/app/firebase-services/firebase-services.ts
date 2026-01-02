@@ -86,10 +86,10 @@ export class FirebaseServices {
       });
       await batch.commit();
 
-    const ref = doc(this.firestore, `contacts/${contactId}`);
-    await deleteDoc(ref);
+      const ref = doc(this.firestore, `contacts/${contactId}`);
+      await deleteDoc(ref);
+    }
   }
-}
 
   /* ================================TASKS================================= */
 
@@ -124,9 +124,29 @@ export class FirebaseServices {
     await updateDoc(ref, data);
   }
 
-  async deleteTask(taskId: string): Promise<void> {
-    const ref = doc(this.firestore, `tasks/${taskId}`);
-    await deleteDoc(ref);
+  async deleteTaskWithChildren(taskId: string): Promise<void> {
+    if (!taskId) {
+      throw new Error('deleteTaskWithChildren: taskId is missing');
+    }
+
+    const batch = writeBatch(this.firestore);
+
+    const subtasksRef = collection(this.firestore, `tasks/${taskId}/subtasks`);
+    const subtasksSnap = await getDocs(subtasksRef);
+    subtasksSnap.forEach((docSnap) => {
+      batch.delete(docSnap.ref);
+    });
+
+    const assignsRef = collection(this.firestore, `tasks/${taskId}/assigns`);
+    const assignsSnap = await getDocs(assignsRef);
+    assignsSnap.forEach((docSnap) => {
+      batch.delete(docSnap.ref);
+    });
+
+    const taskRef = doc(this.firestore, `tasks/${taskId}`);
+    batch.delete(taskRef);
+
+    await batch.commit();
   }
 
   async updateTaskStatus(taskId: string, status: TaskStatus): Promise<void> {
@@ -137,9 +157,9 @@ export class FirebaseServices {
   /* ========================== TASK SUBCOLLECTIONS ========================== */
 
   subTaskAssigns(taskId: string): Observable<TaskAssignDb[]> {
-  const ref = collection(this.firestore, `tasks/${taskId}/assigns`);
-  return collectionData(ref, { idField: 'id' }) as Observable<TaskAssignDb[]>;
-}
+    const ref = collection(this.firestore, `tasks/${taskId}/assigns`);
+    return collectionData(ref, { idField: 'id' }) as Observable<TaskAssignDb[]>;
+  }
 
   async addTaskAssign(taskId: string, assign: Omit<TaskAssign, 'id'>): Promise<void> {
     const ref = collection(this.firestore, `tasks/${taskId}/assigns`);
@@ -161,7 +181,11 @@ export class FirebaseServices {
     await addDoc(ref, subtask);
   }
 
-  async editSubtask(taskId: string, subtaskId: string, data: Partial<Omit<Subtask, 'id'>>): Promise<void> {
+  async editSubtask(
+    taskId: string,
+    subtaskId: string,
+    data: Partial<Omit<Subtask, 'id'>>
+  ): Promise<void> {
     const ref = doc(this.firestore, `tasks/${taskId}/subtasks/${subtaskId}`);
     await updateDoc(ref, data);
   }
