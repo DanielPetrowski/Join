@@ -66,8 +66,12 @@
   .task_info {
     display: flex;
     padding-top: 20px;
-    .task_info_space_1 { margin-left: 20px; }
-    .task_info_space_2 { margin-left: 38px; }
+    .task_info_space_1 {
+      margin-left: 20px;
+    }
+    .task_info_space_2 {
+      margin-left: 38px;
+    }
 
     span:nth-child(1) {
       font-weight: 400;
@@ -81,7 +85,8 @@
     }
   }
 
-  .assigned_title, .subtasks_title {
+  .assigned_title,
+  .subtasks_title {
     font-weight: 400;
     font-size: 20px;
     padding-top: 20px;
@@ -120,8 +125,12 @@
       width: 18px;
       height: 18px;
       color: colors.$bgGrey;
-      .check { opacity: 0; }
-      &.done .check { opacity: 1; }
+      .check {
+        opacity: 0;
+      }
+      &.done .check {
+        opacity: 1;
+      }
     }
   }
 
@@ -130,7 +139,8 @@
     justify-content: flex-end;
     gap: 8px;
     margin-top: 20px;
-    .btn-delete, .btn-edit {
+    .btn-delete,
+    .btn-edit {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -138,12 +148,16 @@
       border: none;
       cursor: pointer;
       color: colors.$bgGrey;
-      &:hover { color: colors.$buttonBlue; }
+      &:hover {
+        color: colors.$buttonBlue;
+      }
     }
   }
 }
 
-.d_none { display: none !important; }
+.d_none {
+  display: none !important;
+}
 
 /* ------------------------------- EditBereich ------------------------------ */
 .dialog_edit {
@@ -153,7 +167,9 @@
   gap: 24px;
   width: 525px; // Einheitlich zur Show-View
 
-  header { align-self: flex-end; }
+  header {
+    align-self: flex-end;
+  }
 
   .area_input {
     display: flex;
@@ -166,34 +182,77 @@
       font-weight: 700;
     }
 
-    input, select {
+    input,
+    select {
       padding: 12px 21px;
       border: 1px solid colors.$bgMiddleGrey;
       border-radius: 10px;
       font-size: 16px;
       width: 100%;
       outline: none;
-      &:focus { border-color: colors.$buttonBlue; }
+      &:focus {
+        border-color: colors.$buttonBlue;
+      }
     }
 
-    .prio_buttons {
+  }
+
+  .area_prio_buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+      font-weight: 400;
+      font-size: 16px;
+      color: colors.$black;
+    }
+
+    .prio_buttons{
       display: flex;
       gap: 16px;
+      width: 100%;
+
       button {
         flex: 1;
-        height: 56px;
-        border-radius: 10px;
-        border: 1px solid colors.$bgMiddleGrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 18px 10px;
+        gap: 8px;
         background: white;
-        font-size: 18px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        border: none;
         cursor: pointer;
-        transition: all 0.2s;
-        
-        &:hover { box-shadow: 0px 4px 4px rgba(0,0,0,0.1); }
-        
-        &.active_urgent { background: colors.$bgOrange; color: white; border-color: transparent; }
-        &.active_medium { background: colors.$bgYellow; color: white; border-color: transparent; }
-        &.active_low { background: colors.$bgGreen; color: white; border-color: transparent; }
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        color: black;
+        transition: all 100ms ease-in-out;
+
+        &:hover {
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        &.active_urgent {
+          background: #FF3D00;
+          color: white;
+          font-weight: 700;
+          svg path { fill: white; }
+        }
+        &.active_medium {
+          background: #FFA800;
+          color: white;
+          font-weight: 700;
+          svg path { fill: white; }
+        }
+        &.active_low {
+          background: #7AE229;
+          color: white;
+          font-weight: 700;
+          svg path { fill: white; }
+        }
       }
     }
   }
@@ -239,7 +298,7 @@
         cursor: pointer;
       }
     }
-    
+
     p {
       display: flex;
       align-items: center;
@@ -261,7 +320,9 @@
       border: none;
       font-weight: 700;
       cursor: pointer;
-      &:hover { background: colors.$pbBlue; }
+      &:hover {
+        background: colors.$pbBlue;
+      }
     }
   }
 }
