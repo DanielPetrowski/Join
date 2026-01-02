@@ -8,10 +8,20 @@
 
       <input type="text" placeholder="Find Task" />
 
-      <button class="button_dark" (click)="openDialogAddTask()">
+      <!-- DESKTOP / TABLET BUTTON -->
+      <button class="button_dark add_task_desktop" (click)="openDialogAddTask()">
         <span>Add task +</span>
       </button>
+
+      <!-- MOBILE BUTTON -->
+      <button class="circle_add_task_mobile" (click)="openDialogAddTask()" aria-label="Add task">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 1V21" stroke="white" stroke-width="2" stroke-linecap="round" />
+          <path d="M21 11L1.00048 11.138" stroke="white" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
     </article>
+
 
     <app-dialog-add-task></app-dialog-add-task>
 

@@ -22,7 +22,7 @@
 }
 
 /* ===================================================== */
-/* TOP AREA (BOARD + SEARCH + ADD BUTTON)                */
+/* TOP AREA                                              */
 /* ===================================================== */
 
 .area_top {
@@ -32,13 +32,12 @@
   max-width: 1200px;
   margin-bottom: 24px;
 
-  /* ---------- MOBILE LAYOUT ---------- */
+  /* ---------- MOBILE GRID ---------- */
   @media (max-width: 740px) {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     row-gap: 12px;
-    align-items: center;
     max-width: 100%;
   }
 
@@ -50,27 +49,13 @@
 
     @media (max-width: 740px) {
       font-size: 47px;
-      grid-column: 1 / 2;
+      grid-column: 1;
       grid-row: 1;
-    }
-  }
-
-  /* ---------- RIGHT AREA (INPUT + BUTTON) ---------- */
-  >div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    @media (max-width: 740px) {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      width: 100%;
     }
   }
 
   /* ---------- SEARCH INPUT ---------- */
   input {
-    box-sizing: border-box;
     width: 312px;
     height: 48px;
     padding: 8px 16px;
@@ -86,49 +71,54 @@
 
     @media (max-width: 740px) {
       width: 100%;
+      grid-column: 1 / -1;
+      grid-row: 2;
     }
   }
 
-  /* ---------- ADD TASK BUTTON (DESKTOP) ---------- */
+  /* ===================================================== */
+  /* ADD TASK BUTTON – DESKTOP                             */
+  /* ===================================================== */
+
   .button_dark {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+
+    @media (max-width: 740px) {
+      display: none;
+    }
   }
 
-  /* ---------- PLUS BUTTON (MOBILE) ---------- */
-  button {
+  /* ===================================================== */
+  /* ADD TASK BUTTON – MOBILE (SVG)                        */
+  /* ===================================================== */
+
+  .circle_add_task_mobile {
+    display: none;
+
     @media (max-width: 740px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       grid-column: 2;
       grid-row: 1;
 
       width: 40px;
       height: 40px;
-      padding: 0;
 
       background-color: colors.$navBgActiveGrey;
       border-radius: 16px;
       border: none;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
+      padding: 0;
       cursor: pointer;
     }
 
-    /* SVG INSIDE BUTTON */
     svg {
       width: 20px;
       height: 20px;
-    }
-
-    /* TEXT AUSBLENDEN AUF MOBILE */
-    span {
-      @media (max-width: 740px) {
-        display: none;
-      }
     }
   }
 }
