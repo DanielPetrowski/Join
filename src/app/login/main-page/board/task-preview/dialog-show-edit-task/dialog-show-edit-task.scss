@@ -13,6 +13,8 @@
   gap: 4px;
   width: 525px;
   position: relative;
+  max-height: 800px;
+  overflow: scroll;
 
   header {
     display: flex;
@@ -165,7 +167,10 @@
   flex-direction: column;
   padding: 40px;
   gap: 24px;
-  width: 525px; 
+  width: 525px;
+  max-height: 800px;
+  overflow: scroll;
+
   header {
     align-self: flex-end;
   }
@@ -193,7 +198,6 @@
         border-color: colors.$buttonBlue;
       }
     }
-
   }
 
   .area_prio_buttons {
@@ -207,7 +211,7 @@
       color: colors.$black;
     }
 
-    .prio_buttons{
+    .prio_buttons {
       display: flex;
       justify-content: space-evenly;
       gap: 16px;
@@ -234,22 +238,28 @@
         }
 
         &.active_urgent {
-          background: #FF3D00;
+          background: #ff3d00;
           color: white;
           font-weight: 700;
-          svg path { fill: white; }
+          svg path {
+            fill: white;
+          }
         }
         &.active_medium {
-          background: #FFA800;
+          background: #ffa800;
           color: white;
           font-weight: 700;
-          svg path { fill: white; }
+          svg path {
+            fill: white;
+          }
         }
         &.active_low {
-          background: #7AE229;
+          background: #7ae229;
           color: white;
           font-weight: 700;
-          svg path { fill: white; }
+          svg path {
+            fill: white;
+          }
         }
       }
     }
@@ -264,7 +274,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 16px;
-      background: #FFFFFF;
+      background: #ffffff;
       border: 1px solid colors.$bgMiddleGrey;
       border-radius: 10px;
       cursor: pointer;
@@ -290,7 +300,7 @@
       width: 100%;
       max-height: 200px;
       overflow-y: auto;
-      background: #FFFFFF;
+      background: #ffffff;
       box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
       border-radius: 10px;
       z-index: 10;
@@ -306,11 +316,12 @@
         border-radius: 5px;
         margin: 2px 0;
 
-        &:hover, &.active {
-          background-color: #EEEEEE; // Hover Farbe
+        &:hover,
+        &.active {
+          background-color: #eeeeee; // Hover Farbe
           color: black;
         }
-        
+
         &.active {
           color: white;
         }
@@ -324,7 +335,7 @@
         .checkbox_empty {
           width: 24px;
           height: 24px;
-          border: 2px solid #2A3647; // Checkbox Rahmen
+          border: 2px solid #2a3647; // Checkbox Rahmen
           border-radius: 3px;
         }
       }
@@ -341,7 +352,7 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      border: 2px solid #FFFFFF;
+      border: 2px solid #ffffff;
       color: white;
       display: flex;
       justify-content: center;
@@ -373,81 +384,80 @@
       width: 100%;
     }
     .subtask_list_edit {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 8px;
-}
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+    }
 
-.subtask_item_edit {
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  border-bottom: 1px solid transparent; /* Platzhalter für Layout-Stabilität */
-  
-  /* Hover-Effekt für die ganze Zeile */
-  &:hover {
-    background-color: #f0f0f0; /* Leichtes Grau beim Hovern */
-    border-radius: 8px;
-  }
+    .subtask_item_edit {
+      display: flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-bottom: 1px solid transparent; /* Platzhalter für Layout-Stabilität */
 
-  /* Zeige Icons nur beim Hovern über die Zeile */
-  &:hover .subtask_icons {
-    opacity: 1;
-    visibility: visible;
-  }
-}
+      /* Hover-Effekt für die ganze Zeile */
+      &:hover {
+        background-color: #f0f0f0; /* Leichtes Grau beim Hovern */
+        border-radius: 8px;
+      }
 
-.bullet_point {
-  margin-right: 12px;
-  font-size: 20px;
-  line-height: 1;
-}
+      /* Zeige Icons nur beim Hovern über die Zeile */
+      &:hover .subtask_icons {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
 
-.subtask_input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  outline: none;
-  
-  &:focus {
-    border-bottom: 1px solid #29abe2; /* Blaue Linie beim Fokus */
-  }
-}
+    .bullet_point {
+      margin-right: 12px;
+      font-size: 20px;
+      line-height: 1;
+    }
 
-.subtask_icons {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  opacity: 0; /* Standardmäßig unsichtbar */
-  visibility: hidden;
-  transition: opacity 0.2s ease-in-out;
-}
+    .subtask_input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      outline: none;
 
-.icon_btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #2a3647;
-  
-  &:hover {
-    color: #29abe2; /* Blaue Farbe beim Hovern über das Icon */
-    transform: scale(1.1);
-  }
-}
+      &:focus {
+        border-bottom: 1px solid #29abe2; /* Blaue Linie beim Fokus */
+      }
+    }
 
-.separator {
-  width: 1px;
-  height: 16px;
-  background-color: #d1d1d1;
-  margin: 0 4px;
-}
+    .subtask_icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0; /* Standardmäßig unsichtbar */
+      visibility: hidden;
+      transition: opacity 0.2s ease-in-out;
+    }
 
+    .icon_btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2a3647;
+
+      &:hover {
+        color: #29abe2; /* Blaue Farbe beim Hovern über das Icon */
+        transform: scale(1.1);
+      }
+    }
+
+    .separator {
+      width: 1px;
+      height: 16px;
+      background-color: #d1d1d1;
+      margin: 0 4px;
+    }
   }
 
   footer {
