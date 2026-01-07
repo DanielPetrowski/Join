@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserUiService } from '../../../../../services/user-ui.service';
 
 @Component({
   selector: 'app-dialog-show-edit-task',
@@ -22,6 +23,7 @@ export class DialogShowEditTask {
   @ViewChild('DialogShowEditTask') dialog!: Dialog;
 
   private readonly firebase = inject(FirebaseServices);
+  private readonly userUi = inject(UserUiService);
 
   readonly task = signal<BoardTask | null>(null);
   readonly contacts = signal<Contact[]>([]);
@@ -102,12 +104,7 @@ export class DialogShowEditTask {
   }
 
   getInitials(name: string): string {
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .substring(0, 2);
+   return this.userUi.getInitials(name);
   }
 
   async toggleSubtask(index: number, task: BoardTask) {

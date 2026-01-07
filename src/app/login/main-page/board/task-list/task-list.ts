@@ -28,7 +28,6 @@ export class TaskList {
   private readonly firebase = inject(FirebaseServices);
   private readonly userUi = inject(UserUiService);
 
-  // WICHTIG: Board injizieren, damit wir den Preview-Dialog öffnen können
   private readonly board = inject(Board);
 
   openAddTaskDialog() {
