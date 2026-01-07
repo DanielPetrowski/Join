@@ -13,6 +13,30 @@
   gap: 4px;
   width: 525px;
   position: relative;
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8;
+    border-radius: 12px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
 
   header {
     display: flex;
@@ -51,11 +75,13 @@
   .area_title {
     display: flex;
     flex-direction: column;
+
     .task_title {
       font-weight: 700;
       font-size: 61px;
       padding-top: 24px;
     }
+
     .task_description {
       font-weight: 400;
       font-size: 20px;
@@ -66,9 +92,11 @@
   .task_info {
     display: flex;
     padding-top: 20px;
+
     .task_info_space_1 {
       margin-left: 20px;
     }
+
     .task_info_space_2 {
       margin-left: 38px;
     }
@@ -78,6 +106,7 @@
       font-size: 20px;
       color: colors.$bgGrey;
     }
+
     span:nth-child(2) {
       font-weight: 400;
       font-size: 20px;
@@ -97,11 +126,13 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+
     p {
       display: flex;
       align-items: center;
       gap: 16px;
       padding: 7px 16px;
+
       span:nth-child(1) {
         display: flex;
         justify-content: center;
@@ -120,17 +151,25 @@
     flex-direction: column;
     padding: 16px;
     gap: 4px;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: background-color 100ms ease-in-out;
+
+      &:hover {
+        background-color: #eee;
+        border-radius: 8px;
+      }
+    }
+
     .checkbox_icon {
-      position: relative;
-      width: 18px;
-      height: 18px;
-      color: colors.$bgGrey;
-      .check {
-        opacity: 0;
-      }
-      &.done .check {
-        opacity: 1;
-      }
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
     }
   }
 
@@ -139,6 +178,7 @@
     justify-content: flex-end;
     gap: 8px;
     margin-top: 20px;
+
     .btn-delete,
     .btn-edit {
       display: flex;
@@ -148,6 +188,7 @@
       border: none;
       cursor: pointer;
       color: colors.$bgGrey;
+
       &:hover {
         color: colors.$buttonBlue;
       }
@@ -159,13 +200,40 @@
   display: none !important;
 }
 
+// #######################################################################
 /* ------------------------------- EditBereich ------------------------------ */
+// #######################################################################
 .dialog_edit {
   display: flex;
   flex-direction: column;
+  position: relative;
   padding: 40px;
   gap: 24px;
-  width: 525px; // Einheitlich zur Show-View
+  width: 525px;
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8;
+    border-radius: 12px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
 
   header {
     align-self: flex-end;
@@ -177,9 +245,10 @@
     gap: 8px;
 
     label {
+      font-weight: 400;
       font-size: 16px;
       color: colors.$black;
-      font-weight: 700;
+      margin-top: 30px;
     }
 
     input,
@@ -190,11 +259,11 @@
       font-size: 16px;
       width: 100%;
       outline: none;
+
       &:focus {
         border-color: colors.$buttonBlue;
       }
     }
-
   }
 
   .area_prio_buttons {
@@ -208,7 +277,7 @@
       color: colors.$black;
     }
 
-    .prio_buttons{
+    .prio_buttons {
       display: flex;
       justify-content: space-evenly;
       gap: 16px;
@@ -235,158 +304,205 @@
         }
 
         &.active_urgent {
-          background: #FF3D00;
+          background: #ff3d00;
           color: white;
           font-weight: 700;
-          svg path { fill: white; }
+
+          svg path {
+            fill: white;
+          }
         }
+
         &.active_medium {
-          background: #FFA800;
+          background: #ffa800;
           color: white;
           font-weight: 700;
-          svg path { fill: white; }
+
+          svg path {
+            fill: white;
+          }
         }
+
         &.active_low {
-          background: #7AE229;
+          background: #7ae229;
           color: white;
           font-weight: 700;
-          svg path { fill: white; }
+
+          svg path {
+            fill: white;
+          }
         }
       }
     }
   }
 
   .area_assigned {
-    position: relative; // Wichtig für absolute Positionierung des Dropdowns
     width: 100%;
 
-    .dropdown_trigger {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      background: #FFFFFF;
-      border: 1px solid colors.$bgMiddleGrey;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      color: black;
-
-      &:hover {
-        border-color: colors.$buttonBlue;
-      }
-
-      svg {
-        transition: transform 125ms ease-in-out;
-        &.rotated {
-          transform: rotate(180deg);
-        }
-      }
+    mat-option.mat-selected .mat-pseudo-checkbox {
+      border-color: colors.$white;
     }
 
-    .dropdown_menu {
-      position: absolute;
-      top: 50px; // Unterhalb des Triggers
-      left: 0;
-      width: 100%;
-      max-height: 200px;
-      overflow-y: auto;
-      background: #FFFFFF;
-      box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-      border-radius: 10px;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-
-      .contact_item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 7px 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        margin: 2px 0;
-
-        &:hover, &.active {
-          background-color: #EEEEEE; // Hover Farbe
-          color: black;
-        }
-        
-        &.active {
-          color: white;
-        }
-
-        .contact_info {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .checkbox_empty {
-          width: 24px;
-          height: 24px;
-          border: 2px solid #2A3647; // Checkbox Rahmen
-          border-radius: 3px;
-        }
-      }
+    mat-option.mat-selected .mat-pseudo-checkbox::after {
+      border-color: colors.$white;
     }
 
-    .selected_badges {
+    .assigned-logos {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
-      padding-top: 12px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      color: #f0f0f0;
     }
 
-    .badge {
-      width: 42px;
-      height: 42px;
+    .sc_logo {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      border: 2px solid #FFFFFF;
-      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 12px;
-      font-weight: 400;
+      font-weight: 500;
+      font-size: 14px;
+      color: #fff;
     }
   }
 
   .subtasks {
+
     .area_input div {
       display: flex;
       gap: 8px;
-      button {
+      align-items: center;
+
+      .confirm_btn {
         width: 48px;
-        background: colors.$buttonBlue;
-        color: white;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: colors.$white;
+        color: colors.$black;
+
         border: none;
         border-radius: 10px;
         cursor: pointer;
+        padding: 0;
+      }
+
+      .confirm_icon {
+        width: 14px;
+        height: 14px;
+        display: block;
       }
     }
 
-    p {
+
+    .subtask_list_edit {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .subtask_item_edit {
       display: flex;
       align-items: center;
-      padding: 8px;
-      border-bottom: 1px solid #eee;
-      width: 100%;
+      padding: 4px 8px;
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        background-color: #f0f0f0;
+        border-radius: 8px;
+      }
+
+      &:hover .subtask_icons {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .bullet_point {
+      margin-right: 12px;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .subtask_input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      outline: none;
+
+      &:focus {
+        border-bottom: 1px solid colors.$buttonBlue;
+      }
+    }
+
+    .subtask_icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    /* ================= SVG ICON BUTTON ================= */
+
+    .icon_btn {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-color: colors.$white;
+      color: colors.$black;
+
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0;
+
+      svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+      }
+
+      &:hover {
+        color: colors.$buttonBlue;
+      }
+    }
+
+    .separator {
+      width: 1px;
+      height: 16px;
+      background-color: #d1d1d1;
+      margin: 0 4px;
     }
   }
+
 
   footer {
     display: flex;
     justify-content: flex-end;
     margin-top: 32px;
+
     button {
-      background: colors.$buttonBlue;
+      background: colors.$buttonGrey;
       color: white;
       padding: 16px 32px;
       border-radius: 10px;
       border: none;
       font-weight: 700;
       cursor: pointer;
+
       &:hover {
         background: colors.$pbBlue;
       }
