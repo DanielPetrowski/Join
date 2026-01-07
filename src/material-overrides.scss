@@ -172,6 +172,9 @@ body .mat-mdc-checkbox .mdc-checkbox__checkmark {
 body .mdc-line-ripple::before{
   position: relative;
 }
+body .mdc-line-ripple::after{
+  position: relative;
+}
 .flex-center {
   display: flex;
   justify-content: center;
