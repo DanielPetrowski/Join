@@ -19,11 +19,6 @@
   display: flex;
   flex-direction: column;
   padding: 40px 24px;
-
-  // @media (max-width: 740px) {
-  //   display: grid;
-  //   grid-template-columns: 1fr;
-  // }
 }
 
 /* ===================================================== */
@@ -62,6 +57,7 @@
     .search_task_box {
       grid-area: search;
       width: 100%;
+      max-width: 100%;
     }
 
     .circle_add_task_mobile {
@@ -90,13 +86,20 @@
     flex-direction: row;
     gap: 8px;
     padding: 0 16px;
-    width: 312px;
+    // width: 312px;
     height: 48px;
     border-radius: 20px;
     background-color: colors.$white;
 
     &:focus-within {
       outline: colors.$buttonBlue solid 2px;
+    }
+
+    // Mobile default
+    width: 100%;
+    max-width: 100%;
+    @media (min-width: 581px) {
+      width: 312px;
     }
 
     input {
