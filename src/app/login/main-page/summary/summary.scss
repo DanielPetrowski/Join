@@ -106,6 +106,22 @@
 
   &:hover {
     transform: scale(1.05);
+    background-color: colors.$buttonGrey;
+
+    .symbol {
+      background-color: colors.$white !important;
+
+      svg {
+        fill: colors.$black;
+        path {
+          fill: colors.$black;
+        }
+      }
+    }
+
+    .task_number, .task_area, .span1, .span2, .date, .deadline {
+      color: colors.$white !important;
+    }
   }
 }
 
@@ -172,6 +188,18 @@
       height: auto;
       padding: 24px;
       gap: 24px;
+    }
+
+    &:hover {
+      .symbol {
+        background-color: #ff3d00 !important;
+        svg {
+          fill: colors.$white;
+          path {
+            fill: colors.$white;
+          }
+        }
+      }
     }
 
     .urgent_left {
