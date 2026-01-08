@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../firebase-services/auth-services';
 
 @Component({
   selector: 'app-header',
@@ -20,14 +21,20 @@ export class Header implements OnInit {
   this.menuOpen = false;
 }
 
-
- constructor(private router: Router) {}
+ constructor(private authService: AuthService, private router: Router) {}
 
   guestLogin() {
-  // Nach Klick auf Guest Login → Summary anzeigen
   this.router.navigate(['/Login']);
-
 }
+
+async onLogout() {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/Login']);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {

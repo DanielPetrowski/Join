@@ -14,13 +14,13 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Contact } from '../interfaces/contact.interface';
 import { Task } from '../interfaces/task.interface';
 import { TaskAssign } from '../interfaces/task-assign.interface';
 import { Subtask } from '../interfaces/subtask.interface';
-import { TaskType } from '../types/task-type';
 import { TaskStatus } from '../types/task-status';
 import { TaskAssignDb } from '../interfaces/task-assign-db.interface';
 
@@ -85,10 +85,10 @@ export class FirebaseServices {
         batch.delete(docSnap.ref);
       });
       await batch.commit();
+    }
 
       const ref = doc(this.firestore, `contacts/${contactId}`);
-      await deleteDoc(ref);
-    }
+      await deleteDoc(ref);    
   }
 
   /* ================================TASKS================================= */
@@ -203,5 +203,12 @@ export class FirebaseServices {
 
   async setLastUserColor(index: number): Promise<void> {
     await updateDoc(this.settingsDoc, { lastUserColor: index });
+  }
+
+  /* ================================ USERCONTACT =============================== */
+
+  async createUserContact(uid: string, contact: Omit<Contact, 'id'>): Promise<void> {
+    const ref = doc(this.firestore, `contacts/${uid}`);
+    await setDoc(ref, contact);
   }
 }
