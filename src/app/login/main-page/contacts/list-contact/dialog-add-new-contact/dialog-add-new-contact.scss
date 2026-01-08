@@ -25,11 +25,6 @@
     padding: 0;
     gap: 20px;
 
-    @media (max-width: 1050px) {
-      flex-direction: column;
-      height: auto;
-      align-items: center;
-    }
   }
 
   .left_side {
@@ -40,33 +35,11 @@
     background-color: colors.$bgGrey;
     padding: 60px 40px 60px 40px;
 
-    @media (max-width: 1200px) {
-      width: 360px;
-    }
-
-    @media (max-width: 1050px) {
-      width: 100%;
-      padding: 80px 40px 80px 40px;
-      z-index: 10;
-      img {
-        display: none;
-      }
-    }
-
-    @media (max-width: 500px) {
-      padding: 40px 24px;
-    }
-
     .seperator {
       height: 0px;
       width: 90px;
       border-bottom: 3px solid colors.$buttonBlue;
       margin-top: 20px;
-
-      @media (max-width: 500px) {
-      width: 60px;
-      margin-top: 5px;
-      }
     }
 
     img {
@@ -79,14 +52,6 @@
       font-weight: 700;
       color: colors.$white;
       margin-top: 32px;
-
-      @media (max-width: 1200px) {
-        font-size: 40px;
-      }
-
-      @media (max-width: 500px) {
-        font-size: 32px;
-      }
     }
 
     p {
@@ -94,14 +59,6 @@
       font-weight: 700;
       color: colors.$white;
       margin-top: 32px;
-
-      @media (max-width: 1200px) {
-        font-size: 20px;
-      }
-
-      @media (max-width: 500px) {
-        font-size: 16px;
-      }
     }
   }
 
@@ -109,18 +66,6 @@
     display: flex;
     align-items: center;
     margin: 0 0px;
-
-    @media (max-width: 500px) {
-      font-size: 10px;
-      margin: -60px 0px 0px 0px;
-      z-index: 10;
-    }
-
-    @media (max-width: 1200px) {
-      font-size: 20px;
-      margin: -60px 0px 0px 0px;
-      z-index: 10;
-    }
 
     .logo_container{
       width: 120px;
@@ -139,12 +84,6 @@
       width: 48px;
       height: 48px;
       fill: colors.$white;
-
-      @media (max-width: 500px) {
-        width: 80px;
-        height: 80px;
-        font-size: 32px;
-      }
     }
   }
 
@@ -155,17 +94,6 @@
     flex-direction: column;
     justify-content: center;
     gap: 32px;
-
-    @media (max-width: 1050px) {
-      width: 100%;
-      padding: 40px 20px;
-      align-items: center;
-    }
-
-    @media (max-width: 500px) {
-      padding: 20px 16px;
-      gap: 10px;
-    }
   }
 
   form {
@@ -183,11 +111,6 @@
       width: 420px;
       transition: border-color 150ms ease;
 
-      @media (max-width: 500px) {
-        width: 100%;
-        padding: 6px 10px;
-      }
-
       &:hover {
         border-color: colors.$buttonBlue;
       }
@@ -200,9 +123,6 @@
 
         &:focus {
           outline: none;
-        }
-        @media (max-width: 500px) {
-          font-size: 12px;
         }
       }
 
@@ -225,10 +145,6 @@
     gap: 24px;
     white-space: nowrap;
 
-    @media (max-width: 500px) {
-      gap: 12px;
-    }
-
     .button_light {
       width: auto;
       background-color: colors.$white;
@@ -237,22 +153,9 @@
       align-items: center;
       justify-content: space-evenly;
       gap: 8px;
-
-      @media (max-width: 500px) {
-        font-size: 10px;
-        font-weight: 400;
-        width: 90px;
-        padding: 0px 4px;
-        gap: 1px;
-      }
       svg {
         width: 16px;
         height: 16px;
-
-        @media (max-width: 500px) {
-          width: 10px;
-          height: 10px;
-        }
       }
     }
 
@@ -266,23 +169,9 @@
       justify-content: space-evenly;
       gap: 8px;
 
-      @media (max-width: 500px) {
-        font-size: 10px;
-        font-weight: 400;
-        width: 90px;
-        padding: 0px 4px;
-        gap: 1px;
-        justify-content: center;
-      }
-
       svg {
         width: 16px;
         height: 16px;
-
-        @media (max-width: 500px) {
-          width: 10px;
-          height: 10px;
-        }
       }
     }
 
@@ -300,5 +189,71 @@
       transition: background-color 150ms ease-in-out;
       cursor: pointer;
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  :host ::ng-deep app-dialog {
+    .left_side { width: 360px; }
+    .left_side span { font-size: 40px; }
+    .left_side p { font-size: 20px; }
+    .mid_side {
+      font-size: 20px;
+      margin: -60px 0px 0px 0px;
+      z-index: 10;
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  :host ::ng-deep app-dialog {
+    .sc_dialog {
+      flex-direction: column;
+      height: auto;
+      align-items: center;
+    }
+    .left_side {
+      width: 100%;
+      padding: 80px 40px 80px 40px;
+      z-index: 10;
+      img { display: none; }
+    }
+    .right_side {
+      width: 100%;
+      padding: 40px 20px;
+      align-items: center;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  :host ::ng-deep app-dialog {
+    .left_side { padding: 40px 24px; }
+    .left_side .seperator { width: 60px; margin-top: 5px; }
+    .left_side span { font-size: 32px; }
+    .left_side p { font-size: 16px; }
+    .mid_side {
+      font-size: 10px;
+      margin: -60px 0px 0px 0px;
+      z-index: 10;
+    }
+    .mid_side .sc_logo, .mid_side svg {
+      width: 80px;
+      height: 80px;
+      font-size: 32px;
+    }
+    .right_side { padding: 20px 16px; gap: 10px; }
+    form label { width: 100%; padding: 6px 10px; }
+    form label input { font-size: 12px; }
+    .dialog_buttons { gap: 12px; }
+    .dialog_buttons .button_light, .dialog_buttons .button_dark {
+      font-size: 10px;
+      font-weight: 400;
+      width: 90px;
+      padding: 0px 4px;
+      gap: 1px;
+    }
+    .dialog_buttons .button_dark { justify-content: center; }
+    .dialog_buttons .button_light svg, .dialog_buttons .button_dark svg { width: 10px; height: 10px; }
   }
 }

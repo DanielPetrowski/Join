@@ -6,9 +6,6 @@
   padding: 48px 35px;
   gap: 24px;
   max-width: 1440px;
-  @media (max-width: 1400px) {
-    gap: 0px;
-  }
   header {
     display: flex;
     justify-content: space-between;
@@ -17,9 +14,6 @@
     span:first-child {
       font-weight: 700;
       font-size: 61px;
-      @media (max-width: 1400px) {
-        font-size: 50px;
-      }
     }
 
     span:nth-child(2) {
@@ -36,17 +30,6 @@
     display: flex;
     gap: 50px;
 
-    @media (max-width: 1400px) {
-      flex-direction: column;
-      max-height: calc(100vh - 400px);
-      overflow-y: auto;
-      scrollbar-width: none;
-    }
-    @media (max-width: 1400px) {
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
     .area_left,
     .area_right {
       display: flex;
@@ -148,12 +131,6 @@
             font-size: 20px;
             border-radius: 10px;
             cursor: pointer;
-            @media (max-width: 1400px) {
-              font-size: 15px;
-              &svg {
-                height: 15px;
-              }
-            }
           }
         }
       }
@@ -292,24 +269,10 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 20px;
-    @media (max-width: 1400px) {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      :first-child {
-        align-self: flex-start;
-      }
-      :last-child {
-        align-self: flex-end;
-      }
-    }
     span {
       font-family: 'Inter';
       font-weight: 400;
       font-size: 20px;
-      @media (max-width: 1400px) {
-        font-size: 10px;
-      }
       color: black;
       &.required {
         color: colors.$errorRed;
@@ -329,9 +292,6 @@
         cursor: pointer;
         font-size: 20px;
         font-weight: 400;
-        @media (max-width: 1400px) {
-          font-size: 10px;
-        }
       }
       .button_light {
         width: 126px;
@@ -342,9 +302,6 @@
         &:hover {
           border-color: colors.$buttonBlue;
           color: colors.$buttonBlue;
-        }
-        @media (max-width: 1400px) {
-          width: 90px;
         }
       }
       .button_dark {
@@ -363,10 +320,6 @@
         border: none;
         transition: all 100ms ease-in-out;
 
-        @media (max-width: 1400px) {
-          font-size: 10px;
-          width: 116px;
-        }
         &:hover {
           background: #29abe2;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -412,5 +365,42 @@
     color: colors.$white;
     border-radius: 10px;
     font-size: 18px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .add_task {
+    gap: 0px;
+
+    header span:first-child {
+      font-size: 50px;
+    }
+
+    .area_mid {
+      flex-direction: column;
+      max-height: calc(100vh - 400px);
+      overflow-y: auto;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
+
+      .area_right .priority .button_container .buttons {
+        font-size: 15px;
+        svg { height: 15px; }
+      }
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 10px;
+      :first-child { align-self: flex-start; }
+      :last-child { align-self: flex-end; }
+
+      span { font-size: 10px; }
+      div {
+        .button_light, .button_dark { font-size: 10px; }
+        .button_light { width: 90px; }
+        .button_dark { width: 116px; font-size: 10px; }
+      }
+    }
   }
 }
