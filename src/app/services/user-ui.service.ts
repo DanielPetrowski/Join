@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, Injector } from '@angular/core';
 import { FirebaseServices } from './../firebase-services/firebase-services';
 import { Timestamp } from '@angular/fire/firestore';
 
@@ -11,30 +11,31 @@ export class UserUiService {
   private readonly maxColors = 15;
   private lastUserColor = 0;
 
-  private readonly firebase = inject(FirebaseServices);
+  private injector = inject(Injector);
 
   private readonly twoDaysInMS = 2 * 24 * 60 * 60 * 1000;
 
   async init(): Promise<void> {
-    this.lastUserColor = await this.firebase.getLastUserColor();
+    const firebase = this.injector.get(FirebaseServices);
+    this.lastUserColor = await firebase.getLastUserColor();
   }
 
   getInitials(name?: string): string {
     if (!name || typeof name !== 'string') {
-      return '?';
+      return 'G';
     }
 
     const parts = name.trim().split(' ').filter(Boolean);
-
     const first = parts[0]?.charAt(0).toUpperCase() ?? '';
     const last = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() : '';
 
-    return first + last || '?';
+    return first + last || 'G';
   }
 
   async getNextColorIndex(): Promise<number> {
+    const firebase = this.injector.get(FirebaseServices);
     this.lastUserColor = (this.lastUserColor % this.maxColors) + 1;
-    await this.firebase.setLastUserColor(this.lastUserColor);
+    await firebase.setLastUserColor(this.lastUserColor);
     return this.lastUserColor;
   }
 

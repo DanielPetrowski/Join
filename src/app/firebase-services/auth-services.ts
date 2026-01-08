@@ -9,31 +9,38 @@ import {
 } from '@angular/fire/auth';
 import { FirebaseServices } from '../firebase-services/firebase-services';
 import { UserUiService } from '../services/user-ui.service';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private auth = inject(Auth);
   private firebase = inject(FirebaseServices);
   private userUi = inject(UserUiService);
+  private readonly router = inject(Router);
 
   async login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
   async logout() {
-  const user = this.auth.currentUser;
+    const user = this.auth.currentUser;
 
-  if (user && user.isAnonymous) {
     try {
-      await deleteUser(user); 
-    } catch (error) {
-      console.error("Fehler beim Löschen des Gastes:", error);
-      await signOut(this.auth);
+      await this.router.navigate(['/Login']);
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      await this.router.navigate(['/Login']);
+
+      if (user && user.isAnonymous) {
+        await deleteUser(user);
+      } else {
+        await signOut(this.auth);
+      }
+    } catch (error: any) {
+      console.warn('Logout/Delete:', error.message);
+      this.router.navigate(['/Login']);
     }
-  } else {
-    return signOut(this.auth);
   }
-}
 
   async loginGuest() {
     return signInAnonymously(this.auth);

@@ -14,6 +14,7 @@ import { CdkDrag, CdkDropList, CdkDropListGroup, CdkDragDrop } from '@angular/cd
 import { TaskPreview } from './task-preview/task-preview';
 import { FormsModule } from '@angular/forms';
 import { FilterTaskPipe } from '../../../shared/pipes/filter-Task-pipe';
+import { Auth, authState } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-board',
@@ -47,9 +48,22 @@ export class Board {
     this.openDialogEditTask(task);
   }
 
-  readonly tasks$: Observable<BoardTask[]> = this.firebase
-    .subTasks()
-    .pipe(switchMap((tasks: Task[]) => combineLatest(tasks.map((task) => this.enrichTask(task)))));
+  // readonly tasks$: Observable<BoardTask[]> = this.firebase
+  //   .subTasks()
+  //   .pipe(switchMap((tasks: Task[]) => combineLatest(tasks.map((task) => this.enrichTask(task)))));
+
+  readonly tasks$: Observable<BoardTask[]> = authState(inject(Auth)).pipe(
+  switchMap(user => {
+    if (!user) return of([]);
+    
+    return this.firebase.subTasks().pipe(
+      switchMap((tasks: Task[]) => {
+        if (tasks.length === 0) return of([]);
+        return combineLatest(tasks.map((task) => this.enrichTask(task)));
+      })
+    );
+  })
+);
 
   readonly todo$ = this.filterByStatus(TaskStatus.ToDo);
   readonly inProgress$ = this.filterByStatus(TaskStatus.InProgress);

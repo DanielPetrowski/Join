@@ -146,7 +146,7 @@
 
     <span class="area_site">
       <p class="greeting">{{ greeting }}</p>
-      <p class="name">Sofia Müller</p>
+      <p class="name">{{ (userData$ | async)?.name }}</p>
     </span>
   </div>
 </section>

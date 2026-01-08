@@ -18,6 +18,7 @@ export class Summary {
   private router = inject(Router);
   ui = inject(UserUiService);
   greeting = this.getGreeting();
+  userData$ = this.firebase.currentUserData$;
 
   summary$ = this.firebase.subTasks().pipe(
     map((tasks) => {

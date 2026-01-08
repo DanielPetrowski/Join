@@ -16,15 +16,16 @@ import {
   deleteDoc,
   setDoc,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap, of } from 'rxjs';
 import { Contact } from '../interfaces/contact.interface';
 import { Task } from '../interfaces/task.interface';
 import { TaskAssign } from '../interfaces/task-assign.interface';
 import { Subtask } from '../interfaces/subtask.interface';
 import { TaskStatus } from '../types/task-status';
 import { TaskAssignDb } from '../interfaces/task-assign-db.interface';
-import { Auth, deleteUser } from '@angular/fire/auth';
+import { Auth, deleteUser, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserUiService } from '../services/user-ui.service'
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,7 @@ export class FirebaseServices {
   private readonly firestore = inject(Firestore);
   private readonly auth = inject(Auth);
   private readonly router = inject(Router);
+  private readonly ui = inject(UserUiService);
 
   private settingsDoc = doc(this.firestore, 'appSettings/contacts');
 
@@ -235,4 +237,19 @@ export class FirebaseServices {
     const ref = doc(this.firestore, `contacts/${uid}`);
     await setDoc(ref, contact);
   }
+
+  public currentUserData$ = authState(this.auth).pipe(
+    switchMap(user => {
+      if (!user|| user.isAnonymous) return of({ name: 'Guest', initials: 'G' });      
+
+      const userDocRef = doc(this.firestore, `contacts/${user.uid}`);
+      return docData(userDocRef).pipe(
+        map((data: any) => ({
+          name: data?.name || 'User',
+          initials: this.ui.getInitials(data?.name)
+        }))
+      );
+    })
+  );
+  
 }
