@@ -108,36 +108,16 @@
           }
           &.urgent {
             background: colors.$bgOrange;
-            span,
-            svg path {
-              color: #fff;
-              fill: #fff;
-            }
-            &:hover {
-              box-shadow: 0;
-            }
           }
           &.medium {
             background: colors.$bgYellow;
-            span,
-            svg path {
-              color: #fff;
-              fill: #fff;
-            }
-            &:hover {
-              box-shadow: 0;
-            }
           }
           &.low {
             background: colors.$bgGreen;
-            span,
-            svg path {
-              color: #fff;
-              fill: #fff;
-            }
-            &:hover {
-              box-shadow: 0;
-            }
+          }
+          &.urgent, &.medium, &.low {
+            span, svg path { color: #fff; fill: #fff; }
+            &:hover { box-shadow: 0; }
           }
           .buttons {
             display: flex;
@@ -307,10 +287,10 @@
       font-family: 'Inter';
       font-weight: 400;
       font-size: 20px;
+      color: black;
       @media (max-width: 1400px) {
         font-size: 10px;
       }
-      color: black;
       &.required {
         color: colors.$errorRed;
       }

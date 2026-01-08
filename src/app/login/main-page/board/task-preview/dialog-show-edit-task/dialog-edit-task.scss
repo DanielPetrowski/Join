@@ -103,32 +103,20 @@
 
         &.active_urgent {
           background: #ff3d00;
-          color: white;
-          font-weight: 700;
-
-          svg path {
-            fill: white;
-          }
         }
 
         &.active_medium {
           background: #ffa800;
-          color: white;
-          font-weight: 700;
-
-          svg path {
-            fill: white;
-          }
         }
 
         &.active_low {
           background: #7ae229;
+        }
+
+        &.active_urgent, &.active_medium, &.active_low {
           color: white;
           font-weight: 700;
-
-          svg path {
-            fill: white;
-          }
+          svg path { fill: white; }
         }
       }
     }
