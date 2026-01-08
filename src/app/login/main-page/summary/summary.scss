@@ -75,7 +75,6 @@
 // --- Gemeinsame Styles für alle Boxen ---
 .box_top, .box_urgent, .box_task_bord, .box_task_progress, .box_task_feedback {
   background: colors.$white;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   cursor: pointer;
   transition: transform 100ms ease-in-out;
@@ -84,6 +83,8 @@
   &:hover {
     transform: scale(1.05);
     background-color: colors.$buttonGrey;
+  box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.1);
+   
 
     .symbol {
       background-color: colors.$white !important;
