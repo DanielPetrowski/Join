@@ -3,7 +3,7 @@
         <header>
             <img src="img/Capa 2.svg" alt="">
 
-            <div class="header_right">
+            <div class="header_right" *ngIf="!isSignUp">
                 <p>Not a Join User?</p>
                 <button class="sign_up" (click)="openSignUp()">Sign Up</button>
             </div>
@@ -31,7 +31,7 @@
 
                 <div class="headline" *ngIf="isSignUp">
                     <div class="sign_up_arrow_container">
-                    <img src="img/arrow_left.svg" alt="">
+                    <img src="img/arrow_left.svg" alt="" (click)="openSignUp()">
                     <h1>Sign up </h1>
                     </div>
                     <span class="underline"></span>
@@ -58,7 +58,7 @@
                             <div class="policy_text">
                             <input type="checkbox"><span>  I accept the <span class="policy">Privacy policy</span></span>
                             </div>
-                            <button class="sign_up_button" >Sign up</button>
+                            <button class="sign_up_button" (click)="openSignUp()">Sign up</button>
                         </div>
                     </div>
                 </div>

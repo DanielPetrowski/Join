@@ -20,7 +20,7 @@ isSignUp = false
 
 }
 openSignUp() {
-    this.isSignUp = true;
+    this.isSignUp = !this.isSignUp;
   }
 
 
