@@ -95,14 +95,16 @@
           }
           &.urgent { 
             background: colors.$bgOrange; 
+            span, svg path { color: #fff; fill: #fff; } 
+            &:hover { box-shadow: 0; } 
           }
           &.medium { 
             background: colors.$bgYellow; 
+            span, svg path { color: #fff; fill: #fff; } 
+            &:hover { box-shadow: 0; } 
           }
           &.low { 
             background: colors.$bgGreen; 
-          }
-          &.urgent, &.medium, &.low {
             span, svg path { color: #fff; fill: #fff; } 
             &:hover { box-shadow: 0; } 
           }
@@ -262,10 +264,10 @@
       font-family: 'Inter'; 
       font-weight: 400; 
       font-size: 20px; 
-      color: black;
       @media(max-width:500px){
         font-size: 10px;
       }
+      color: black;
       &.required, .footer { 
         color: colors.$errorRed; 
         font-size: 25px;
