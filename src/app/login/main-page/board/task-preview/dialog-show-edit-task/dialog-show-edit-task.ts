@@ -17,7 +17,7 @@ import { UserUiService } from '../../../../../services/user-ui.service';
   standalone: true,
   imports: [CommonModule, Dialog, FormsModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './dialog-show-edit-task.html',
-  styleUrl: './dialog-show-edit-task.scss',
+  styleUrls: ['./dialog-show-task.scss', './dialog-edit-task.scss']
 })
 export class DialogShowEditTask {
   @ViewChild('DialogShowEditTask') dialog!: Dialog;
