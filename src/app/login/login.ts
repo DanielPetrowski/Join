@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.scss',
 })
 export class Login {
-
+isSignUp = false
   constructor(private router: Router) {}
 
   guestLogin() {
@@ -19,4 +19,10 @@ export class Login {
   this.router.navigate(['/summary']);
 
 }
+openSignUp() {
+    this.isSignUp = true;
+  }
+
+
+
 }

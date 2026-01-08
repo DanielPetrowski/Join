@@ -1,13 +1,16 @@
 @use"../styles/colors.scss";
-.widescreen{
-background-color: colors.$bgLightGrey ;
+
+.widescreen {
+    background-color: colors.$bgLightGrey ;
 }
+
 main {
     height: 100vh;
-    width: 100%;;
-   padding-right: calc((100% - 1920px));
-    
-    
+    width: 100%;
+    ;
+    padding-right: calc((100% - 1920px));
+
+
 
     header {
         display: flex;
@@ -59,7 +62,7 @@ main {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 449px;
+            height: 550px;
             width: 652px;
             background-color: colors.$white;
             border-radius: 20px;
@@ -70,12 +73,21 @@ main {
                 flex-direction: column;
                 gap: 16px;
 
+                .sign_up_arrow_container {
+                    display: flex;
+
+                    img {
+                        right: 120px;
+                        position: relative;
+                    }
+
+                }
 
                 h1 {
                     font-size: 61px;
                 }
 
-                span {
+                .underline {
                     width: 150px;
                     height: 1px;
                     border-style: solid;
@@ -109,6 +121,15 @@ main {
                     display: flex;
                     justify-content: center;
                     gap: 30px;
+
+                    .policy_text {
+                        display: flex;
+                        gap: 10px;
+
+                        .policy {
+                            color: colors.$buttonBlue;
+                        }
+                    }
 
                     .dark_button {
                         background-color: colors.$bgGrey;
@@ -162,4 +183,34 @@ main {
             }
         }
     }
-}
+
+    .sign_up_bottom {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-direction: column;
+        align-items: center;
+        .policy{
+            color: colors.$buttonBlue;
+        }
+        .sign_up_button{
+            background-color: colors.$bgGrey;
+                        color: colors.$white;
+                        width: 110px;
+                        height: 25px;
+                        border-radius: 10px;
+                        font-size: 21px;
+                        padding: 15px 0px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            background-color: colors.$buttonBlue;
+                            border-color: colors.$buttonBlue;
+                            cursor: pointer;
+
+                        }
+                    }
+        }
+    }
