@@ -4,6 +4,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInAnonymously,
+  signOut,
+  deleteUser,
 } from '@angular/fire/auth';
 import { FirebaseServices } from '../firebase-services/firebase-services';
 import { UserUiService } from '../services/user-ui.service';
@@ -17,6 +19,21 @@ export class AuthService {
   async login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
+
+  async logout() {
+  const user = this.auth.currentUser;
+
+  if (user && user.isAnonymous) {
+    try {
+      await deleteUser(user); 
+    } catch (error) {
+      console.error("Fehler beim Löschen des Gastes:", error);
+      await signOut(this.auth);
+    }
+  } else {
+    return signOut(this.auth);
+  }
+}
 
   async loginGuest() {
     return signInAnonymously(this.auth);

@@ -21,7 +21,6 @@ import { Contact } from '../interfaces/contact.interface';
 import { Task } from '../interfaces/task.interface';
 import { TaskAssign } from '../interfaces/task-assign.interface';
 import { Subtask } from '../interfaces/subtask.interface';
-import { TaskType } from '../types/task-type';
 import { TaskStatus } from '../types/task-status';
 import { TaskAssignDb } from '../interfaces/task-assign-db.interface';
 
