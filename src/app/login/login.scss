@@ -234,68 +234,98 @@
 }
 
 @media (max-width: 700px) {
-    @media (max-width: 700px) {
-      .widescreen {
-        height: auto;
-        min-height: 100vh;
-    
-        .login_footer {
-          position: static;
-          bottom: auto;
-          margin-top: auto;
-          padding-bottom: 24px;
-        }
+  .widescreen {
+    height: auto;
+    min-height: 100vh;
+
+    .login_footer {
+      position: static;
+      bottom: auto;
+      margin-top: auto;
+      padding-bottom: 24px;
+    }
+  }
+
+  .login_page {
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    header {
+      /* Header-Container auflösen, damit Kinder sortiert werden können */
+      display: contents;
+
+      img {
+        order: 1;
+        width: 64px;
+        height: 78px;
+        margin-top: 32px;
+        margin-left: 32px;
+        align-self: flex-start;
       }
-    
-      .login_page {
-        padding-right: 0;
+
+      .header_right {
+        order: 3; /* Positioniert das Element nach dem Login-Fenster */
         display: flex;
-        flex-direction: column;
         align-items: center;
-        flex: 1;
-    
-        header {
-          /* Header-Container auflösen, damit Kinder sortiert werden können */
-          display: contents;
-    
-          img {
-            order: 1;
-            width: 64px;
-            height: 78px;
-            margin-top: 32px;
-            margin-left: 32px;
-            align-self: flex-start;
+        gap: 16px;
+        margin: 32px 0;
+        justify-content: center;
+      }
+    }
+
+    .main_contend {
+      order: 2;
+      height: auto;
+      margin-top: 30px;
+      width: 100%;
+
+      .middle_area {
+        width: 396px;
+        max-width: 90%;
+        height: auto;
+        min-height: 475px;
+        padding: 32px 0;
+        border-radius: 30px;
+        gap: 32px;
+        flex-direction: column;
+
+        .headline {
+          gap: 16px;
+
+          h1 {
+            font-size: 47px;
           }
-    
-          .header_right {
-            order: 3; /* Positioniert das Element nach dem Login-Fenster */
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin: 32px 0;
-            justify-content: center;
+
+          .underline {
+            width: 88px;
           }
         }
-    
-        .main_contend {
-          order: 2;
-          height: auto;
-          margin-top: 50px;
-          width: 100%;
-    
-          .middle_area {
-            width: 90%;
-            max-width: 400px;
-            height: auto;
-            padding: 32px 16px;
+
+        .inputs {
+          width: 364px;
+          max-width: 100%;
+          padding: 0;
+          gap: 16px;
+
+          .middle_bottom_area {
             flex-direction: column;
-    
-            .inputs {
-              width: 100%;
+            align-items: center;
+            gap: 21px;
+
+            .dark_button,
+            .light_button {
+              width: 180px;
+              height: 51px;
+              font-size: 16px;
+              padding: 0;
+              border-radius: 8px;
             }
           }
         }
       }
     }
-    
+  }
 }
