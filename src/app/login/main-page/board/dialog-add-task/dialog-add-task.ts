@@ -47,11 +47,7 @@ export class DialogAddTask {
   public userUi = inject(UserUiService);
   private router = inject(Router);
 
-  @ViewChild(Dialog) dialog!: Dialog;
-
-  open() {
-    this.dialog.open();
-  }
+  @ViewChild(Dialog) dialog!: Dialog;  
 
   title = signal('');
   description = signal('');
@@ -60,6 +56,7 @@ export class DialogAddTask {
   priority = signal<'urgent' | 'medium' | 'low' | null>(null);
   contacts = signal<Contact[]>([]);
   assignedTo = signal<Contact[]>([]);
+  currentStatus = signal<TaskStatus>(TaskStatus.ToDo);
 
   subtaskInput = '';
   subtasks: Subtask[] = [];
@@ -84,6 +81,12 @@ export class DialogAddTask {
   taskTypes = Object.entries(TaskType)
     .filter(([, value]) => typeof value === 'number')
     .map(([key, value]) => ({ name: key, value: value as TaskType }));
+
+  open(status: TaskStatus = TaskStatus.ToDo) {
+    this.resetForm();
+    this.currentStatus.set(status);
+    this.dialog.open();
+  }
 
   constructor() {
     this.firebase
@@ -208,6 +211,7 @@ export class DialogAddTask {
   }
 
   async createTask() {
+    console.log(this.currentStatus())
     const prio = this.priority();
     if (!this.title() || !this.selectedTaskType() || !prio || !this.dueDate()) {
       this.taskErrorMessage.set('Please fill all required fields!');
@@ -220,9 +224,11 @@ export class DialogAddTask {
       description: this.description(),
       date: Timestamp.fromDate(this.dueDate()!),
       type: this.selectedTaskType()!,
-      status: TaskStatus.ToDo,
+      status: this.currentStatus(),
       priority: this.getPriorityNumber(prio),
     };
+
+    console.log('Finaler Status beim Senden an Firebase:', newTask.status);
 
     try {
       const createdTask = await this.firebase.addTask(newTask);

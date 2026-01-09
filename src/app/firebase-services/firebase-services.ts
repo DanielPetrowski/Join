@@ -129,12 +129,12 @@ export class FirebaseServices {
     return docData(ref, { idField: 'id' }) as Observable<Task | undefined>;
   }
 
-  async addTask(task: Omit<Task, 'id' | 'status'>): Promise<Task> {
+  async addTask(task: Omit<Task, 'id'>): Promise<Task> {
     const ref = collection(this.firestore, 'tasks');
 
     const taskWithDefaults: Omit<Task, 'id'> = {
       ...task,
-      status: TaskStatus.ToDo,
+      status: task.status ?? TaskStatus.ToDo,
     };
 
     const docRef = await addDoc(ref, taskWithDefaults);

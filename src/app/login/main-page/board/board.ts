@@ -41,16 +41,12 @@ export class Board {
 
   searchInput: string = '';
 
-  @ViewChild('addTaskDialog') addTaskDialog!: DialogAddTask;
   @ViewChild(DialogAddTask) dialogAddTask!: DialogAddTask;
   @ViewChild(DialogShowEditTask) dialogShowEditTask!: DialogShowEditTask;
 
-  openDialogAddTask() {
-    this.dialogAddTask.open();
-  }
-  openAddTaskDialog() {
-    this.addTaskDialog.open();
-  }
+  openDialogAddTask(status: TaskStatus = TaskStatus.ToDo) {
+    this.dialogAddTask.open(status);
+  } 
 
   onTaskClick(task: BoardTask): void {
     if (!task.id) return;
