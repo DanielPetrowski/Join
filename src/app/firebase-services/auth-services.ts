@@ -10,6 +10,7 @@ import {
 import { FirebaseServices } from '../firebase-services/firebase-services';
 import { UserUiService } from '../services/user-ui.service';
 import { Router } from '@angular/router';
+import { disableNetwork } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -26,10 +27,7 @@ export class AuthService {
     const user = this.auth.currentUser;
 
     try {
-      await this.router.navigate(['/Login']);
-      await new Promise(resolve => setTimeout(resolve, 50));
-
-      await this.router.navigate(['/Login']);
+      await disableNetwork(this.firebase['firestore']);
 
       if (user && user.isAnonymous) {
         await deleteUser(user);
@@ -38,6 +36,7 @@ export class AuthService {
       }
     } catch (error: any) {
       console.warn('Logout/Delete:', error.message);
+      } finally {
       this.router.navigate(['/Login']);
     }
   }
