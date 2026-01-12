@@ -24,7 +24,6 @@
     margin: 0;
     padding: 0;
     gap: 20px;
-
   }
 
   .left_side {
@@ -67,7 +66,7 @@
     align-items: center;
     margin: 0 0px;
 
-    .logo_container{
+    .logo_container {
       width: 120px;
       height: 120px;
       background-color: colors.$bgMiddleGrey;
@@ -145,6 +144,10 @@
     gap: 24px;
     white-space: nowrap;
 
+    @media (max-width: 1050px) {
+      justify-content: center;
+    }
+
     .button_light {
       width: auto;
       background-color: colors.$white;
@@ -156,6 +159,10 @@
       svg {
         width: 16px;
         height: 16px;
+      }
+
+      @media (max-width: 1050px) {
+        display: none;
       }
     }
 
@@ -194,9 +201,15 @@
 
 @media (max-width: 1200px) {
   :host ::ng-deep app-dialog {
-    .left_side { width: 360px; }
-    .left_side span { font-size: 40px; }
-    .left_side p { font-size: 20px; }
+    .left_side {
+      width: 360px;
+    }
+    .left_side span {
+      font-size: 40px;
+    }
+    .left_side p {
+      font-size: 20px;
+    }
     .mid_side {
       font-size: 20px;
       margin: -60px 0px 0px 0px;
@@ -216,7 +229,9 @@
       width: 100%;
       padding: 80px 40px 80px 40px;
       z-index: 10;
-      img { display: none; }
+      img {
+        display: none;
+      }
     }
     .right_side {
       width: 100%;
@@ -228,32 +243,59 @@
 
 @media (max-width: 500px) {
   :host ::ng-deep app-dialog {
-    .left_side { padding: 40px 24px; }
-    .left_side .seperator { width: 60px; margin-top: 5px; }
-    .left_side span { font-size: 32px; }
-    .left_side p { font-size: 16px; }
+    .left_side {
+      padding: 40px 24px;
+    }
+    .left_side .seperator {
+      width: 60px;
+      margin-top: 5px;
+    }
+    .left_side span {
+      font-size: 32px;
+    }
+    .left_side p {
+      font-size: 16px;
+    }
     .mid_side {
       font-size: 10px;
       margin: -60px 0px 0px 0px;
       z-index: 10;
     }
-    .mid_side .sc_logo, .mid_side svg {
+    .mid_side .sc_logo,
+    .mid_side svg {
       width: 80px;
       height: 80px;
       font-size: 32px;
     }
-    .right_side { padding: 20px 16px; gap: 10px; }
-    form label { width: 100%; padding: 6px 10px; }
-    form label input { font-size: 12px; }
-    .dialog_buttons { gap: 12px; }
-    .dialog_buttons .button_light, .dialog_buttons .button_dark {
+    .right_side {
+      padding: 20px 16px;
+      gap: 10px;
+    }
+    form label {
+      width: 100%;
+      padding: 6px 10px;
+    }
+    form label input {
+      font-size: 12px;
+    }
+    .dialog_buttons {
+      gap: 12px;
+    }
+    .dialog_buttons .button_light,
+    .dialog_buttons .button_dark {
       font-size: 10px;
       font-weight: 400;
       width: 90px;
       padding: 0px 4px;
       gap: 1px;
     }
-    .dialog_buttons .button_dark { justify-content: center; }
-    .dialog_buttons .button_light svg, .dialog_buttons .button_dark svg { width: 10px; height: 10px; }
+    .dialog_buttons .button_dark {
+      justify-content: center;
+    }
+    .dialog_buttons .button_light svg,
+    .dialog_buttons .button_dark svg {
+      width: 10px;
+      height: 10px;
+    }
   }
 }
