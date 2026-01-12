@@ -1,6 +1,23 @@
 @use './../../../styles/global-styles.scss';
+@use './../../../styles/colors.scss';
 
 .main-area {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin-left: 96px;
+  margin-right: 96px;
+  margin-top: 110px;
+}
+
+.highlight {
+  color: colors.$buttonBlue;
+}
+
+.join_guide_list {
+  list-style-position: inside;
+}
+
+.join_guide_list li::marker {
+  font-weight: 700;
+  font-size: 27px;
 }
