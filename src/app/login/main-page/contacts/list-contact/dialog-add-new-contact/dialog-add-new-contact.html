@@ -64,7 +64,7 @@
               </g>
             </svg>
           </label>
-          <p class="error-msg" *ngIf="nameField.invalid && nameField.touched">First and last name must contain at least
+          <p class="error_msg" *ngIf="nameField.invalid && nameField.touched">First and last name must contain at least
             3 letters.</p>
 
           <label class="field">
@@ -83,7 +83,7 @@
               </g>
             </svg>
           </label>
-          <p class="error-msg" *ngIf="emailField.invalid && emailField.touched">Email format is incorrect.</p>
+          <p class="error_msg" *ngIf="emailField.invalid && emailField.touched">Email format is incorrect.</p>
 
           <label class="field">
             <input #phoneField="ngModel" [(ngModel)]="formModel().phone" name="tel" type="tel"
@@ -101,7 +101,7 @@
               </g>
             </svg>
           </label>
-          <p class="error-msg" *ngIf="phoneField.invalid && phoneField.touched">The number format is incorrect.</p>
+          <p class="error_msg" *ngIf="phoneField.invalid && phoneField.touched">The number format is incorrect.</p>
 
           <div class="dialog_buttons">
             <button class="button_light" type="button"
