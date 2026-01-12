@@ -1,4 +1,4 @@
-import { Component, ViewChild, signal, inject } from '@angular/core';
+import { Component, ViewChild, signal, inject, ElementRef } from '@angular/core';
 import { Dialog } from '../../../../../shared/dialog/dialog';
 import { BoardTask } from '../../../../../interfaces/task-board.interface';
 import { TaskType } from '../../../../../types/task-type';
@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 })
 export class DialogShowEditTask {
   @ViewChild('DialogShowEditTask') dialog!: Dialog;
+  @ViewChild('subtaskInput') subtaskInput!: ElementRef<HTMLInputElement>;
 
   private readonly firebase = inject(FirebaseServices);
   private readonly userUi = inject(UserUiService);
@@ -94,6 +95,10 @@ export class DialogShowEditTask {
 
   setPrio(prio: number) {
     this.editData.priority = prio;
+  }
+
+  focusInput(): void {
+    this.subtaskInput?.nativeElement.focus();
   }
 
   addSubtask() {

@@ -368,11 +368,13 @@
       <div class="area_input">
         <label>Subtasks</label>
 
-        <div class="subtask_input_wrapper">
+        <div class="subtask_input_wrapper" (click)="focusInput()">
           <input
+            #subtaskInput
             type="text"
             [(ngModel)]="newSubtaskTitle"
             (keydown.enter)="addSubtask()"
+            (keydown.escape)="cancelAddSubtask()"
             placeholder="Add new subtask"
           />
 
@@ -381,7 +383,7 @@
               class="input_icon_btn"
               type="button"
               aria-label="Confirm"
-              (click)="addSubtask()"
+              (click)="addSubtask(); $event.stopPropagation()"
             >
               <svg
                 width="14"
@@ -400,7 +402,12 @@
               </svg>
             </button>
             <div class="separator"></div>
-            <button class="input_icon_btn" type="button" aria-label="Cancel" (click)="cancelAddSubtask()">
+            <button
+              class="input_icon_btn"
+              type="button"
+              aria-label="Cancel"
+              (click)="cancelAddSubtask(); $event.stopPropagation()"
+            >
               <svg
                 width="14"
                 height="14"
