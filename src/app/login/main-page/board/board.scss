@@ -317,6 +317,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 980px) {
+    flex-direction: row;
+  }
 }
 
 .no_tasks_box {
