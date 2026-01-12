@@ -48,6 +48,11 @@ main {
         justify-content: center;
         
       }
+      
+      /* Speziell für den Login Button, falls nötig */
+      &[routerLink="/Login"]:hover {
+        color: colors.$buttonBlue;
+      }
 
       &.active-link {
         background-color: colors.$navBgActiveGrey;

@@ -2,6 +2,7 @@
   <main>
     <div>
       <img class="join_logo_nav" src="img/Capa_1.png" alt="" />
+      @if (user$ | async) {
       <nav>
         <a
           routerLink="/summary"
@@ -28,6 +29,12 @@
           ><img src="img/contact-icon.png" alt="" />Contacts</a
         >
       </nav>
+      } @else {
+      <nav>
+        <a routerLink="/Login"
+          ><img src="img/login.svg" alt="" />Log in</a>
+      </nav>
+      }
     </div>
 
     <div class="Legal">

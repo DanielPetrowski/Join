@@ -6,6 +6,7 @@ import {
   signInAnonymously,
   signOut,
   deleteUser,
+  user,
 } from '@angular/fire/auth';
 import { FirebaseServices } from '../firebase-services/firebase-services';
 import { UserUiService } from '../services/user-ui.service';
@@ -17,6 +18,8 @@ export class AuthService {
   private firebase = inject(FirebaseServices);
   private userUi = inject(UserUiService);
   private readonly router = inject(Router);
+
+  currentUser$ = user(this.auth);
 
   async login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
