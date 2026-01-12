@@ -97,8 +97,8 @@
       width: 100%;
 
       @media (max-width: 420px) {
-        flex-direction: column;    
-      }   
+        flex-direction: column;
+      }
 
       button {
         display: flex;
@@ -123,7 +123,7 @@
         &.active_urgent {
           background: #ff3d00;
           color: white;
-          font-weight: 700;       
+          font-weight: 700;
 
           svg path {
             fill: white;
@@ -157,7 +157,7 @@
     width: 100%;
 
     mat-option.mat-selected .mat-pseudo-checkbox {
-      border-color: colors.$white;     
+      border-color: colors.$white;
     }
 
     mat-option.mat-selected .mat-pseudo-checkbox::after {
@@ -166,7 +166,7 @@
 
     @media (max-width: 420px) {
       .mat-mdc-form-field mat-label {
-      font-size: 12px;
+        font-size: 12px;
       }
     }
 
@@ -215,10 +215,6 @@
         font-size: 16px;
         width: 100%;
         outline: none;
-
-        &:focus {
-          border-color: colors.$buttonBlue;
-        }
       }
 
       .input_icon_btn {
@@ -273,7 +269,7 @@
 
   .subtask_list_edit {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 4px;
     margin-top: 8px;
   }
@@ -284,11 +280,8 @@
     padding: 4px 8px;
     border-bottom: 1px solid transparent;
 
-    > textarea {
-      resize: none;
-    }
-
     &:hover {
+      cursor: pointer;
       background-color: colors.$bgLightGrey;
       border-radius: 8px;
     }
@@ -297,6 +290,12 @@
       opacity: 1;
       visibility: visible;
       background-color: colors.$bgLightGrey;
+    }
+
+    &.editing {
+      background-color: colors.$white;
+      border-bottom: 2px solid colors.$buttonBlue;
+      border-radius: 0;
     }
   }
 
@@ -308,14 +307,11 @@
 
   .subtask_input {
     flex: 1;
+    cursor: pointer;
     border: none;
     background: transparent;
     font-size: 16px;
     outline: none;
-
-    &:focus {
-      border-bottom: 1px solid colors.$buttonBlue;
-    }
 
     @media (max-width: 420px) {
       min-width: 0;

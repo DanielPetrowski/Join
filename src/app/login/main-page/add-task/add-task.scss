@@ -192,6 +192,7 @@
     &:hover {
       background-color: colors.$bgMiddleGrey;
       border-radius: 10px;
+      cursor: pointer;
     }
     &.editing {
       background-color: colors.$white;

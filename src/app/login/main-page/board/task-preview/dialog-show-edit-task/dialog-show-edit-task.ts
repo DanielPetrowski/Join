@@ -12,14 +12,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserUiService } from '../../../../../services/user-ui.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterModule } from "@angular/router";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-show-edit-task',
   standalone: true,
   imports: [CommonModule, Dialog, FormsModule, MatSelectModule, MatFormFieldModule, RouterModule],
   templateUrl: './dialog-show-edit-task.html',
-  styleUrls: ['./dialog-show-task.scss', './dialog-edit-task.scss']
+  styleUrls: ['./dialog-show-task.scss', './dialog-edit-task.scss'],
 })
 export class DialogShowEditTask {
   @ViewChild('DialogShowEditTask') dialog!: Dialog;
@@ -42,13 +42,16 @@ export class DialogShowEditTask {
   };
 
   newSubtaskTitle: string = '';
+  editingIndex: number | null = null;
+  originalTitle = '';
 
   constructor() {
-    this.firebase.subContactsList()
-    .pipe(takeUntilDestroyed())
-    .subscribe(contacts => {
-      this.contacts.set(contacts);
-    });
+    this.firebase
+      .subContactsList()
+      .pipe(takeUntilDestroyed())
+      .subscribe((contacts) => {
+        this.contacts.set(contacts);
+      });
   }
 
   open(task: BoardTask): void {
@@ -108,7 +111,7 @@ export class DialogShowEditTask {
   }
 
   getInitials(name: string): string {
-   return this.userUi.getInitials(name);
+    return this.userUi.getInitials(name);
   }
 
   async toggleSubtask(index: number, task: BoardTask) {
@@ -186,19 +189,40 @@ export class DialogShowEditTask {
   selectOpened: boolean = false;
 
   getSelectedContacts(): Contact[] {
-    return this.contacts().filter(c => 
-      this.editData.assigns.some((a: any) => a.contactId === c.id)
+    return this.contacts().filter((c) =>
+      this.editData.assigns.some((a: any) => a.contactId === c.id),
     );
   }
 
   onSelectionChange(event: any) {
     const selectedContacts: Contact[] = event.value;
-    this.editData.assigns = selectedContacts.map(c => ({
+    this.editData.assigns = selectedContacts.map((c) => ({
       contactId: c.id,
       name: c.name,
       color: c.color,
-      initials: this.getInitials(c.name)
+      initials: this.getInitials(c.name),
     }));
   }
 
+  setEditing(index: number) {
+    this.editingIndex = index;
+    this.originalTitle = this.editData.subtasks[index].title;
+  }
+
+  confirmEdit() {
+  this.editingIndex = null;
+  this.originalTitle = '';
+}
+
+cancelEdit() {
+  if (this.editingIndex === null) return;
+
+  this.editData.subtasks[this.editingIndex].title = this.originalTitle;
+  this.editingIndex = null;
+  this.originalTitle = '';
+}
+
+  clearEditing() {
+    this.editingIndex = null;
+  }
 }
