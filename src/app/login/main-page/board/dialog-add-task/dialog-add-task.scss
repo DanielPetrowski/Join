@@ -16,16 +16,13 @@
       font-size: 61px;
     }
 
-    span:nth-child(2) {
-      border: none;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .close {
+      position: relative;
+      top: 0;
+      right: 0;
     }
   }
+
   .area_mid {
     display: flex;
     gap: 50px;
@@ -98,9 +95,17 @@
           &.low {
             background: colors.$bgGreen;
           }
-          &.urgent, &.medium, &.low {
-            span, svg path { color: #fff; fill: #fff; }
-            &:hover { box-shadow: 0; }
+          &.urgent,
+          &.medium,
+          &.low {
+            span,
+            svg path {
+              color: #fff;
+              fill: #fff;
+            }
+            &:hover {
+              box-shadow: 0;
+            }
           }
           .buttons {
             display: flex;
@@ -285,7 +290,7 @@
         }
       }
       .button_dark {
-        span{
+        span {
           color: white;
         }
         width: 183px;
@@ -358,11 +363,15 @@
       max-height: calc(100vh - 400px);
       overflow-y: auto;
       scrollbar-width: none;
-      &::-webkit-scrollbar { display: none; }
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       .area_right .priority .button_container .buttons {
         font-size: 15px;
-        svg { height: 15px; }
+        svg {
+          height: 15px;
+        }
       }
     }
   }
