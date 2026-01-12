@@ -15,7 +15,6 @@
   background-color: colors.$bgLightGrey;
   padding: 110px 40px 40px 96px;
 
-  @media (max-width: 1350px) { padding-left: 50px; }
   @media (max-width: 600px) { padding: 80px 24px 24px; }
 
   // Header Bereich
@@ -59,7 +58,7 @@
   align-items: center;
   gap: 60px;
 
-  @media (max-width: 1250px) { flex-direction: column; align-items: flex-start; }
+  @media (max-width: 1350px) { flex-direction: column; align-items: flex-start; }
   @media (max-width: 600px) { align-items: center; }
 
   > section {
@@ -139,7 +138,7 @@
   .box_urgent {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 0 48px;
     height: 168px;
     width: 100%;
@@ -268,6 +267,10 @@
     color: colors.$buttonBlue;
   }
 
+  @media (max-width: 1350px) {
+    display: none;
+  }
+
   @media (max-width: 600px) {
     align-items: center;
     .greeting { font-size: 32px; }
@@ -279,7 +282,7 @@
 /* MOBILE LAYOUT (Figma Adaptation)                      */
 /* ===================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 1350px) {
   .summary {
     padding: 32px 16px;
     
@@ -386,10 +389,5 @@
         .span1, .span2 { font-size: 14px; text-align: center; }
       }
     }
-  }
-
-  /* Begrüßung auf Mobile ausblenden (laut Figma nur Metrics) */
-  .area_site {
-    display: none;
   }
 }
