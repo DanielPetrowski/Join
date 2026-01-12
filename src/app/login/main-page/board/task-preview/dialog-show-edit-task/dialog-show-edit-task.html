@@ -1,12 +1,9 @@
 <app-dialog #DialogShowEditTask class="edit_task_dialog">
-  <!-- -------------------------- Section ShowTask --------------------------- -->
-
   <section class="dialog_show" *ngIf="task() as t" [class.d_none]="isEditMode">
     <header>
       <img *ngIf="taskTypeSvg" [src]="taskTypeSvg" alt="Task Type" class="task_type_icon" />
 
       <button class="close" type="button" aria-label="Close Button" (click)="close()">
-        <!-- close.svg -->
         <svg
           width="14"
           height="14"
@@ -39,7 +36,6 @@
           {{ t.priority === 1 ? 'Urgent' : t.priority === 2 ? 'Medium' : 'Low' }}
         </span>
 
-        <!-- URGENT -->
         <svg
           *ngIf="t.priority === 1"
           width="20"
@@ -65,7 +61,6 @@
           </defs>
         </svg>
 
-        <!-- MEDIUM -->
         <svg
           *ngIf="t.priority === 2"
           width="20"
@@ -91,7 +86,6 @@
           </defs>
         </svg>
 
-        <!-- LOW -->
         <svg
           *ngIf="t.priority === 3"
           xmlns="http://www.w3.org/2000/svg"
@@ -209,12 +203,10 @@
     </footer>
   </section>
 
-  <!-- -------------------------- Section EditTask --------------------------- -->
 
   <section class="dialog_edit" [class.d_none]="!isEditMode">
     <header>
       <button class="close" type="button" aria-label="Close Button" (click)="close()">
-        <!-- close.svg -->
         <svg
           width="14"
           height="14"
@@ -265,11 +257,9 @@
       <input type="date" [(ngModel)]="editData.date" required />
     </div>
 
-    <!-- -------------------------- Prio-Button-Area --------------------------- -->
     <div class="area_prio_buttons">
       <label>Priority</label>
       <div class="prio_buttons">
-        <!-- ---------------------------- Button urgent ---------------------------- -->
         <button type="button" [class.active_urgent]="editData.priority === 1" (click)="setPrio(1)">
           Urgent
           <svg
@@ -296,7 +286,6 @@
             </defs>
           </svg>
         </button>
-        <!-- ---------------------------- Button medium ---------------------------- -->
         <button type="button" [class.active_medium]="editData.priority === 2" (click)="setPrio(2)">
           Medium
           <svg
@@ -323,7 +312,6 @@
             </defs>
           </svg>
         </button>
-        <!-- ----------------------------- button low ------------------------------ -->
         <button type="button" [class.active_low]="editData.priority === 3" (click)="setPrio(3)">
           Low
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" fill="none">
@@ -339,8 +327,6 @@
         </button>
       </div>
     </div>
-
-    <!-- -------------------------- Assigned-To-Area ------------------------------>
     <span class="assigned_title">Assigned To:</span>
     <div class="area_assigned">
       <mat-form-field appearance="fill" floatLabel="always">
@@ -379,8 +365,6 @@
         </span>
       </div>
     </div>
-
-    <!---------------------------- Subtask-Area ------------------------------>
     <div class="subtasks">
       <div class="area_input">
         <label>Subtasks</label>
@@ -394,7 +378,6 @@
           />
 
           <div class="subtask_input_icons">
-            <!-- CONFIRM -->
             <button
               class="input_icon_btn"
               type="button"
@@ -418,7 +401,6 @@
               </svg>
             </button>
             <div class="separator"></div>
-            <!-- CLOSE -->
             <button class="input_icon_btn" type="button" aria-label="Cancel">
               <svg
                 width="14"
@@ -447,6 +429,7 @@
             class="subtask_input"
             aria-label="subtask-edit"
             rows="2"
+            autocomplete="off"
           ></textarea>
 
           <div class="subtask_icons">
