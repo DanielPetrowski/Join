@@ -195,18 +195,17 @@
       }
     }
   }
+
   .subtask_item {
+    margin-top: 5px;
     &:hover {
       background-color: colors.$bgMiddleGrey;
       border-radius: 10px;
-      margin-top: 5px;
+      cursor: pointer;
     }
     &.editing {
       background-color: colors.$white;
-      border-bottom: colors.$buttonBlue;
-      border-bottom-style: solid;
-      border-width: thin;
-      margin-top: 5px;
+      border-bottom: thin solid colors.$buttonBlue;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }

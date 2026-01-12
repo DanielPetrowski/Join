@@ -442,7 +442,7 @@
             <ng-container *ngIf="editingIndex !== i; else editMode">
               <button
                 type="button"
-                class="icon_btn edit_icon"
+                class="edit_task_btn edit_icon"
                 (click)="setEditing(i)"
                 aria-label="button edit subtask"
               >
@@ -462,13 +462,13 @@
               <div class="separator"></div>
               <button
                 type="button"
-                class="icon_btn delete_icon"
+                class="edit_task_btn delete_icon"
                 (click)="removeSubtask(i); $event.stopPropagation()"
                 aria-label="button delete subtask"
               >
                 <svg
-                  width="16"
-                  height="16"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -482,12 +482,18 @@
             </ng-container>
 
             <ng-template #editMode>
-              <img src="img/delete.svg" alt="" (click)="cancelEdit(); $event.stopPropagation()" />
+              <img
+                src="img/delete.svg"
+                alt=""
+                (click)="removeSubtask(i); $event.stopPropagation()"
+                class=".edit_task_btn"
+              />
               <div class="separator"></div>
               <img
                 src="img/Subtasks icons11.svg"
                 alt=""
                 (click)="confirmEdit(); $event.stopPropagation()"
+                class=".edit_task_btn"
               />
             </ng-template>
           </div>

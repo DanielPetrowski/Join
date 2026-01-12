@@ -289,15 +289,15 @@
     &:hover .subtask_icons {
       opacity: 1;
       visibility: visible;
-      background-color: colors.$bgLightGrey;
     }
 
     &.editing {
       background-color: colors.$white;
       border-bottom: 2px solid colors.$buttonBlue;
       border-radius: 0;
+      }
     }
-  }
+ 
 
   .bullet_point {
     margin-right: 12px;
@@ -357,6 +357,31 @@
 
     &:hover {
       color: colors.$buttonBlue;
+    }
+  }
+
+  .edit_task_btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: colors.$bgLightGrey;
+    color: colors.$black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    transition: 0.2s ease-in-out;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 
