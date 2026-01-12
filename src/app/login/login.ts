@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +20,7 @@ export class Login {
   loginError = false;
   passwordMatchError = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, private cd: ChangeDetectorRef) {}
 
   async login() {
     this.loginError = false;
@@ -30,6 +30,7 @@ export class Login {
     } catch (error: any) {
       console.error(error);
       this.loginError = true;
+      this.cd.detectChanges();
     }
   }
 
