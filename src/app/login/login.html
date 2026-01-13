@@ -34,8 +34,8 @@
             </div>
 
             <div class="middle_bottom_area">
-              <button class="dark_button" (click)="login()">Log In</button>
-              <button class="light_button" type="button" (click)="guestLogin()">
+              <button class="button_dark" (click)="login()">Log In</button>
+              <button class="button_light" type="button" (click)="guestLogin()">
                 Guest Log In
               </button>
             </div>
@@ -78,7 +78,7 @@
                 <input type="checkbox" />
                 <span>
                   I accept the
-                  <span class="policy">Privacy policy</span>
+                  <a routerLink="/Privacy Policy" class="policy">Privacy Policy</a>
                 </span>
               </div>
               <button class="sign_up_button" (click)="signup()">Sign up</button>
