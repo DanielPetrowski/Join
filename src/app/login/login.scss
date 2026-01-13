@@ -352,15 +352,13 @@
   .login_page {
     header {
       img {
-        top: 16px;
-        left: 16px;
+        top: 16px; left: 16px;
         width: 48px;
         height: 58px;
       }
 
       .header_right {
-        flex-direction: row;
-        gap: 12px;
+        flex-direction: row; gap: 12px;
       }
     }
     .main_contend {
@@ -374,8 +372,7 @@
           .input_wrapper {
             height: 40px;
             input {
-              font-size: 16px;
-              min-width: 0;
+              font-size: 16px; min-width: 0;
             }
             img {
               width: 20px;
@@ -393,5 +390,10 @@
         padding: 16px 0;
       }
     }
+  }
+}
+@media (max-width:380px){
+  .login_footer{
+    bottom: 20px;
   }
 }
