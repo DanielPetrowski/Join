@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-helper',
@@ -9,4 +9,9 @@ import { CommonModule } from '@angular/common';
 })
 export class Helper {
 
+  constructor(private location: Location) {}
+
+  backToSite() {
+    this.location.back();
+  }
 }

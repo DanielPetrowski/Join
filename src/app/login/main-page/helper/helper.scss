@@ -2,18 +2,25 @@
 @use './../../../styles/colors.scss';
 
 .main-area {
-  height: calc(100vh - 300px);
-  display: flex;
-  flex-direction: column;
-  margin-left: 96px;
-  margin-right: 96px;
+  height: calc(100vh - 300px); 
   margin-top: 110px;
+  overflow-y: auto;
 }
 
 .help_content {
-  flex: 1;
-  overflow-y: auto;
+  padding-left: 96px;
+  padding-right: 96px;
   overflow-x: hidden;
+}
+
+.help_headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .arrow_container {
+    cursor: pointer;
+  }
 }
 
 .highlight {
