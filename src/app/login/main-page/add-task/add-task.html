@@ -10,9 +10,9 @@
         <form>
           <input class="area_input_label" type="text" name="title" [(ngModel)]="title" #titleModel="ngModel"
             placeholder="Enter a title" required
-            [ngClass]="{ 'error-border': titleModel.invalid && titleModel.touched }" />
+            [ngClass]="{ 'error_border': titleModel.invalid && titleModel.touched }" />
 
-          <div *ngIf="titleModel.invalid && titleModel.touched" class="error-text">
+          <div *ngIf="titleModel.invalid && titleModel.touched" class="error_text">
             This field is required
           </div>
         </form>
@@ -25,7 +25,7 @@
       <div class="carlenda">
         <p>Due date <span class="required">*</span></p>
         <mat-form-field appearance="outline" floatLabel="auto" [ngClass]="{
-            'error-border': !dueDate() && dueDateTouched,
+            'error_border': !dueDate() && dueDateTouched,
             'selected-border': dueDate() && !(!dueDate() && dueDateTouched),
           }">
           <input matInput name="dueDate" [(ngModel)]="dueDate" #dueDateModel="ngModel" placeholder="DD/MM/YYYY" required
@@ -35,7 +35,7 @@
           <mat-datepicker #picker (closed)="onCalendarClosed()" (dateChange)="onDateChange($event)"></mat-datepicker>
         </mat-form-field>
 
-        <div *ngIf="!dueDate() && dueDateTouched" class="error-text">This field is required</div>
+        <div *ngIf="!dueDate() && dueDateTouched" class="error_text">This field is required</div>
       </div>
     </article>
 
@@ -101,7 +101,7 @@
             {{ assignedTo().length > 0 || selectOpened ? 'An:' : 'Select contacts to assign' }}
           </mat-label>
 
-          <mat-select panelClass="test-select" multiple [value]="assignedTo()"
+          <mat-select panelClass="test_select" multiple [value]="assignedTo()"
             (selectionChange)="assignedTo.set($event.value); updateAssignedToText()">
             <mat-select-trigger> </mat-select-trigger>
 
@@ -114,7 +114,7 @@
           </mat-select>
         </mat-form-field>
 
-        <div class="assigned-logos" *ngIf="assignedTo().length > 0">
+        <div class="assigned_logos" *ngIf="assignedTo().length > 0">
           <span class="sc_logo flex-center" *ngFor="let contact of assignedTo()" [style.background]="contact.color">
             {{ userUi.getInitials(contact.name) }}
           </span>
@@ -122,10 +122,10 @@
       </div>
       <div>
         <p>Category <span class="required">*</span></p>
-        <mat-form-field class="task-type-field" appearance="fill" floatLabel="always" [class.invalid]="taskTypeError">
+        <mat-form-field class="task_type_field" appearance="fill" floatLabel="always" [class.invalid]="taskTypeError">
           <mat-label *ngIf="!selectedTaskType()">Task Type</mat-label>
 
-          <mat-select panelClass="task-type-select" [value]="selectedTaskType()"
+          <mat-select panelClass="task_type_select" [value]="selectedTaskType()"
             (selectionChange)="onTaskTypeChange($event.value)" (blur)="onTaskTypeBlur()">
             <mat-option *ngFor="let type of taskTypes" [value]="type.value">
               {{ type.name }}
@@ -133,7 +133,7 @@
           </mat-select>
         </mat-form-field>
 
-        <div class="error-text" *ngIf="taskTypeError">This field is required</div>
+        <div class="error_text" *ngIf="taskTypeError">This field is required</div>
       </div>
       <form class="area_input" (submit)="$event.preventDefault()">
         <label for="Subtasks">Subtasks
@@ -156,9 +156,9 @@
         <ul>
           <li *ngFor="let subtask of subtasks; let i = index; trackBy: trackByIndex" class="subtask_item"
             [class.editing]="editIndex === i">
-            <span class="task-wrapper">
-              <span class="task-text" [hidden]="editIndex === i">{{ subtask.title }}</span>
-              <input #editInput class="task-input" [(ngModel)]="subtasks[i].title" [hidden]="editIndex !== i"
+            <span class="task_wrapper">
+              <span class="task_text" [hidden]="editIndex === i">{{ subtask.title }}</span>
+              <input #editInput class="task_input" [(ngModel)]="subtasks[i].title" [hidden]="editIndex !== i"
                 [class.editing]="editIndex === i" />
             </span>
 
@@ -190,11 +190,11 @@
         </button>
 
         <div *ngIf="taskErrorMessage() || taskAddedMessage()" class="create_task_message">
-          <div *ngIf="taskErrorMessage()" class="task-error-message flex-center">
+          <div *ngIf="taskErrorMessage()" class="task_error_message flex-center">
             {{ taskErrorMessage() }}
           </div>
 
-          <div *ngIf="taskAddedMessage()" class="task-added-message flex-center">
+          <div *ngIf="taskAddedMessage()" class="task_added_message flex-center">
             {{ taskAddedMessage() }}
             <img src="img/board-icon.png" alt="" />
           </div>

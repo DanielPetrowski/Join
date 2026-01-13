@@ -125,7 +125,7 @@
       }
     }
   }
-  .assigned-logos {
+  .assigned_logos {
     display: flex;
     gap: 8px;
     margin-top: 8px;
@@ -251,7 +251,7 @@
       opacity: 1;
       pointer-events: auto;
     }
-    .task-wrapper {
+    .task_wrapper {
       flex: 1;
       font-size: 20px;
     }
@@ -319,11 +319,11 @@
       }
     }
   }
-  .error-border {
+  .error_border {
     border: 1px solid colors.$errorRed !important;
     border-radius: 10px;
   }
-  .error-text {
+  .error_text {
     color: colors.$errorRed;
     font-size: 12px;
   }
@@ -341,8 +341,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
-  .task-error-message,
-  .task-added-message {
+  .task_error_message,
+  .task_added_message {
     padding: 20px 40px;
     background: colors.$bgGrey;
     color: colors.$white;
