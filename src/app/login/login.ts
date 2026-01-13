@@ -18,7 +18,11 @@ export class Login {
   confirmPassword = '';
   isSignUp = false;
   loginError = false;
+  nameError = false;
+  emailError = false;
   passwordMatchError = false;
+  passwordError = false
+  agreed = false
 
   constructor(private auth: AuthService, private router: Router, private cd: ChangeDetectorRef) {}
 
@@ -36,19 +40,27 @@ export class Login {
     }
   }
 
-  async signup() {
-    this.passwordMatchError = false;
-    if (this.password !== this.confirmPassword) {
-      this.passwordMatchError = true;
-      return;
-    }
-    try {
-      const user = await this.auth.signup(this.name, this.email, this.password);
-      this.router.navigate(['/summary']);
-    } catch (error: any) {
-      console.error(error);
-    }
+async signup() {
+
+  this.nameError = !this.name?.trim();
+  this.emailError = !this.email?.trim();
+  this.passwordError = !this.password;
+  this.passwordMatchError = false;
+  this.nameError = !this.name?.trim(); 
+
+if (this.nameError || this.emailError || this.passwordError) return;
+
+  if (this.password !== this.confirmPassword) {
+    this.passwordMatchError = true;
+    return;
   }
+  try {
+    const user = await this.auth.signup(this.name, this.email, this.password);
+    this.router.navigate(['/summary']);
+  } catch (error: any) {
+    console.error(error);
+  }
+}
 
   async guestLogin() {
     try {
