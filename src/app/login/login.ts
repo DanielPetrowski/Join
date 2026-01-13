@@ -22,8 +22,10 @@ export class Login {
   emailError = false;
   passwordMatchError = false;
   passwordError = false
+  passwordTooShortError = false;
   invalidEmailError = false;
   agreed = false
+ emailTakenError = false;
 
   constructor(private auth: AuthService, private router: Router, private cd: ChangeDetectorRef) {}
 
@@ -42,33 +44,57 @@ export class Login {
   }
 
 async signup() {
+  
   this.nameError = !this.name?.trim();
   this.emailError = !this.email?.trim();
-  this.passwordError = !this.password;
-  this.passwordMatchError = false;
-
-
   this.invalidEmailError = false;
+  this.passwordError = !this.password;
+  this.passwordTooShortError = false;
+  this.passwordMatchError = false;
+  this.emailTakenError = false;
+
+ 
   if (!this.emailError) {
-     const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(this.email)) {
       this.invalidEmailError = true;
     }
   }
 
- 
-  if (this.nameError || this.emailError || this.invalidEmailError || this.passwordError) return;
-  if (this.password !== this.confirmPassword) {
-    this.passwordMatchError = true;
-    return;
+  
+  if (!this.passwordError && this.password.length < 6) {
+    this.passwordTooShortError = true;
   }
+
+  
+  if (!this.passwordError && !this.passwordTooShortError && this.password !== this.confirmPassword) {
+    this.passwordMatchError = true;
+  }
+
+  if (
+    this.nameError ||
+    this.emailError ||
+    this.invalidEmailError ||
+    this.passwordError ||
+    this.passwordTooShortError ||
+    this.passwordMatchError
+  ) return;
+
+  
   try {
     const user = await this.auth.signup(this.name, this.email, this.password);
     this.router.navigate(['/summary']);
   } catch (error: any) {
-    console.error(error);
+    // E-Mail bereits vergeben
+    if (error.code === 'auth/email-already-in-use' || error.message?.includes('already in use')) {
+      this.emailTakenError = true;
+      this.cd.detectChanges(); // Angular informieren, dass sich das Flag geändert hat
+    } else {
+      console.error(error);
+    }
   }
 }
+
 
 
   async guestLogin() {

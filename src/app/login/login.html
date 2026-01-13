@@ -55,12 +55,15 @@
           </div>
           <span class="error-text" *ngIf="emailError">Email is required</span>
           <span class="error-text" *ngIf="invalidEmailError">Enter a valid email</span>
+          <span class="error-text" *ngIf="emailTakenError">Email is already in Use</span>
 
-          <div class="input_wrapper" [class.error-border]="passwordError">
+          <div class="input_wrapper" [class.error-border]="passwordError || passwordTooShortError|| emailTakenError">
             <input placeholder="Password" type="password" [(ngModel)]="password" />
             <img src="img/lock.svg" alt="" />
           </div>
           <span class="error-text" *ngIf="passwordError">Passwort is required</span>
+          <span class="error-text" *ngIf="passwordTooShortError">Password must be at least 6 characters</span>
+          
 
           <div class="input_wrapper" [class.error-border]="passwordMatchError">
             <input placeholder="Confirm Password" type="password" [(ngModel)]="confirmPassword" />
