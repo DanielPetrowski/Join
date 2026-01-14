@@ -1,7 +1,6 @@
 @use '../styles/colors.scss';
 
 .text_3 {
-  /* Figma: "subtitle" */
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 27px;
@@ -50,6 +49,10 @@
 
 .d_none {
   display: none;
+}
+
+button {
+  font-family: 'Inter', sans-serif;
 }
 
 .close {
