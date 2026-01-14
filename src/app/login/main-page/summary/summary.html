@@ -1,3 +1,7 @@
+<div class="overlay" *ngIf="overlayInDom()" [class.hidden]="!overlay()">
+ <p class="greeting">{{ greeting }}</p>
+      <p class="name">{{ (userData$ | async)?.name }}</p>
+      </div>
 <section class="summary">
   <div class="summary-header">
     <span class="headline">Join 360</span>
