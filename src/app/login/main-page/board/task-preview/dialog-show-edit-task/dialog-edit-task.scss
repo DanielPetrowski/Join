@@ -32,10 +32,12 @@
 
   header {
     align-self: flex-end;
+    background-color: colors.$white;
   }
 
   .close {
     color: colors.$buttonGrey;
+    position: unset;
     &:hover {
       display: block;
       background-color: #d9d9d9;
