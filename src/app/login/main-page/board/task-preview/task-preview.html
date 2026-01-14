@@ -14,8 +14,15 @@
 
   <footer class="task_footer">
     <div class="area_assigns" *ngIf="task.assigns.length">
-      <span class="assign_avatar" *ngFor="let assign of task.assigns" [style.backgroundColor]="assign.color">
+      <span class="assign_avatar" *ngFor="let assign of visibleAssigns" [style.backgroundColor]="assign.color">
         {{ assign.initials }}
+      </span>
+      <span
+        class="assign_avatar assign_more"
+        *ngIf="remainingAssignsCount > 0"
+        [title]="remainingAssignNames"
+        [style.background]="remainingAssignsGradient">
+        +{{ remainingAssignsCount }}
       </span>
     </div>
 

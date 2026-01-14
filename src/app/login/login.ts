@@ -21,13 +21,17 @@ export class Login {
   nameError = false;
   emailError = false;
   passwordMatchError = false;
-  passwordError = false
+  passwordError = false;
   passwordTooShortError = false;
   invalidEmailError = false;
-  agreed = false
- emailTakenError = false;
+  agreed = false;
+  emailTakenError = false;
 
-  constructor(private auth: AuthService, private router: Router, private cd: ChangeDetectorRef) {}  
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+  ) {}
 
   async login() {
     this.loginError = false;
@@ -40,52 +44,56 @@ export class Login {
     }
   }
 
-async signup() {
-  
-  this.nameError = !this.name?.trim();
-  this.emailError = !this.email?.trim();
-  this.invalidEmailError = false;
-  this.passwordError = !this.password;
-  this.passwordTooShortError = false;
-  this.passwordMatchError = false;
-  this.emailTakenError = false;
- 
-  if (!this.emailError) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(this.email)) {
-      this.invalidEmailError = true;
-    }
-  }
-  
-  if (!this.passwordError && this.password.length < 6) {
-    this.passwordTooShortError = true;
-  }
-  
-  if (!this.passwordError && !this.passwordTooShortError && this.password !== this.confirmPassword) {
-    this.passwordMatchError = true;
-  }
+  async signup() {
+    this.nameError = !this.name?.trim();
+    this.emailError = !this.email?.trim();
+    this.invalidEmailError = false;
+    this.passwordError = !this.password;
+    this.passwordTooShortError = false;
+    this.passwordMatchError = false;
+    this.emailTakenError = false;
 
-  if (
-    this.nameError ||
-    this.emailError ||
-    this.invalidEmailError ||
-    this.passwordError ||
-    this.passwordTooShortError ||
-    this.passwordMatchError
-  ) return;
-  
-  try {
-    const user = await this.auth.signup(this.name, this.email, this.password);
-    this.router.navigate(['/summary']);
-  } catch (error: any) {
-    if (error.code === 'auth/email-already-in-use' || error.message?.includes('already in use')) {
-      this.emailTakenError = true;
-      this.cd.detectChanges();
-    } else {
-      console.error(error);
+    if (!this.emailError) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(this.email)) {
+        this.invalidEmailError = true;
+      }
+    }
+
+    if (!this.passwordError && this.password.length < 6) {
+      this.passwordTooShortError = true;
+    }
+
+    if (
+      !this.passwordError &&
+      !this.passwordTooShortError &&
+      this.password !== this.confirmPassword
+    ) {
+      this.passwordMatchError = true;
+    }
+
+    if (
+      this.nameError ||
+      this.emailError ||
+      this.invalidEmailError ||
+      this.passwordError ||
+      this.passwordTooShortError ||
+      this.passwordMatchError
+    )
+      return;
+
+    try {
+      const user = await this.auth.signup(this.name, this.email, this.password);
+      this.router.navigate(['/summary']);
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use' || error.message?.includes('already in use')) {
+        this.emailTakenError = true;
+        this.cd.detectChanges();
+      } else {
+        console.error(error);
+      }
     }
   }
-}
 
   async guestLogin() {
     try {
@@ -93,7 +101,7 @@ async signup() {
       this.router.navigate(['/summary']);
     } catch (error: any) {}
   }
-  
+
   openSignUp() {
     this.isSignUp = !this.isSignUp;
     this.loginError = false;
