@@ -31,16 +31,33 @@
   }
 
   header {
-    align-self: flex-end;
-    background-color: colors.$white;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding-bottom: 5px;
 
-  .close {
-    color: colors.$buttonGrey;
-    position: unset;
-    &:hover {
-      display: block;
-      background-color: #d9d9d9;
+    .close {
+      display: flex;
+      position: unset;
+      background: transparent;
+      border: none;
+      color: colors.$buttonGrey;
+      transition: background-color 150ms ease-in-out;
+
+      &:hover {
+        background-color: colors.$bgMiddleGrey;
+      }
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      @media (max-width: 400px) {
+        padding-right: 10px;
+        padding-top: 20px;
+      }
     }
   }
 
