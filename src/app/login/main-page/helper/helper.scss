@@ -46,3 +46,33 @@ h1 {
   font-weight: 700;
   font-size: 27px;
 }
+
+.headline{
+  background-color: none;
+    font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 1.2;
+  color: colors.$black;
+}
+.subheadline{
+    background-color: none;
+    font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  color: colors.$black;
+}
+
+@media(max-width:1050px){
+ .help_content{
+  padding: 0;
+  margin: 0 16px;
+ }
+ .main-area{
+  height: calc(100vh - 200px);
+  margin-top: 40px;
+  
+
+ }
+}
