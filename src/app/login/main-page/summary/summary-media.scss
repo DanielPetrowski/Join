@@ -6,9 +6,6 @@
   align-items: center;
 }
 
-/* =========================
-   <= 1200px
-========================= */
 @media (max-width: 1200px) {
   .area_site {
     .greeting { font-size: 38px; }
@@ -16,9 +13,6 @@
   }
 }
 
-/* =========================
-   <= 1050px
-========================= */
 @media (max-width: 1050px) {
 
   .overlay {
@@ -164,9 +158,6 @@
   }
 }
 
-/* =========================
-   <= 650px
-========================= */
 @media (max-width: 650px) {
   .area_summary {
     > section {
@@ -175,9 +166,6 @@
   }
 }
 
-/* =========================
-   <= 600px
-========================= */
 @media (max-width: 600px) {
   .summary {
     padding: 60px 24px 24px;
@@ -193,9 +181,6 @@
   }
 }
 
-/* =========================
-   HEIGHT <= 620px
-========================= */
 @media (max-height: 620px) {
   .summary-header {
     flex-direction: row;
