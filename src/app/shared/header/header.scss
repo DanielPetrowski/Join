@@ -201,6 +201,9 @@ section {
 
       li {
         margin: 8px 0;
+        &:hover{
+          background-color: colors.$navActive;
+        }
       }
 
       a {
