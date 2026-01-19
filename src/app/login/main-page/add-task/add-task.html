@@ -96,23 +96,23 @@
 
       <div>
         <p>Assigned to</p>
-        <mat-form-field appearance="fill" floatLabel="always">
-          <mat-label>
-            {{ assignedTo().length > 0 || selectOpened ? 'An:' : 'Select contacts to assign' }}
-          </mat-label>
+             <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>
+              {{ assignedTo().length > 0 || selectOpened ? 'An:' : 'Select contacts to assign' }}
+            </mat-label>
 
-          <mat-select panelClass="test_select" multiple [value]="assignedTo()"
-            (selectionChange)="assignedTo.set($event.value); updateAssignedToText()">
-            <mat-select-trigger> </mat-select-trigger>
+            <mat-select panelClass="test-select" multiple [value]="assignedTo()"
+              (selectionChange)="assignedTo.set($event.value); updateAssignedToText()">
+              <mat-select-trigger> </mat-select-trigger>
 
-            <mat-option *ngFor="let contact of contacts()" [value]="contact">
-              <span class="sc_logo flex-center" [style.background]="contact.color">
-                {{ userUi.getInitials(contact.name) }}
-              </span>
-              {{ contact.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-option *ngFor="let contact of contacts()" [value]="contact">
+                <span class="sc_logo" [style.background]="contact.color">
+                  {{ userUi.getInitials(contact.name) }}
+                </span>
+                {{ contact.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
         <div class="assigned_logos" *ngIf="assignedTo().length > 0">
           <span class="sc_logo flex-center" *ngFor="let contact of assignedTo()" [style.background]="contact.color">

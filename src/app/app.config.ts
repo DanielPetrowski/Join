@@ -41,15 +41,22 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'join-db-ee5a8',
-        appId: '1:1071337539188:web:a82b5c20d18417d9423321',
-        storageBucket: 'join-db-ee5a8.firebasestorage.app',
-        apiKey: 'AIzaSyBDbp41sPTcemNlIZoP9lyE037AktuztqY',
-        authDomain: 'join-db-ee5a8.firebaseapp.com',
-        messagingSenderId: '1071337539188',
+        projectId: "join-91649",
+        appId: "1:836937892141:web:d62558bf6a20e9133e13a4",
+        storageBucket: "join-91649.firebasestorage.app",
+        apiKey: "AIzaSyDs_K8n7CINAWm_G0dZ7fco2lGMD5d-vMY",
+        authDomain: "join-91649.firebaseapp.com",
+        messagingSenderId: "836937892141",
       })
     ),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
   ],
 };
+
+  // apiKey: "AIzaSyDs_K8n7CINAWm_G0dZ7fco2lGMD5d-vMY",
+  // authDomain: "join-91649.firebaseapp.com",
+  // projectId: "join-91649",
+  // storageBucket: "join-91649.firebasestorage.app",
+  // messagingSenderId: "836937892141",
+  // appId: "1:836937892141:web:d62558bf6a20e9133e13a4"
